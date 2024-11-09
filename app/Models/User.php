@@ -19,7 +19,6 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
-        'email',
         'password',
     ];
 
@@ -44,5 +43,15 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function presets():HasMany
+    {
+        return $this->hasMany(Preset::class);
+    }
+
+    public function timadata():HasMany
+    {
+        return $this->hasMany(TimeData::class);
     }
 }
