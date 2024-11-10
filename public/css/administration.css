@@ -1,0 +1,24 @@
+.name .password {
+    border-radius: 10px;
+    height: 100px;
+    border-width: 5px;
+    width: 200px;
+    border-color: black;
+}
+.layout {
+    display: inline-block;
+    border-radius: 10px;
+    border-width: 5px;
+    border-color: black;
+    border-style: solid;
+}
+.reg {
+    width: 400px;
+    height: 500px;
+    align-content: center;
+}
+.use {
+    width: 400px;
+    height: 500px;
+}
+
