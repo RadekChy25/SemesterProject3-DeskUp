@@ -17,7 +17,6 @@
 # Compiled Tailwind & Mix Files
 /public/css
 /public/js
-/public/mix-manifest.json
 
 # Node & NPM
 /node_modules/
