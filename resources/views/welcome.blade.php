@@ -3,47 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DeskUP</title>
-    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
-</head>
-<body class="bg-dark-100 font-sans">
-    <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
-        <div class="sm:mx-auto sm:w-full sm:max-w-sm">
-          <img class="mx-auto h-10 w-auto" src="{{ asset('images/loginLogo.png') }}" alt="Your Company">
-          <h2 class="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900">Sign in to your account</h2>
+    <title>DeskUp</title>
+   <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+</head>  
+<body class="bg-blue-500 text-white font-sans">
+
+    <!-- Navbar -->
+    <nav class="bg-blue-700 p-4">
+        <div class="container mx-auto flex space-x-4">
+            <a href="#" class="text-white font-bold">DeskUp</a>
+            <a href="#" class="text-white">I1</a>
+            <a href="#" class="text-white">I2</a>
+            <a href="#" class="text-white">I3</a>
         </div>
-      
-        <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form class="space-y-6" action="#" method="POST">
-            <div>
-              <label for="email" class="block text-sm/6 font-medium text-gray-900">Email address</label>
-              <div class="mt-2">
-                <input id="email" name="email" type="email" autocomplete="email" required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6">
-              </div>
+    </nav>
+
+    <!-- Website Main Section -->
+    <div class="container mx-auto p-4 flex space-x-8 mt-6">
+        
+        <!-- Left Side Section -->
+        <div class="w-1/2 bg-white p-6 rounded-lg shadow-lg text-black">
+            <h1 class="text-center text-2xl font-semibold mb-4">Top Section</h1>
+            <p class="text-center mb-6">This is the top section of the page.</p>
+            <div class="flex justify-center space-x-4">
+                <button class="bg-orange-500 text-white px-4 py-2 rounded-md hover:bg-orange-700">UP</button>
             </div>
-      
-            <div>
-              <div class="flex items-center justify-between">
-                <label for="password" class="block text-sm/6 font-medium text-gray-900">Password</label>
-                <div class="text-sm">
-                  <a href="#" class="font-semibold text-indigo-600 hover:text-indigo-500">Forgot password?</a>
+            <div class="flex justify-center space-x-4">
+                <button class="bg-orange-500 text-white px-4 py-2 rounded-md hover:bg-orange-700">DOWN</button>
+            </div>
+            <div class="flex justify-center space-x-4">
+                <button class="bg-orange-500 text-white px-4 py-2 rounded-md hover:bg-orange-700">STAND UP</button>
+            </div>
+            <div class="flex justify-center space-x-4">
+                <button class="bg-orange-500 text-white px-4 py-2 rounded-md hover:bg-orange-700">SIT DOWN</button>
+            </div>
+            <div class="mt-4 flex justify-center items-center space-x-2">
+                <button class="bg-orange-500 text-white px-4 py-2 rounded-md hover:bg-orange-700">CUSTOM</button>
+                <input type="number" class="w-16 px-2 py-1 border rounded-md text-black" placeholder="0">
+            </div>
+        </div>
+
+        <!-- Right Side Section -->
+        <div class="w-1/2 bg-white p-6 rounded-lg shadow-lg text-black">
+            <h1 class="text-center text-2xl font-semibold mb-4">Bottom Section</h1>
+            <p class="text-center mb-6">This is the bottom section of the page.</p>
+            <div class="bg-gray-200 p-4 rounded-md shadow-inner mb-6 text-center">
+                <span>Graph content</span>
+            </div>
+
+            <!-- Buttons Section -->
+            <div class="flex justify-between space-x-4">
+                <!-- Left Buttons -->
+                <div class="flex flex-col space-y-2">
+                    <button class="bg-orange-500 text-white px-4 py-2 rounded-md hover:bg-orange-700">INFO</button>
+                    <button class="bg-orange-500 text-white px-4 py-2 rounded-md hover:bg-orange-700">PRESETS</button>
+                    <button class="bg-orange-500 text-white px-4 py-2 rounded-md hover:bg-orange-700">MODE</button>
                 </div>
-              </div>
-              <div class="mt-2">
-                <input id="password" name="password" type="password" autocomplete="current-password" required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6">
-              </div>
+                
+                <!-- Right Buttons -->
+                <div class="flex flex-col space-y-2">
+                    <button class="bg-orange-500 text-white px-4 py-2 rounded-md hover:bg-orange-700">ACTIVITY</button>
+                    <button class="bg-orange-500 text-white px-4 py-2 rounded-md hover:bg-orange-700">AUTO</button>
+                    <button class="bg-orange-500 text-white px-4 py-2 rounded-md hover:bg-orange-700">BLANK</button>
+                </div>
             </div>
-      
-            <div>
-              <button type="submit" class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Sign in</button>
-            </div>
-          </form>
-      
-          <p class="mt-10 text-center text-sm/6 text-gray-500">
-            Not a member?
-            <a href="#" class="font-semibold text-indigo-600 hover:text-indigo-500">Start a 14 day free trial</a>
-          </p>
         </div>
-      </div>      
+    </div>
+
 </body>
 </html>
