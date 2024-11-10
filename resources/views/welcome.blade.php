@@ -7,10 +7,10 @@
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
 </head>
 <body class="bg-blue-1000 font-sans">
-    <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+    <div class="flex min-h-full flex-col justify-center px-24 py-24 lg:px-10">
         <div class="sm:mx-auto sm:w-full sm:max-w-sm">
-          <img class="mx-auto h-20 w-auto rounded-circle" src="{{ asset('images/loginLogo.png') }}" alt="Your Company">
-          <h2 class="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-300">Sign in to your account</h2>
+          <img class="mx-auto h-auto w-auto" src="{{ asset('images/loginlogo.png') }}" alt="Your Company">
+          <h2 class="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-300 py-2">Sign in to your account</h2>
         </div>
       
         <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
