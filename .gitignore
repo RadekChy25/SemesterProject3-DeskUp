@@ -1,0 +1,28 @@
+# Laravel & Composer
+/vendor
+/.env
+/.env.*
+/phpunit.xml
+/phpunit.xml.dist
+/.vscode/
+/.idea/
+
+# Laravel Cache & Log Files
+/storage/*
+!/storage/app
+!/storage/database
+!/storage/framework
+!/storage/logs
+
+# Compiled Tailwind & Mix Files
+/public/css
+/public/js
+
+# Node & NPM
+/node_modules/
+/npm-debug.log
+/yarn-error.log
+
+# Operating System Files
+.DS_Store
+Thumbs.db
