@@ -1,9 +1,11 @@
-import mix from 'laravel-mix';
-import tailwindcss from 'tailwindcss';
+const mix = require('laravel-mix');
 
-mix
-  .postCss('resources/css/app.css', 'public/css', [
-      tailwindcss,
-  ])
-  .js('resources/js/app.js', 'public/js')
-  .version();
+mix.js('resources/js/app.js', 'public/js')
+    .babelConfig({
+        presets: ['@babel/preset-env'], // Ensure Babel processes JS files
+        plugins: ['@babel/plugin-transform-modules-commonjs'] // Transpile ES Modules to CommonJS
+    })
+    .postCss('resources/css/app.css', 'public/css', [
+        require('tailwindcss'),
+    ])
+    .sourceMaps();
