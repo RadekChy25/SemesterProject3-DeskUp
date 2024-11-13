@@ -1,9 +1,4 @@
 {
-<<<<<<< HEAD
-    "/js/app.js": "/js/app.js?id=a355fdaf0a0667af3ee2612ff4519bc1",
-    "/css/app.css": "/css/app.css?id=afe17c3350c9d582382930cfc602815f"
-=======
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css"
->>>>>>> LoginPage
 }
