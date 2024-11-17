@@ -13,7 +13,7 @@
     <!-- Navbar -->
     <nav class="bg-blue-700 p-4">
         <div class="container mx-auto flex justify-between">
-            <a href="#" class="text-white font-bold">DeskUp</a>
+            <img src="images/logo.png" alt="DeskUp Logo" class="h-8 w-8">
             <div class="flex space-x-4">
                 <a href="#" class="text-white"><i class="fas fa-user"></i></a>
                 <a href="#" class="text-white"><i class="fas fa-question-circle"></i></a>
@@ -29,31 +29,33 @@
         <div class="w-1/2 bg-white p-6 rounded-lg shadow-lg text-black">
             <h1 class="text-center text-2xl font-semibold mb-4">Top Section</h1>
             <p class="text-center mb-6">This is the top section of the page.</p>
+            
             <div class="flex justify-center space-x-4">
-                <button class="bg-orange-500 text-white px-4 py-2 rounded-md hover:bg-orange-700">
-                    <i class="fas fa-arrow-up"></i> 
+                <button class="bg-blue-500 text-white px-20 py-4 text-lg rounded-md hover:bg-blue-700 flex-1">
+                    <i class="fas fa-arrow-up"></i>
                 </button>
             </div>
-            <div class="flex justify-center space-x-4">
-                <button class="bg-orange-500 text-white px-4 py-2 rounded-md hover:bg-orange-700">
-                    <i class="fas fa-arrow-down"></i> 
+            <div class="flex justify-center space-x-4 mt-4">
+                <button class="bg-blue-500 text-white px-20 py-4 text-lg rounded-md hover:bg-blue-700 flex-1">
+                    <i class="fas fa-arrow-down"></i>
                 </button>
             </div>
-            <div class="flex justify-center space-x-4">
-                <button class="bg-orange-500 text-white px-4 py-2 rounded-md hover:bg-orange-700">
-                     STAND UP
+            <div class="flex justify-center space-x-4 mt-4">
+                <button class="bg-blue-500 text-white px-20 py-4 text-lg rounded-md hover:bg-blue-700 flex-1">
+                    STAND UP
                 </button>
             </div>
-            <div class="flex justify-center space-x-4">
-                <button class="bg-orange-500 text-white px-4 py-2 rounded-md hover:bg-orange-700">
-                     SIT DOWN
+            <div class="flex justify-center space-x-4 mt-4">
+                <button class="bg-blue-500 text-white px-20 py-4 text-lg rounded-md hover:bg-blue-700 flex-1">
+                    SIT DOWN
                 </button>
             </div>
+
             <div class="mt-4 flex justify-center items-center space-x-2">
-                <button class="bg-orange-500 text-white px-4 py-2 rounded-md hover:bg-orange-700">
-                     CUSTOM
+                <button class="bg-blue-500 text-white px-10 py-4 text-lg rounded-md hover:bg-blue-700 flex-1" >
+                    CUSTOM
                 </button>
-                <input type="number" class="w-16 px-2 py-1 border rounded-md text-black" placeholder="0">
+                <input type="number" class="w-20 px-4 py-4 border rounded-md text-black text-lg flex-1" placeholder="Set between 60-240 cm." min="60" max="240">
             </div>
         </div>
 
@@ -68,17 +70,17 @@
             <!-- Buttons Section -->
             <div class="flex justify-between space-x-4">
                 <!-- Left Buttons -->
-                <div class="flex flex-col space-y-2">
-                    <button class="bg-orange-500 text-white px-4 py-2 rounded-md hover:bg-orange-700">INFO</button>
-                    <button class="bg-orange-500 text-white px-4 py-2 rounded-md hover:bg-orange-700">PRESETS</button>
-                    <button class="bg-orange-500 text-white px-4 py-2 rounded-md hover:bg-orange-700">MODE</button>
+                <div class="flex flex-col space-y-4">
+                    <button class="bg-blue-500 text-white px-6 py-4 text-lg rounded-md hover:bg-blue-700">INFO</button>
+                    <button class="bg-blue-500 text-white px-6 py-4 text-lg rounded-md hover:bg-blue-700">PRESETS</button>
+                    <button class="bg-blue-500 text-white px-6 py-4 text-lg rounded-md hover:bg-blue-700">MODE</button>
                 </div>
                 
                 <!-- Right Buttons -->
-                <div class="flex flex-col space-y-2">
-                    <button class="bg-orange-500 text-white px-4 py-2 rounded-md hover:bg-orange-700">ACTIVITY</button>
-                    <button class="bg-orange-500 text-white px-4 py-2 rounded-md hover:bg-orange-700">AUTO</button>
-                    <button class="bg-orange-500 text-white px-4 py-2 rounded-md hover:bg-orange-700">BLANK</button>
+                <div class="flex flex-col space-y-4">
+                    <button class="bg-blue-500 text-white px-6 py-4 text-lg rounded-md hover:bg-blue-700">ACTIVITY</button>
+                    <button class="bg-blue-500 text-white px-6 py-4 text-lg rounded-md hover:bg-blue-700">AUTO</button>
+                    <button class="bg-blue-500 text-white px-6 py-4 text-lg rounded-md hover:bg-blue-700">BLANK</button>
                 </div>
             </div>
         </div>
