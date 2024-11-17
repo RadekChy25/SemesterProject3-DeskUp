@@ -10,11 +10,13 @@
 
     <!-- Navbar -->
     <nav class="bg-blue-700 p-4">
-        <div class="container mx-auto flex space-x-4">
+        <div class="container mx-auto flex space-x-4 text-right">
             <a href="#" class="text-white font-bold">DeskUp</a>
-            <a href="#" class="text-white">I1</a>
-            <a href="#" class="text-white">I2</a>
-            <a href="#" class="text-white">I3</a>
+            <div class="ml-auto flex space-x-4 text-right">
+                <a href="#" class="text-white text-right">I1</a>
+                <a href="#" class="text-white text-right">I2</a>
+                <a href="#" class="text-white text-right">I3</a>
+            </div>
         </div>
     </nav>
 

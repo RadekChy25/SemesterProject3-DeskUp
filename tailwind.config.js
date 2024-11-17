@@ -14,7 +14,27 @@ export default {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
+        
         },
     },
-    plugins: [],
+    plugins: [
+        plugin(function({ addUtilities }) {
+            const newUtilities = {
+                '.text-justify': {
+                    textAlign: 'justify',
+                },
+                '.text-center': {
+                    textAlign: 'center',
+                },
+                '.text-left': {
+                    textAlign: 'left',
+                },
+                '.text-right': {
+                    textAlign: 'right',
+                },
+            };
+
+            addUtilities(newUtilities, ['responsive', 'hover']);
+        }),
+    ],
 };
