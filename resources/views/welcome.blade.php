@@ -64,8 +64,8 @@
         <div class="w-1/2 bg-white p-6 rounded-lg shadow-lg text-black">
             <!--h1 class="text-center text-2xl font-semibold mb-4">Bottom Section</h1>
             <p class="text-center mb-6">This is the bottom section of the page.</p-->
-            <div class="bg-gray-200 p-4 rounded-md shadow-inner mb-6 text-center">
-            <div class="bg-gray-200 p-4 rounded-md shadow-inner mb-6 text-center">
+            <div class="bg-gray-200 p-8 rounded-md shadow-inner mb-11 text-center">
+            <div>
                 <h2 class="text-xl font-semibold mb-4">Time Spent Sitting vs. Standing</h2>
                 <canvas id="sittingStandingChart" class="w-10 h-4"></canvas>
                     </div>
@@ -113,18 +113,19 @@
 
             <!-- Buttons Section -->
             <div class="flex justify-between space-x-4">
-                <!-- Left Buttons -->
+              
                 <div class="flex flex-col space-y-4">
-                    <button class="bg-blue-500 text-white px-6 py-4 text-lg rounded-md hover:bg-blue-700">INFO</button>
-                    <button class="bg-blue-500 text-white px-6 py-4 text-lg rounded-md hover:bg-blue-700">PRESETS</button>
-                    <button class="bg-blue-500 text-white px-6 py-4 text-lg rounded-md hover:bg-blue-700">MODE</button>
+                    <button class="bg-blue-500 text-white px-8 py-4 text-lg rounded-md hover:bg-blue-700 flex-1">PRESETS</button>
                 </div>
-                
-                <!-- Right Buttons -->
                 <div class="flex flex-col space-y-4">
-                    <button class="bg-blue-500 text-white px-6 py-4 text-lg rounded-md hover:bg-blue-700">ACTIVITY</button>
-                    <button class="bg-blue-500 text-white px-6 py-4 text-lg rounded-md hover:bg-blue-700">AUTO</button>
-                    <button class="bg-blue-500 text-white px-6 py-4 text-lg rounded-md hover:bg-blue-700">BLANK</button>
+                    <button class="bg-blue-500 text-white px-8 py-4 text-lg rounded-md hover:bg-blue-700 flex-1">MODES</button>
+                   
+                </div>
+                <div class="flex flex-col space-y-4">
+                    <button class="bg-blue-500 text-white px-8 py-4 text-lg rounded-md hover:bg-blue-700 flex-1">AUTO</button>
+                </div>
+                <div class="flex flex-col space-y-4">
+                    <button class="bg-blue-500 text-white px-8 py-4 text-lg rounded-md hover:bg-blue-700 flex-1">ACTIVITY</button>
                 </div>
             </div>
         </div>
