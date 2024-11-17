@@ -6,57 +6,56 @@
     <title>DeskUp</title>
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
     <script src="https://cdn.tailwindcss.com"></script>
-    <span class="iconify" data-icon="mdi:home" data-inline="false"></span>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>  
 <body class="bg-blue-500 text-white font-sans">
 
     <!-- Navbar -->
     <nav class="bg-blue-700 p-4">
-    <div class="container mx-auto flex justify-between">
-        <a href="#" class="text-white font-bold">DeskUp</a>
-        <div class="flex space-x-4">
-            <a href="#" class="text-white">I1</a>
-            <a href="#" class="text-white">I2</a>
-            <a href="#" class="text-white">I3</a>
+        <div class="container mx-auto flex justify-between">
+            <a href="#" class="text-white font-bold">DeskUp</a>
+            <div class="flex space-x-4">
+                <a href="#" class="text-white"><i class="fas fa-user"></i></a>
+                <a href="#" class="text-white"><i class="fas fa-question-circle"></i></a>
+                <a href="#" class="text-white"><i class="fas fa-cog"></i></a>
+            </div>
         </div>
-    </div>
-</nav>
+    </nav>
 
     <!-- Website Main Section -->
     <div class="container mx-auto p-4 flex space-x-8 mt-6">
         
         <!-- Left Side Section -->
         <div class="w-1/2 bg-white p-6 rounded-lg shadow-lg text-black">
-    <h1 class="text-center text-2xl font-semibold mb-4">Top Section</h1>
-    <p class="text-center mb-6">This is the top section of the page.</p>
-    <div class="flex justify-center space-x-4">
-        <button class="bg-orange-500 text-white px-4 py-2 rounded-md hover:bg-orange-700">
-            <i class="fas fa-arrow-up"></i> UP
-        </button>
-    </div>
-    <div class="flex justify-center space-x-4">
-        <button class="bg-orange-500 text-white px-4 py-2 rounded-md hover:bg-orange-700">
-            <i class="fas fa-arrow-down"></i> DOWN
-        </button>
-    </div>
-    <div class="flex justify-center space-x-4">
-        <button class="bg-orange-500 text-white px-4 py-2 rounded-md hover:bg-orange-700">
-            <i class="fas fa-arrow-up"></i> STAND UP
-        </button>
-    </div>
-    <div class="flex justify-center space-x-4">
-        <button class="bg-orange-500 text-white px-4 py-2 rounded-md hover:bg-orange-700">
-            <i class="fas fa-arrow-down"></i> SIT DOWN
-        </button>
-    </div>
-    <div class="mt-4 flex justify-center items-center space-x-2">
-        <button class="bg-orange-500 text-white px-4 py-2 rounded-md hover:bg-orange-700">
-            <i class="fas fa-cog"></i> CUSTOM
-        </button>
-        <input type="number" class="w-16 px-2 py-1 border rounded-md text-black" placeholder="0">
-    </div>
-</div>
-
+            <h1 class="text-center text-2xl font-semibold mb-4">Top Section</h1>
+            <p class="text-center mb-6">This is the top section of the page.</p>
+            <div class="flex justify-center space-x-4">
+                <button class="bg-orange-500 text-white px-4 py-2 rounded-md hover:bg-orange-700">
+                    <i class="fas fa-arrow-up"></i> 
+                </button>
+            </div>
+            <div class="flex justify-center space-x-4">
+                <button class="bg-orange-500 text-white px-4 py-2 rounded-md hover:bg-orange-700">
+                    <i class="fas fa-arrow-down"></i> 
+                </button>
+            </div>
+            <div class="flex justify-center space-x-4">
+                <button class="bg-orange-500 text-white px-4 py-2 rounded-md hover:bg-orange-700">
+                     STAND UP
+                </button>
+            </div>
+            <div class="flex justify-center space-x-4">
+                <button class="bg-orange-500 text-white px-4 py-2 rounded-md hover:bg-orange-700">
+                     SIT DOWN
+                </button>
+            </div>
+            <div class="mt-4 flex justify-center items-center space-x-2">
+                <button class="bg-orange-500 text-white px-4 py-2 rounded-md hover:bg-orange-700">
+                     CUSTOM
+                </button>
+                <input type="number" class="w-16 px-2 py-1 border rounded-md text-black" placeholder="0">
+            </div>
+        </div>
 
         <!-- Right Side Section -->
         <div class="w-1/2 bg-white p-6 rounded-lg shadow-lg text-black">
