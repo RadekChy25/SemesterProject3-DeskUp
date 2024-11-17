@@ -13,7 +13,7 @@
     <!-- Navbar -->
     <nav class="bg-blue-700 p-4">
         <div class="container mx-auto flex justify-between">
-            <img src="images/logo.png" alt="DeskUp Logo" class="h-8 w-8">
+            <img src="{{ asset('images/logo-deskUp.png') }}" alt="DeskUp Logo" class="h-8 w-35">
             <div class="flex space-x-4">
                 <a href="#" class="text-white"><i class="fas fa-user"></i></a>
                 <a href="#" class="text-white"><i class="fas fa-question-circle"></i></a>
@@ -27,8 +27,8 @@
         
         <!-- Left Side Section -->
         <div class="w-1/2 bg-white p-6 rounded-lg shadow-lg text-black">
-            <h1 class="text-center text-2xl font-semibold mb-4">Top Section</h1>
-            <p class="text-center mb-6">This is the top section of the page.</p>
+            <h1 class="text-center text-2xl font-semibold mb-4">Control Panel</h1>
+            <p class="text-center mb-6">Here you can adjust height of your desk.</p>
             
             <div class="flex justify-center space-x-4">
                 <button class="bg-blue-500 text-white px-20 py-4 text-lg rounded-md hover:bg-blue-700 flex-1">
