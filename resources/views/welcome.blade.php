@@ -14,8 +14,14 @@
             <img class="mx-auto" src="{{ asset('images/logo.png') }}" alt="Your Company">
             <h2 class="mt-10 text-center text-2xl font-bold tracking-tight text-white">Sign in to your account</h2>
         </div>
-        <x-login>
-        </x-login>
+        <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+            <form class="space-y-6" action="{{ route('login') }}" method="POST">
+                @csrf
+                <x-login>
+                    Sign in
+                </x-login>
+            </form>
+        </div>
     </div>
 </body>
 </html>
