@@ -1,4 +1,6 @@
 import defaultTheme from 'tailwindcss/defaultTheme';
+import plugin from 'tailwindcss/plugin';
+import { addIconSelectors } from '@iconify/tailwind';
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -14,7 +16,6 @@ export default {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
-        
         },
     },
     plugins: [
@@ -35,6 +36,10 @@ export default {
             };
 
             addUtilities(newUtilities, ['responsive', 'hover']);
+        }),
+        addIconSelectors({
+            // Ensure you have the correct configuration here
+            varName: 'iconify', // Example configuration
         }),
     ],
 };
