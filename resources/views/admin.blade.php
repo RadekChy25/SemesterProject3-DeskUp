@@ -1,16 +1,16 @@
 @extends('layout')
-<div class="m-20">
-    <x-navbar>
-    </x-navbar>
-</div>
-<div class="flex w-full flex-col lg:flex-row">
-    <div class="card bg-base-300 rounded-box grid h-32 flex-grow place-items-center p-8">
-        <h2 class="text-3xl">Register new users.</h2>
+
+<x-user>
+    <x-slot:left>
+        <h3>Register now.</h3>
         <x-login>
+
         </x-login>
-    </div>
-    <div class="divider lg:divider-horizontal"></div>
-    <div class="card bg-base-300 rounded-box grid h-32 flex-grow place-items-center">
-        <h2 class="text-3xl">List of users:</h2>
-    </div>
-  </div>
+    </x-slot:left>
+    <x-slot:right>
+        @foreach ($users as $user)
+            <p class="block w-full font-medium rounded-md border-0 py-1.5 pl-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm">Username: {{ $user->name }}</p>
+            <button ></button>
+        @endforeach
+    </x-slot:right>
+</x-user>
