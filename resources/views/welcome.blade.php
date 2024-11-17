@@ -6,6 +6,7 @@
     <title>DeskUp</title>
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>  
 <body class="bg-blue-500 text-white font-sans">
@@ -61,11 +62,54 @@
 
         <!-- Right Side Section -->
         <div class="w-1/2 bg-white p-6 rounded-lg shadow-lg text-black">
-            <h1 class="text-center text-2xl font-semibold mb-4">Bottom Section</h1>
-            <p class="text-center mb-6">This is the bottom section of the page.</p>
+            <!--h1 class="text-center text-2xl font-semibold mb-4">Bottom Section</h1>
+            <p class="text-center mb-6">This is the bottom section of the page.</p-->
             <div class="bg-gray-200 p-4 rounded-md shadow-inner mb-6 text-center">
-                <span>Graph content</span>
-            </div>
+            <div class="bg-gray-200 p-4 rounded-md shadow-inner mb-6 text-center">
+                <h2 class="text-xl font-semibold mb-4">Time Spent Sitting vs. Standing</h2>
+                <canvas id="sittingStandingChart" class="w-10 h-4"></canvas>
+                    </div>
+                        <script>
+                            const ctx = document.getElementById('sittingStandingChart').getContext('2d');
+                            const sittingStandingChart = new Chart(ctx, {
+                                type: 'bar', // Type of graph: bar chart
+                                data: {
+                                    labels: ['Sitting', 'Standing'], // Labels for each category
+                                    datasets: [{
+                                        label: 'Time (in minutes)',
+                                        data: [60, 120], // Sample data: 120 minutes sitting, 60 minutes standing
+                                        backgroundColor: [
+                                            'rgba(54, 162, 235, 0.2)',  // Blue for sitting
+                                            'rgba(255, 99, 132, 0.2)'   // Red for standing
+                                        ],
+                                        borderColor: [
+                                            'rgba(54, 162, 235, 1)',   // Blue border for sitting
+                                            'rgba(255, 99, 132, 1)'    // Red border for standing
+                                        ],
+                                        borderWidth: 1
+                                    }]
+                                },
+                                options: {
+                                    responsive: true,
+                                    maintainAspectRatio: true,
+                                    scales: {
+                                        y: {
+                                            beginAtZero: true,  // Ensure the Y-axis starts at zero
+                                            title: {
+                                                display: true,
+                                                text: 'Time (Minutes)'
+                                            }
+                                        }
+                                    },
+                                    plugins: {
+                                        legend: {
+                                            position: 'top',
+                                        },
+                                    }
+                                }
+                            });
+                        </script>
+                    </div>
 
             <!-- Buttons Section -->
             <div class="flex justify-between space-x-4">
