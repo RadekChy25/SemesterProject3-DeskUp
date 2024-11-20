@@ -27,3 +27,6 @@ Route::get('/admin', function(){
         'users' => User::all()
     ]);
 })->name('admin.index');
+Route::get('/ui', function (){
+    return view('components/ui');
+});

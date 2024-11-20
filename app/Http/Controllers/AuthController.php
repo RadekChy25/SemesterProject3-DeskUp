@@ -11,18 +11,20 @@ class AuthController extends Controller
     {
         // Login logic here
         $request->validate([
-                "username" => "required",
+                "name" => "required",
                 "password" => "required",
             ]);
 
-        $credentials["username"] = $request->username;
+        $credentials["name"] = $request->name;
         $credentials["password"] =$request->password;
 
         if(Auth::attempt($credentials))
         {
+            return redirect('/ui');
         }
         else
         {
+            return redirect('/');
         }
     }
 
