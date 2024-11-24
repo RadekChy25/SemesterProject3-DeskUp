@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Models\User;
 
+use App\Http\Controllers\DeskController;
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -30,3 +32,5 @@ Route::get('/admin', function(){
 Route::get('/ui', function (){
     return view('components/ui');
 });
+
+Route::get('/getdesks', [DeskController::class, 'getDesks']);
