@@ -10,10 +10,10 @@ class RegistrationController extends Controller
     public function register(Request $request)
     {
         $request->validate([
-            "uname" => "required",
+            //"uname" => "required",
             "name"=> "required",
             "password" => "required",
-            "usertype" => "required",
+            //"usertype" => "required",
         ]);
 
         if($request->code==123456789)
@@ -21,18 +21,14 @@ class RegistrationController extends Controller
 
             $user=new User();
         
-            $user->uname = $request->uname;
+            //$user->uname = $request->uname;
             $user->name =$request->name;
             $user->password = Hash::make($request->password);
-            $user->type =$request->usertype;
-
-            if ($user->save())
-            {
-            }
-
+            //$user->type =$request->usertype;
+            
+            $user->save();
         }
-        else
-        {
-        }
+
+        return(redirect('/admin'));
     }
 }
