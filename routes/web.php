@@ -17,7 +17,12 @@ Route::post('/admin', function () {
         ]
     );
     return redirect('admin');
-})->name('admin');
+})->name('register');
+
+Route::post('/admin', function ($user) {
+    RegistrationController::delete($user->id);
+    return redirect('admin');
+})->name('delete');
 
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 
