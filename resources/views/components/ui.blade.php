@@ -32,32 +32,56 @@
             <p class="text-center mb-6">Here you can adjust height of your desk.</p>
             
             <div class="flex justify-center space-x-4">
-                <button class="bg-blue-500 text-white px-20 py-4 text-lg rounded-md hover:bg-blue-700 flex-1">
-                    <i class="fas fa-arrow-up"></i>
-                </button>
+                <form action="{{route('moveDesk')}}" method='POST' class="flex flex-1">
+                    @csrf
+                    <button class="bg-blue-500 text-white px-20 py-4 text-lg rounded-md hover:bg-blue-700 flex-1">
+                        <i class="fas fa-arrow-up"></i>
+                    </button>
+                    <input type="hidden" name="heightChange" value=5>
+                </form>
             </div>
             <div class="flex justify-center space-x-4 mt-4">
-                <button class="bg-blue-500 text-white px-20 py-4 text-lg rounded-md hover:bg-blue-700 flex-1">
-                    <i class="fas fa-arrow-down"></i>
-                </button>
+                <form action="{{route('moveDesk')}}", method='POST' class="flex flex-1">
+                    @csrf
+                    <button class="bg-blue-500 text-white px-20 py-4 text-lg rounded-md hover:bg-blue-700 flex-1">
+                        <i class="fas fa-arrow-down"></i>
+                    </button>
+                    <input type="hidden" name="heightChange" value=-5>
+                </form>
             </div>
             <div class="flex justify-center space-x-4 mt-4">
-                <button class="bg-blue-500 text-white px-20 py-4 text-lg rounded-md hover:bg-blue-700 flex-1">
-                    STAND UP
-                </button>
+                <form action="{{route('changeHeight')}}" method="POST" class="flex flex-1">
+                    @csrf
+                    <button class="bg-blue-500 text-white px-20 py-4 text-lg rounded-md hover:bg-blue-700 flex-1">
+                        STAND UP
+                    </button>
+                    <input type="hidden" name="height" value=200>
+                </form>
             </div>
             <div class="flex justify-center space-x-4 mt-4">
-                <button class="bg-blue-500 text-white px-20 py-4 text-lg rounded-md hover:bg-blue-700 flex-1">
-                    SIT DOWN
-                </button>
+                <form action="{{route('changeHeight')}}" method="POST" class="flex flex-1">
+                    @csrf
+                    <button class="bg-blue-500 text-white px-20 py-4 text-lg rounded-md hover:bg-blue-700 flex-1">
+                        SIT DOWN
+                    </button>
+                    <input type="hidden" name="height" value=60>
+                </form>
             </div>
 
             <div class="mt-4 flex justify-center items-center space-x-2">
-                <button class="bg-blue-500 text-white px-10 py-4 text-lg rounded-md hover:bg-blue-700 flex-1" >
-                    CUSTOM
-                </button>
-                <input type="number" class="w-20 px-4 py-4 border rounded-md text-black text-lg flex-1" placeholder="Set between 60-240 cm." min="60" max="240">
+                <form action="{{route('changeHeight')}}", method='POST' class="flex flex-1">
+                    @csrf
+                    <button type="submit" class="bg-blue-500 text-white px-10 py-4 text-lg rounded-md hover:bg-blue-700 flex-1" >
+                        CUSTOM
+                    </button>
+                    <input name="height" type="number" class="w-20 px-4 py-4 border rounded-md text-black text-lg flex-1" placeholder="Set between 60-240 cm." min="60" max="240">
+                </form>
             </div>
+            @session('feedback')
+                <p class="bg-green-500 mt-5 text-white px-7 py-2 text-lg rounded-md hover:bg-green-300 flex-1 text-center">
+                    Desk height changed to {{$value->position_mm/10}} cms
+                </p>
+            @endsession
         </div>
 
         <!-- Right Side Section -->
