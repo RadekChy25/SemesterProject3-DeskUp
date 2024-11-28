@@ -28,6 +28,7 @@ Route::post('/admin', function ($user) {
 })->name('delete');
 
 Route::post('/login', [AuthController::class, 'login'])->name('login');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::get('/user', [AuthController::class, 'getUser'])->middleware('auth');
 Route::get('/admin', function(){

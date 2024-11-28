@@ -36,9 +36,12 @@
                         </li>
                         <!-- Logout Button -->
                         <li>
-                            <button onclick="logout();" class="w-full text-left px-4 py-2 text-black hover:bg-blue-500 rounded-md">
-                                Logout
-                            </button>
+                            <form action="{{ route('logout') }}" method="POST" class="w-full">
+                                @csrf
+                                <button type="submit" class="w-full text-left px-4 py-2 text-black hover:bg-blue-500 rounded-md">
+                                    Logout
+                                </button>
+                            </form>
                         </li>
                     </ul>
                 </div>               
