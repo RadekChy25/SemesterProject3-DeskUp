@@ -22,10 +22,11 @@
     </x-slot:left>
     <x-slot:right>
         @foreach ($users as $user)
-            <form class="flex flex-row m-3" action="{{route('delete', $user->id)}}" name="delete" method="POST">
+            <form class="flex flex-row m-3" action="{{route('delete')}}" name="delete" method="POST">
                 @csrf
+                <input type="hidden" name="id" value="{{ $user->id }}">
                 <p class="basis-5/6 block w-full font-medium rounded-md border-0 py-1.5 pl-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm">{{ $user->name }}</p>
-                <button class="basis-1/6 ml-3 bg-red-400 font-medium rounded-md border-0 shadow-sm ring-1 ring-inset ring-red-400 hover:shadow-lg hover:bg-red-500 active:shadow-inner active:origin-bottom" {{ action('AuthController', $user->id) }}>Delete</button>
+                <button class="basis-1/6 ml-3 bg-red-400 font-medium rounded-md border-0 shadow-sm ring-1 ring-inset ring-red-400 hover:shadow-lg hover:bg-red-500 active:shadow-inner active:origin-bottom">Delete</button>
             </form>
         @endforeach
     </x-slot:right>

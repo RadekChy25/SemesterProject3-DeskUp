@@ -35,9 +35,9 @@ class RegistrationController extends Controller
         {
         }
     }
-    public static function delete(User $user)
+    public static function delete(Request $request)
     {
-        User::destroy($user->id);
-        return(redirect("/management"));
+        User::destroy($request->id);
+        return(redirect("/admin"));
     }
 }
