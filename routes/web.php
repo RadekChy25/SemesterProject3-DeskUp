@@ -12,7 +12,20 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::post('/admin', [RegistrationController::class, 'register'])->name('admin');
+Route::post('/admin', function () {
+    User::create(
+        [
+            'name'=> request('name'),
+            'password'=> request('password'),
+        ]
+    );
+    return redirect('admin');
+})->name('register');
+
+Route::post('/admin', function ($user) {
+    RegistrationController::delete($user->id);
+    return redirect('admin');
+})->name('delete');
 
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 
