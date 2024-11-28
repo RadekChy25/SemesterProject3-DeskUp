@@ -20,7 +20,7 @@
                 <a href="#" class="text-white"><i class="fas fa-question-circle"></i></a>
                 <a href="#" class="text-white"><i class="fas fa-cog"></i></a>
                 <!-- User List Dropdown -->
-                <div id="user-list-container" style="display: none; position: absolute; top: 100%; left: 0; background-color: white; border: 1px solid #ddd; padding: 10px; width: 150px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                <div id="user-list-container" style="display: none; position: absolute; top: 100%; left: 0; background-color: white; border: 1px solid #ddd; padding: 10px; width: 150px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); border-radius: 8px;">
                     <ul style="list-style-type: none; padding: 0; margin: 0;">
                         <!-- Profile Button -->
                         <li>
