@@ -12,7 +12,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::post('/admin', function () {
+Route::post('/register', function () {
     User::create(
         [
             'name'=> request('name'),
@@ -22,7 +22,7 @@ Route::post('/admin', function () {
     return redirect('admin');
 })->name('register');
 
-Route::post('/admin', function ($user) {
+Route::post('/delete', function ($user) {
     RegistrationController::delete($user->id);
     return redirect('admin');
 })->name('delete');
