@@ -16,35 +16,18 @@
         <div class="container mx-auto flex justify-between">
             <img src="{{ asset('images/logo-deskUp.png') }}" alt="DeskUp Logo" class="h-8 w-35">
             <div class="flex space-x-4 relative">
-                <a href="#" id="user-icon" class="text-white"><i class="fas fa-user"></i></a>
+                <!-- User Dropdown -->
+                <div class="relative">
+                    <a href="#" id="user-icon" class="text-white"><i class="fas fa-user"></i></a>
+                    <div id="user-dropdown" 
+                         class="absolute right-0 mt-2 w-48 bg-white text-black rounded shadow-md hidden">
+                        <a href="#" class="block px-4 py-2 hover:bg-gray-200">Profile</a>
+                        <a href="#" class="block px-4 py-2 hover:bg-gray-200">Settings</a>
+                        <a href="#" class="block px-4 py-2 hover:bg-gray-200">Logout</a>
+                    </div>
+                </div>
                 <a href="#" class="text-white"><i class="fas fa-question-circle"></i></a>
                 <a href="#" class="text-white"><i class="fas fa-cog"></i></a>
-                <!-- User List Dropdown -->
-                <div id="user-list-container" style="display: none; position: absolute; top: 100%; left: 0; background-color: white; border: 1px solid #ddd; padding: 10px; width: 150px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); border-radius: 8px;">
-                    <ul style="list-style-type: none; padding: 0; margin: 0;">
-                        <!-- Profile Button -->
-                        <li>
-                            <button onclick="goToProfile();" class="w-full text-left px-4 py-2 text-black hover:bg-blue-500 rounded-md">
-                                Profile
-                            </button>
-                        </li>
-                        <!-- Settings Button -->
-                        <li>
-                            <button onclick="goToSettings();" class="w-full text-left px-4 py-2 text-black hover:bg-blue-500 rounded-md">
-                                Settings
-                            </button>
-                        </li>
-                        <!-- Logout Button -->
-                        <li>
-                            <form action="{{ route('logout') }}" method="POST" class="w-full">
-                                @csrf
-                                <button type="submit" class="w-full text-left px-4 py-2 text-black hover:bg-blue-500 rounded-md">
-                                    Logout
-                                </button>
-                            </form>
-                        </li>
-                    </ul>
-                </div>               
             </div>
         </div>
     </nav>
@@ -57,6 +40,7 @@
             <h1 class="text-center text-2xl font-semibold mb-4">Control Panel</h1>
             <p class="text-center mb-6">Here you can adjust height of your desk.</p>
             
+            <!-- Adjust Height Buttons -->
             <div class="flex justify-center space-x-4">
                 <form action="{{route('moveDesk')}}" method='POST' class="flex flex-1">
                     @csrf
@@ -103,6 +87,7 @@
                     <input name="height" type="number" class="w-20 px-4 py-4 border rounded-md text-black text-lg flex-1" placeholder="Set between 60-240 cm." min="60" max="240">
                 </form>
             </div>
+
             @session('feedback')
                 <p class="bg-green-500 mt-5 text-white px-7 py-2 text-lg rounded-md hover:bg-green-300 flex-1 text-center">
                     Desk height changed to {{$value->position_mm/10}} cms
@@ -119,19 +104,19 @@
             <script>
                 const ctx = document.getElementById('sittingStandingChart').getContext('2d');
                 const sittingStandingChart = new Chart(ctx, {
-                    type: 'bar', // Type of graph: bar chart
+                    type: 'bar', 
                     data: {
-                        labels: ['Sitting', 'Standing'], // Labels for each category
+                        labels: ['Sitting', 'Standing'], 
                         datasets: [{
                             label: 'Time (in minutes)',
-                            data: [60, 120], // Sample data: 120 minutes sitting, 60 minutes standing
+                            data: [60, 120], 
                             backgroundColor: [
-                                'rgba(54, 162, 235, 0.2)',  // Blue for sitting
-                                'rgba(255, 99, 132, 0.2)'   // Red for standing
+                                'rgba(54, 162, 235, 0.2)',  
+                                'rgba(255, 99, 132, 0.2)'   
                             ],
                             borderColor: [
-                                'rgba(54, 162, 235, 1)',   // Blue border for sitting
-                                'rgba(255, 99, 132, 1)'    // Red border for standing
+                                'rgba(54, 162, 235, 1)',   
+                                'rgba(255, 99, 132, 1)'    
                             ],
                             borderWidth: 1
                         }]
@@ -141,7 +126,7 @@
                         maintainAspectRatio: true,
                         scales: {
                             y: {
-                                beginAtZero: true,  // Ensure the Y-axis starts at zero
+                                beginAtZero: true,  
                                 title: {
                                     display: true,
                                     text: 'Time (Minutes)'
@@ -160,42 +145,98 @@
             <!-- Buttons Section -->
             <div class="flex justify-between space-x-4">
                 <div class="flex flex-col space-y-4">
-                    <button class="bg-blue-500 text-white px-8 py-4 text-lg rounded-md hover:bg-blue-700 flex-1">PRESETS</button>
+                    <button id="presetsBtn" class="bg-blue-500 text-white px-8 py-4 text-lg rounded-md hover:bg-blue-700 flex-1">PRESETS</button>
                 </div>
                 <div class="flex flex-col space-y-4">
-                    <button class="bg-blue-500 text-white px-8 py-4 text-lg rounded-md hover:bg-blue-700 flex-1">MODES</button>
+                    <button id="modesBtn" class="bg-blue-500 text-white px-8 py-4 text-lg rounded-md hover:bg-blue-700 flex-1">MODES</button>
                 </div>
                 <div class="flex flex-col space-y-4">
-                    <button class="bg-blue-500 text-white px-8 py-4 text-lg rounded-md hover:bg-blue-700 flex-1">AUTO</button>
+                    <button id="autoBtn" class="bg-blue-500 text-white px-8 py-4 text-lg rounded-md hover:bg-blue-700 flex-1">AUTO</button>
                 </div>
                 <div class="flex flex-col space-y-4">
-                    <button class="bg-blue-500 text-white px-8 py-4 text-lg rounded-md hover:bg-blue-700 flex-1">ACTIVITY</button>
+                    <button id="activityBtn" class="bg-blue-500 text-white px-8 py-4 text-lg rounded-md hover:bg-blue-700 flex-1">ACTIVITY</button>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- Modal Templates -->
+    <div id="presetsModal" class="modal text-black hidden fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+        <div class="bg-white p-8 rounded-lg w-1/2">
+            <h2 class="text-xl font-semibold mb-4">Presets</h2>
+            <p>Choose a preset option for your desk.</p>
+            <button onclick="closeModal('presetsModal')" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded-md">Close</button>
+        </div>
+    </div>
+
+    <div id="modesModal" class="modal hidden text-black fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+        <div class="bg-white p-8 rounded-lg w-1/2">
+            <h2 class="text-xl font-semibold mb-4">Modes</h2>
+            <p>Select a mode for your desk.</p>
+            <button onclick="closeModal('modesModal')" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded-md">Close</button>
+        </div>
+    </div>
+
+    <div id="autoModal" class="modal hidden text-black fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+        <div class="bg-white p-8 rounded-lg w-1/2">
+            <h2 class="text-xl font-semibold mb-4">Auto</h2>
+            <p>Enable automatic adjustments for your desk.</p>
+            <button onclick="closeModal('autoModal')" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded-md">Close</button>
+        </div>
+    </div>
+
+    <div id="activityModal" class="modal text-black hidden fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+        <div class="bg-white p-8 rounded-lg w-1/2">
+            <h2 class="text-xl font-semibold mb-4">Activity</h2>
+            <p>Track your activity with the desk.</p>
+            <button onclick="closeModal('activityModal')" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded-md">Close</button>
+        </div>
+    </div>
+
     <script>
-  document.getElementById('user-icon').addEventListener('click', function(event) {
-    event.preventDefault();  // Prevent default action (like link navigation)
+        // Existing script for user dropdown toggle
+        // Toggle Dropdown Visibility
+        const userIcon = document.getElementById('user-icon');
+        const userDropdown = document.getElementById('user-dropdown');
 
-    var userList = document.getElementById('user-list-container');
-    
-    // Toggle the dropdown visibility with transition effect
-    if (userList.style.display === 'none' || userList.style.display === '') {
-        userList.style.display = 'block';
-        userList.style.opacity = '1';
-        userList.style.visibility = 'visible';
-    } else {
-        userList.style.opacity = '0';
-        userList.style.visibility = 'hidden';
-        // Add a delay to remove the display:none after fade-out effect
-        setTimeout(function() {
-            userList.style.display = 'none';
-        }, 300);  // Timeout should match the duration of the transition
-    }
-});
+        userIcon.addEventListener('click', function (event) {
+            event.preventDefault();
+            if (userDropdown.classList.contains('hidden')) {
+                userDropdown.classList.remove('hidden');
+            } else {
+                userDropdown.classList.add('hidden');
+            }
+        });
 
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function (event) {
+            if (!userIcon.contains(event.target) && !userDropdown.contains(event.target)) {
+                userDropdown.classList.add('hidden');
+            }
+        });
+
+        // Modal open/close functions
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.remove('hidden');
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.add('hidden');
+        }
+
+        // Event listeners to open modals
+        document.getElementById('presetsBtn').addEventListener('click', function() {
+            openModal('presetsModal');
+        });
+        document.getElementById('modesBtn').addEventListener('click', function() {
+            openModal('modesModal');
+        });
+        document.getElementById('autoBtn').addEventListener('click', function() {
+            openModal('autoModal');
+        });
+        document.getElementById('activityBtn').addEventListener('click', function() {
+            openModal('activityModal');
+        });
     </script>
 
 </body>
