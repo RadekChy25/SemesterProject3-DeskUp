@@ -23,7 +23,7 @@
     <!-- Main Content -->
     <div class="container mx-auto p-4 flex justify-center mt-6">
         <div class="w-full max-w-4xl bg-white p-6 rounded-lg shadow-lg text-black">
-            <h1 class="text-center text-2xl font-semibold mb-6">Check Frequently Asked Questions</h1>
+            <h1 class="text-center text-2xl font-semibold mb-6">Frequently Asked Questions</h1>
             <div class="space-y-4">
 
                 <!-- FAQ Item 1 -->
