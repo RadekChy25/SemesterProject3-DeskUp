@@ -22,14 +22,16 @@
                     <div id="user-dropdown" 
                          class="absolute right-0 mt-2 w-48 bg-white text-black rounded shadow-md hidden">
                         <a href="#" class="block px-4 py-2 hover:bg-gray-200">Profile</a>
-                        <a href="#" class="block px-4 py-2 hover:bg-gray-200">Settings</a>
                         <form action="{{ route('logout') }}" method="POST">
                             @csrf
                             <button href="logout" class="block px-4 py-2 hover:bg-blue-400 flex w-full">Logout</button>
                         </form>                        
                     </div>
                 </div>
-                <a href="#" class="text-white"><i class="fas fa-question-circle"></i></a>
+                    <form action="{{ route('faq') }}" method="GET">
+                            @csrf
+                            <button href="faq" class="text-white"><i class="fas fa-question-circle"></i></button>
+                        </form>
                 <a href="#" class="text-white"><i class="fas fa-cog"></i></a>
             </div>
         </div>

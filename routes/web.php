@@ -44,3 +44,7 @@ Route::get('/ui', function (){
 Route::get('/getdesks', [DeskController::class, 'getDesks']);
 Route::post('/changeDeskHeight', [DeskController::class, 'changeHeightTo'])->name('changeHeight');
 Route::post('/moveDeskBy', [DeskController::class, 'moveDeskBy'])->name('moveDesk');
+
+Route::get('/faq', function () {
+    return view('components/faq');
+})->name('faq');
