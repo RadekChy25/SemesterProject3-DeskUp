@@ -23,7 +23,10 @@
                          class="absolute right-0 mt-2 w-48 bg-white text-black rounded shadow-md hidden">
                         <a href="#" class="block px-4 py-2 hover:bg-gray-200">Profile</a>
                         <a href="#" class="block px-4 py-2 hover:bg-gray-200">Settings</a>
-                        <a href="logout" class="block px-4 py-2 hover:bg-gray-200">Logout</a>
+                        <form action="{{ route('logout') }}" method="POST">
+                            @csrf
+                            <button href="logout" class="block px-4 py-2 hover:bg-blue-400 flex w-full">Logout</button>
+                        </form>                        
                     </div>
                 </div>
                 <a href="#" class="text-white"><i class="fas fa-question-circle"></i></a>
@@ -255,11 +258,6 @@
         </div>
     </div>
 </div>
-
-
-        <!-- Close button -->
-        <button onclick="closeModal('modesModal')" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded-md">Close</button>
-    </div>
 </div>
 
 
