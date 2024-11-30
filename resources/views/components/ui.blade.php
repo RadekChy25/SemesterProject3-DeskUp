@@ -159,7 +159,11 @@
                     <button id="autoBtn" class="bg-blue-500 text-white px-8 py-4 text-lg rounded-md hover:bg-blue-700 flex-1">AUTO</button>
                 </div>
                 <div class="flex flex-col space-y-4">
-                    <button id="activityBtn" class="bg-blue-500 text-white px-8 py-4 text-lg rounded-md hover:bg-blue-700 flex-1">ACTIVITY</button>
+                    <form action="{{route('activity')}}" method="GET" class="flex flex-1">
+                        @csrf
+                      <button id="activityBtn" class="bg-blue-500 text-white px-8 py-4 text-lg rounded-md hover:bg-blue-700 flex-1">ACTIVITY</button>
+                        <input type="hidden" name="height" value=200>
+                    </form>
                 </div>
             </div>
         </div>
