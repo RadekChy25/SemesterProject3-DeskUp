@@ -13,5 +13,9 @@
     <div class="min-h-full">
         @yield('content')
     </div>
+    <form action="{{ route('logout') }}" method="POST">
+        @csrf
+        <button href="logout" class="block px-4 py-2 hover:bg-blue-400 flex w-full">Logout</button>
+    </form>   
 </body>
 </html>
