@@ -275,14 +275,6 @@
         </div>
     </div>
 
-    <div id="activityModal" class="modal text-black hidden fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-        <div class="bg-white p-8 rounded-lg w-1/2">
-            <h2 class="text-xl font-semibold mb-4">Activity</h2>
-            <p>Track your activity with the desk.</p>
-            <button onclick="closeModal('activityModal')" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded-md">Close</button>
-        </div>
-    </div>
-
     <script>
         // Existing script for user dropdown toggle
         // Toggle Dropdown Visibility
