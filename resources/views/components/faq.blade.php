@@ -12,6 +12,7 @@
 <body class="bg-blue-500 text-white font-sans">
 
     <!-- Navbar -->
+    <!-- Navbar -->
     <nav class="bg-blue-700 p-4">
         <div class="container mx-auto flex justify-between">
             <img src="{{ asset('images/logo-deskUp.png') }}" alt="DeskUp Logo" class="h-8 w-35">
@@ -25,10 +26,13 @@
                         <form action="{{ route('logout') }}" method="POST">
                             @csrf
                             <button href="logout" class="block px-4 py-2 hover:bg-blue-400 flex w-full">Logout</button>
-                        </form> 
+                        </form>                        
                     </div>
                 </div>
-                <a href="#" class="text-white"><i class="fas fa-home"></i></a>
+                    <form action="{{ route('faq') }}" method="GET">
+                            @csrf
+                            <button href="faq" class="text-white"><i class="fas fa-question-circle"></i></button>
+                        </form>
                 <a href="#" class="text-white"><i class="fas fa-cog"></i></a>
             </div>
         </div>
@@ -92,9 +96,12 @@
                         Yes, DeskUp includes an activity tracker to monitor how much time you spend sitting and standing, helping you maintain a balanced work routine.
                     </div>
                 <div class="flex justify-center mt-6">
-                    <button class="w-1/4 justify-center items-center p-4 bg-blue-500 text-white rounded-md hover:bg-blue-600" onclick="">
-                        <span>Go back</span>
-                    </button>
+                    <form action="{{ route('ui') }}" method="GET">
+                        <button href="ui" class="w-full justify-center items-center p-4 bg-blue-500 text-white rounded-md hover:bg-blue-600" onclick="">
+                            Go back
+                        </button>
+                    </form>
+                    
             </div>
             </div>
     </div>

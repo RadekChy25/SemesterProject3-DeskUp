@@ -48,3 +48,7 @@ Route::post('/moveDeskBy', [DeskController::class, 'moveDeskBy'])->name('moveDes
 Route::get('/faq', function () {
     return view('components/faq');
 })->name('faq');
+
+Route::get('/ui', function (){
+    return view('components/ui');
+})->name('ui');
