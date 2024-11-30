@@ -3,9 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FAQ - DeskUp</title>
+    <title>DeskUp</title>
+    <link rel="stylesheet" href="{{ mix('css/app.css') }}">
     <script src="https://cdn.tailwindcss.com"></script>
-</head>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>  
 <body class="bg-blue-500 text-white font-sans">
 
     <!-- Navbar -->
@@ -13,85 +16,338 @@
         <div class="container mx-auto flex justify-between">
             <img src="{{ asset('images/logo-deskUp.png') }}" alt="DeskUp Logo" class="h-8 w-35">
             <div class="flex space-x-4 relative">
-                <a href="#" id="user-icon" class="text-white"><i class="fas fa-user"></i></a>
+                <!-- User Dropdown -->
+                <div class="relative">
+                    <a href="#" id="user-icon" class="text-white"><i class="fas fa-user"></i></a>
+                    <div id="user-dropdown" 
+                         class="absolute right-0 mt-2 w-48 bg-white text-black rounded shadow-md hidden">
+                        <a href="#" class="block px-4 py-2 hover:bg-gray-200">Profile</a>
+                        <a href="#" class="block px-4 py-2 hover:bg-gray-200">Settings</a>
+                        <a href="logout" class="block px-4 py-2 hover:bg-gray-200">Logout</a>
+                    </div>
+                </div>
                 <a href="#" class="text-white"><i class="fas fa-question-circle"></i></a>
                 <a href="#" class="text-white"><i class="fas fa-cog"></i></a>
             </div>
         </div>
     </nav>
 
-    <!-- Main Content -->
-    <div class="container mx-auto p-4 flex justify-center mt-6">
-        <div class="w-full max-w-4xl bg-white p-6 rounded-lg shadow-lg text-black">
-            <h1 class="text-center text-2xl font-semibold mb-6">Check Frequently Asked Questions</h1>
-            <div class="space-y-4">
+    <!-- Website Main Section -->
+    <div class="container mx-auto p-4 flex space-x-8 mt-6">
+        
+        <!-- Left Side Section -->
+        <div class="w-1/2 bg-white p-6 rounded-lg shadow-lg text-black">
+            <h1 class="text-center text-2xl font-semibold mb-4">Control Panel</h1>
+            <p class="text-center mb-6">Here you can adjust height of your desk.</p>
+            
+            <!-- Adjust Height Buttons -->
+            <div class="flex justify-center space-x-4">
+                <form action="{{route('moveDesk')}}" method='POST' class="flex flex-1">
+                    @csrf
+                    <button class="bg-blue-500 text-white px-20 py-4 text-lg rounded-md hover:bg-blue-700 flex-1">
+                        <i class="fas fa-arrow-up"></i>
+                    </button>
+                    <input type="hidden" name="heightChange" value=5>
+                </form>
+            </div>
+            <div class="flex justify-center space-x-4 mt-4">
+                <form action="{{route('moveDesk')}}" method='POST' class="flex flex-1">
+                    @csrf
+                    <button class="bg-blue-500 text-white px-20 py-4 text-lg rounded-md hover:bg-blue-700 flex-1">
+                        <i class="fas fa-arrow-down"></i>
+                    </button>
+                    <input type="hidden" name="heightChange" value=-5>
+                </form>
+            </div>
+            <div class="flex justify-center space-x-4 mt-4">
+                <form action="{{route('changeHeight')}}" method="POST" class="flex flex-1">
+                    @csrf
+                    <button class="bg-blue-500 text-white px-20 py-4 text-lg rounded-md hover:bg-blue-700 flex-1">
+                        STAND UP
+                    </button>
+                    <input type="hidden" name="height" value=200>
+                </form>
+            </div>
+            <div class="flex justify-center space-x-4 mt-4">
+                <form action="{{route('changeHeight')}}" method="POST" class="flex flex-1">
+                    @csrf
+                    <button class="bg-blue-500 text-white px-20 py-4 text-lg rounded-md hover:bg-blue-700 flex-1">
+                        SIT DOWN
+                    </button>
+                    <input type="hidden" name="height" value=60>
+                </form>
+            </div>
 
-                <!-- FAQ Item 1 -->
-                <div>
-                    <button class="w-full flex justify-between items-center p-4 bg-blue-500 text-white rounded-md hover:bg-blue-600" onclick="toggleFaq('faq1')">
-                        <span>What is DeskUp?</span>
-                        <i class="fas fa-chevron-down"></i>
+            <div class="mt-4 flex justify-center items-center space-x-2">
+                <form action="{{route('changeHeight')}}" method='POST' class="flex flex-1">
+                    @csrf
+                    <button type="submit" class="bg-blue-500 text-white px-10 py-4 text-lg rounded-md hover:bg-blue-700 flex-1" >
+                        CUSTOM
                     </button>
-                    <div id="faq1" class="hidden mt-2 p-4 bg-gray-100 text-black rounded-md">
-                        DeskUp is an adjustable desk system that allows you to switch between sitting and standing positions effortlessly. It promotes a healthier working style.
-                    </div>
-                </div>
+                    <input name="height" type="number" class="w-20 px-4 py-4 border rounded-md text-black text-lg flex-1" placeholder="Set between 60-240 cm." min="60" max="240">
+                </form>
+            </div>
 
-                <!-- FAQ Item 2 -->
-                <div>
-                    <button class="w-full flex justify-between items-center p-4 bg-blue-500 text-white rounded-md hover:bg-blue-600" onclick="toggleFaq('faq2')">
-                        <span>How do I adjust the desk height?</span>
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
-                    <div id="faq2" class="hidden mt-2 p-4 bg-gray-100 text-black rounded-md">
-                        You can adjust the desk height using the control panel on the DeskUp app or the physical buttons on the desk. The desk allows you to customize the height between 60 cm and 240 cm.
-                    </div>
-                </div>
-                <!-- FAQ Item 3 -->
-                <div>
-                    <button class="w-full flex justify-between items-center p-4 bg-blue-500 text-white rounded-md hover:bg-blue-600" onclick="toggleFaq('faq3')">
-                        <span>What are the benefits of standing desks?</span>
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
-                    <div id="faq3" class="hidden mt-2 p-4 bg-gray-100 text-black rounded-md">
-                        Standing desks can help improve posture, increase energy levels, and reduce the risk of back pain. They also encourage more movement during the workday, which benefits overall health.
-                    </div>
-                </div>
+            @session('feedback')
+                <p class="bg-green-500 mt-5 text-white px-7 py-2 text-lg rounded-md hover:bg-green-300 flex-1 text-center">
+                    Desk height changed to {{$value->position_mm/10}} cms
+                </p>
+            @endsession
+        </div>
 
-                <!-- FAQ Item 4 -->
-                <div>
-                    <button class="w-full flex justify-between items-center p-4 bg-blue-500 text-white rounded-md hover:bg-blue-600" onclick="toggleFaq('faq4')">
-                        <span>Can I save custom height presets?</span>
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
-                    <div id="faq4" class="hidden mt-2 p-4 bg-gray-100 text-black rounded-md">
-                        Yes, DeskUp allows you to save sitting and standing height presets. Use the "Presets" feature in the control panel to set and save your preferred heights.
-                    </div>
-                </div>
+        <!-- Right Side Section -->
+        <div class="w-1/2 bg-white p-6 rounded-lg shadow-lg text-black">
+            <div class="bg-gray-200 p-8 rounded-md shadow-inner mb-11 text-center">
+                <h2 class="text-xl font-semibold mb-4">Time Spent Sitting vs. Standing</h2>
+                <canvas id="sittingStandingChart" class="w-10 h-4"></canvas>
+            </div>
+            <script>
+                const ctx = document.getElementById('sittingStandingChart').getContext('2d');
+                const sittingStandingChart = new Chart(ctx, {
+                    type: 'bar', 
+                    data: {
+                        labels: ['Sitting', 'Standing'], 
+                        datasets: [{
+                            label: 'Time (in minutes)',
+                            data: [60, 120], 
+                            backgroundColor: [
+                                'rgba(54, 162, 235, 0.2)',  
+                                'rgba(255, 99, 132, 0.2)'   
+                            ],
+                            borderColor: [
+                                'rgba(54, 162, 235, 1)',   
+                                'rgba(255, 99, 132, 1)'    
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: true,
+                        scales: {
+                            y: {
+                                beginAtZero: true,  
+                                title: {
+                                    display: true,
+                                    text: 'Time (Minutes)'
+                                }
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                position: 'top',
+                            },
+                        }
+                    }
+                });
+            </script>
 
-                <!-- FAQ Item 5 -->
-                <div>
-                    <button class="w-full flex justify-between items-center p-4 bg-blue-500 text-white rounded-md hover:bg-blue-600" onclick="toggleFaq('faq5')">
-                        <span>Does DeskUp track my activity?</span>
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
-                    <div id="faq5" class="hidden mt-2 p-4 bg-gray-100 text-black rounded-md">
-                        Yes, DeskUp includes an activity tracker to monitor how much time you spend sitting and standing, helping you maintain a balanced work routine.
-                    </div>
+            <!-- Buttons Section -->
+            <div class="flex justify-between space-x-4">
+                <div class="flex flex-col space-y-4">
+                    <button id="presetsBtn" class="bg-blue-500 text-white px-8 py-4 text-lg rounded-md hover:bg-blue-700 flex-1">PRESETS</button>
+                </div>
+                <div class="flex flex-col space-y-4">
+                    <button id="modesBtn" class="bg-blue-500 text-white px-8 py-4 text-lg rounded-md hover:bg-blue-700 flex-1">MODES</button>
+                </div>
+                <div class="flex flex-col space-y-4">
+                    <button id="autoBtn" class="bg-blue-500 text-white px-8 py-4 text-lg rounded-md hover:bg-blue-700 flex-1">AUTO</button>
+                </div>
+                <div class="flex flex-col space-y-4">
+                    <button id="activityBtn" class="bg-blue-500 text-white px-8 py-4 text-lg rounded-md hover:bg-blue-700 flex-1">ACTIVITY</button>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- Modal Templates -->
+    <div id="presetsModal" class="modal hidden fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
+    <div class="bg-white p-8 rounded-lg w-full max-w-lg shadow-lg">
+        <div class="flex justify-between items-center mb-4">
+            <h2 id="modalTitle" class="text-xl font-semibold">Presets</h2>
+            <button onclick="closeModal('presetsModal')" aria-label="Close modal" class="text-gray-500 hover:text-gray-700">
+                ✖
+            </button>
+        </div>
+        <p class="text-gray-700 mb-4">Choose a preset option for your desk.</p>
+        
+        <!-- Sitting Height -->
+        <div class="mb-4">
+            <label for="sittingHeight" class="block text-sm font-medium text-gray-700">Select the sitting height:</label>
+            <input id="sittingHeight" name="height" type="number" 
+                class="w-full px-4 py-2 mt-1 border border-gray-300 rounded-md text-gray-800 text-lg focus:ring-blue-500 focus:border-blue-500" 
+                placeholder="Set between 60-240 cm" min="60" max="240">
+        </div>
+        
+        <!-- Standing Height -->
+        <div class="mb-4">
+            <label for="standingHeight" class="block text-sm font-medium text-gray-700">Select the standing height:</label>
+            <input id="standingHeight" name="height" type="number" 
+                class="w-full px-4 py-2 mt-1 border border-gray-300 rounded-md text-gray-800 text-lg focus:ring-blue-500 focus:border-blue-500" 
+                placeholder="Set between 60-240 cm" min="60" max="240">
+        </div>
+        
+        <!-- Action Buttons -->
+        <div class="flex justify-end">
+            <button onclick="closeModal('presetsModal')" 
+                class="mr-2 bg-gray-200 text-gray-800 px-4 py-2 rounded-md hover:bg-gray-300">
+                Cancel
+            </button>
+            <button onclick="submitHeights()" 
+                class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">
+                Save
+            </button>
+        </div>
+    </div>
+</div>
+<div id="modesModal" class="modal hidden text-black fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+    <div class="bg-white p-8 rounded-lg w-1/2">
+        <h2 class="text-xl font-semibold mb-4">Modes</h2>
+        <p style="padding-bottom: 5%;">Select a mode for your desk:</p>
+
+        <!-- Mode selection checkboxes -->
+        <div class="mb-4">
+            <!-- Mode 1 with start hour, duration, and desk height -->
+            <label class="flex items-center mb-2">
+                <input type="checkbox" id="mode1Checkbox" class="mode-checkbox mr-2">
+                <span class="mode-btn bg-blue-500 text-white px-4 py-2 rounded-md w-full">Cleaning Mode</span>
+            </label>
+            <div class="flex items-center mb-4 pl-8">
+                <label for="mode1StartHour" class="mr-2">Start Hour:</label>
+                <input type="time" id="mode1StartHour" class="mr-4">
+                <label for="mode1Duration" class="mr-2">Duration (minutes):</label>
+                <input type="number" id="mode1Duration" min="1" max="1440" class="w-16 mr-4">
+                <label for="mode1Height" class="mr-2">Desk Height (cm):</label>
+                <input type="number" id="mode1Height" min="60" max="240" class="w-16">
+            </div>
+
+            <!-- Mode 2 with start hour, duration, and desk height -->
+            <label class="flex items-center mb-2">
+                <input type="checkbox" id="mode2Checkbox" class="mode-checkbox mr-2">
+                <span class="mode-btn bg-green-500 text-white px-4 py-2 rounded-md w-full">Some Fancy Mode</span>
+            </label>
+            <div class="flex items-center mb-4 pl-8">
+                <label for="mode2StartHour" class="mr-2">Start Hour:</label>
+                <input type="time" id="mode2StartHour" class="mr-4">
+                <label for="mode2Duration" class="mr-2">Duration (minutes):</label>
+                <input type="number" id="mode2Duration" min="1" max="1440" class="w-16 mr-4">
+                <label for="mode2Height" class="mr-2">Desk Height (cm):</label>
+                <input type="number" id="mode2Height" min="60" max="240" class="w-16">
+            </div>
+
+            <!-- Mode 3 with start hour, duration, and desk height -->
+            <label class="flex items-center">
+                <input type="checkbox" id="mode3Checkbox" class="mode-checkbox mr-2">
+                <span class="mode-btn bg-red-500 text-white px-4 py-2 rounded-md w-full">Disco Mode</span>
+            </label>
+            <div class="flex items-center pl-8">
+                <label for="mode3StartHour" class="mr-2">Start Hour:</label>
+                <input type="time" id="mode3StartHour" class="mr-2">
+                <label for="mode3Duration" class="mr-2">Duration (minutes):</label>
+                <input type="number" id="mode3Duration" min="1" max="1440" class="w-16 mr-4">
+                <label for="mode3Height" class="mr-2">Desk Height (cm):</label>
+                <input type="number" id="mode3Height" min="60" max="240" class="w-16">
+            </div>
+        </div>
+        <div class="flex justify-end space-x-4">
+            <button onclick="saveSettings()" class="bg-blue-500 text-white px-6 py-2 rounded-md">Save</button>
+            <button onclick="closeModal('modesModal')" class="bg-gray-500 text-white px-6 py-2 rounded-md">Cancel</button>
+        </div>
+    </div>
+</div>
+
+
+        <!-- Close button -->
+        <button onclick="closeModal('modesModal')" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded-md">Close</button>
+    </div>
+</div>
+
+
+    <div id="autoModal" class="modal hidden text-black fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+        <div class="bg-white p-8 rounded-lg w-1/2">
+            <h2 class="text-xl font-semibold mb-4">Auto</h2>
+            <p>Enable automatic adjustments for your desk.</p>
+            <button onclick="closeModal('autoModal')" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded-md">Close</button>
+        </div>
+    </div>
+
+    <div id="activityModal" class="modal text-black hidden fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+        <div class="bg-white p-8 rounded-lg w-1/2">
+            <h2 class="text-xl font-semibold mb-4">Activity</h2>
+            <p>Track your activity with the desk.</p>
+            <button onclick="closeModal('activityModal')" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded-md">Close</button>
+        </div>
+    </div>
+
     <script>
-        function toggleFaq(faqId) {
-            const faq = document.getElementById(faqId);
-            if (faq.classList.contains('hidden')) {
-                faq.classList.remove('hidden');
+        // Existing script for user dropdown toggle
+        // Toggle Dropdown Visibility
+        const userIcon = document.getElementById('user-icon');
+        const userDropdown = document.getElementById('user-dropdown');
+
+        userIcon.addEventListener('click', function (event) {
+            event.preventDefault();
+            if (userDropdown.classList.contains('hidden')) {
+                userDropdown.classList.remove('hidden');
             } else {
-                faq.classList.add('hidden');
+                userDropdown.classList.add('hidden');
             }
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function (event) {
+            if (!userIcon.contains(event.target) && !userDropdown.contains(event.target)) {
+                userDropdown.classList.add('hidden');
+            }
+        });
+
+        // Modal open/close functions
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.remove('hidden');
         }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.add('hidden');
+        }
+
+        // Event listeners to open modals
+        document.getElementById('presetsBtn').addEventListener('click', function() {
+            openModal('presetsModal');
+        });
+        document.getElementById('modesBtn').addEventListener('click', function() {
+            openModal('modesModal');
+        });
+        document.getElementById('autoBtn').addEventListener('click', function() {
+            openModal('autoModal');
+        });
+        document.getElementById('activityBtn').addEventListener('click', function() {
+            openModal('activityModal');
+        });
+        // Handle Save Action
+        function submitHeights() {
+        const sittingHeight = document.getElementById('sittingHeight').value;
+        const standingHeight = document.getElementById('standingHeight').value;
+
+        if (!sittingHeight || !standingHeight) {
+            alert('Please fill in both heights.');
+            return;
+        }
+
+        if (sittingHeight < 60 || sittingHeight > 240 || standingHeight < 60 || standingHeight > 240) {
+            alert('Heights must be between 60 and 240 cm.');
+            return;
+        }
+
+        alert(`Sitting height: ${sittingHeight} cm, Standing height: ${standingHeight} cm`);
+        closeModal('presetsModal');
+    }
     </script>
+    
+    <style>
+    .mode-checkbox {
+        transform: scale(1.5); /* Adjust this scale value to your preference */
+    }
+    </style>
+
 </body>
 </html>
