@@ -7,6 +7,8 @@ use App\Models\User;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\DeskController;
 use App\Http\Controllers\AuthController;
+use App\Http\Middleware\Admin;
+use App\Http\Middleware\Users;
 
 Route::get('/', function () {
     return view('welcome');
@@ -22,6 +24,13 @@ Route::post('/register', function () {
     return redirect('admin');
 })->name('register');
 
+Route::get('/admin', function(){
+    return view('admin', [
+        'users' => User::all()
+    ]);
+})->middleware(Admin::class)->name('admin.index');
+
+
 Route::post('/delete', function ($user) {
     RegistrationController::delete($user->id);
     return redirect('admin');
@@ -30,15 +39,9 @@ Route::post('/delete', function ($user) {
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::get('/user', [AuthController::class, 'getUser'])->middleware('auth');
-Route::get('/admin', function(){
-    return view('admin', [
-        'users' => User::all()
-    ]);
-})->name('admin.index');
 Route::get('/ui', function (){
     return view('components/ui');
-});
+})->middleware(User::class);
 
 //These are the routes for interacting with desks
 Route::get('/getdesks', [DeskController::class, 'getDesks']);

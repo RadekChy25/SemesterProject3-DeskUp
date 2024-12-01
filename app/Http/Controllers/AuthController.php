@@ -18,15 +18,16 @@ class AuthController extends Controller
         $credentials["name"] = $request->name;
         $credentials["password"] =$request->password;
 
-        if(Auth::attempt($credentials))
-        {
-            return redirect('/ui');
+        if(Auth::attempt($credentials)){
+            if (Auth::user()->usertype == 'admin') {
+                return redirect("/admin");
+            } elseif (Auth::user()->usertype == 'user') {
+                return redirect('/ui');
+            }
         }
-        else
-        {
-            return redirect('/');
-        }
+        return redirect('/');
     }
+    
 
     public function logout()
     {
