@@ -14,7 +14,9 @@
     <!-- Navbar -->
     <nav class="bg-blue-700 p-4">
         <div class="container mx-auto flex justify-between">
-            <img src="{{ asset('images/logo-deskUp.png') }}" alt="DeskUp Logo" class="h-8 w-35">
+            <a href="/ui">
+            <img src="{{ asset('images/logo-deskUp.png') }}" alt="DeskUp Logo" class="h-8 w-35" > 
+            <a>
             <div class="flex space-x-4 relative">
                 <!-- User Dropdown -->
                 <div class="relative">
