@@ -32,5 +32,15 @@
                 </form>
             @endforeach
         </x-slot:right>
+
+        <!-- Add the buttons section as a bottom slot -->
+        <x-slot:bottom>
+            <div class="w-full bg-white p-6 rounded-lg shadow-lg text-black">
+                <!-- Buttons Section -->
+                    <div class="flex flex-col space-y-4">
+                        <button id="modesBtn" class="bg-blue-500 text-white px-8 py-4 text-lg rounded-md hover:bg-blue-700 flex-1">MODES</button>
+                    </div>
+            </div>
+        </x-slot:bottom>
     </x-user>
 @endsection
