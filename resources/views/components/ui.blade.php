@@ -1,49 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DeskUp</title>
-    <link rel="stylesheet" href="{{ mix('css/app.css') }}">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-</head>  
-<body class="bg-blue-500 text-white font-sans">
+@extends('layout')
 
-    <!-- Navbar -->
-    <nav class="bg-blue-700 p-4">
-        <div class="container mx-auto flex justify-between">
-            <a href="/ui">
-            <img src="{{ asset('images/logo-deskUp.png') }}" alt="DeskUp Logo" class="h-8 w-35" > 
-            <a>
-            <div class="flex space-x-4 relative">
-                <!-- User Dropdown -->
-                <div class="relative">
-                    <a href="#" id="user-icon" class="text-white"><i class="fas fa-user"></i></a>
-                    <div id="user-dropdown" 
-                         class="absolute right-0 mt-2 w-48 bg-white text-black rounded shadow-md hidden">
-                        <a href="#" class="block px-4 py-2 hover:bg-gray-200">Profile</a>
-                        <form action="{{ route('logout') }}" method="POST">
-                            @csrf
-                            <button href="logout" class="block px-4 py-2 hover:bg-blue-400 flex w-full">Logout</button>
-                        </form>                        
-                    </div>
-                </div>
-                    <form action="{{ route('faq') }}" method="GET">
-                            @csrf
-                            <button href="faq" class="text-white"><i class="fas fa-question-circle"></i></button>
-                        </form>
-                <a href="#" class="text-white"><i class="fas fa-cog"></i></a>
-            </div>
-        </div>
-    </nav>
+@section('content')
 
-    <!-- Website Main Section -->
-    <div class="container mx-auto p-4 flex space-x-8 mt-6">
-        
-        <!-- Left Side Section -->
-        <div class="w-1/2 bg-white p-6 rounded-lg shadow-lg text-black">
+    <x-navbar>
+    </x-navbar>
+
+    <x-user>
+        <x-slot:left>
             <h1 class="text-center text-2xl font-semibold mb-4">Control Panel</h1>
             
             @session('feedback')
@@ -101,10 +64,10 @@
                     <input  use step="0.1" name="height" type="number" class="w-20 px-3 py-4 ml-2 border rounded-md text-black text-lg flex-1" placeholder="Set between 60-240 cm." min="60" max="240">
                 </form>
             </div>
-        </div>
+        </x-slot:left>
 
         <!-- Right Side Section -->
-        <div class="w-1/2 bg-white p-6 rounded-lg shadow-lg text-black">
+        <x-slot:right>
             <div class="bg-gray-200 p-8 rounded-md shadow-inner mb-11 text-center">
                 <h2 class="text-xl font-semibold mb-4">Time Spent Sitting vs. Standing</h2>
                 <canvas id="sittingStandingChart" class="w-10 h-4"></canvas>
@@ -163,8 +126,10 @@
                     </form>
                 </div>
             </div>
-        </div>
-    </div>
+        </x-slot:right>
+        <x-slot:bottom>
+        </x-slot:bottom>
+    </x-user>
 
     <!-- Modal Templates -->
     <div id="presetsModal" class="modal hidden fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
@@ -208,26 +173,6 @@
 </div>
 
     <script>
-        // Existing script for user dropdown toggle
-        // Toggle Dropdown Visibility
-        const userIcon = document.getElementById('user-icon');
-        const userDropdown = document.getElementById('user-dropdown');
-
-        userIcon.addEventListener('click', function (event) {
-            event.preventDefault();
-            if (userDropdown.classList.contains('hidden')) {
-                userDropdown.classList.remove('hidden');
-            } else {
-                userDropdown.classList.add('hidden');
-            }
-        });
-
-        // Close dropdown when clicking outside
-        document.addEventListener('click', function (event) {
-            if (!userIcon.contains(event.target) && !userDropdown.contains(event.target)) {
-                userDropdown.classList.add('hidden');
-            }
-        });
 
         // Modal open/close functions
         function openModal(modalId) {
@@ -276,6 +221,4 @@
         transform: scale(1.5); /* Adjust this scale value to your preference */
     }
     </style>
-
-</body>
-</html>
+@endsection

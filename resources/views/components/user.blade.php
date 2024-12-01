@@ -17,12 +17,12 @@
     </div>
     <div class="container mx-auto p-4 flex space-x-8 ">
             <!-- Bottom Section -->
-    <div class="mt-auto w-full">
-        {{ $bottom }}
-    </div>
+        <div class="mt-auto w-full">
+            {{ $bottom }}
+        </div>
     </div>
     
-    <div id="modesModal" class="modal hidden text-black fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+<div id="modesModal" class="modal hidden text-black fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
     <div class="bg-white p-8 rounded-lg w-1/2">
         <h2 class="text-xl font-semibold mb-4">Modes</h2>
         <p style="padding-bottom: 5%;">Select a mode for your desk:</p>
@@ -76,7 +76,6 @@
             <button onclick="closeModal('modesModal')" class="bg-gray-500 text-white px-6 py-2 rounded-md">Cancel</button>
         </div>
     </div>
-</div>
 </div>
 
 
