@@ -28,14 +28,16 @@
         
         <x-slot:right>
             @foreach ($users as $user)
-                @if ($user->usertype != 'admin')
-                    <form class="flex flex-row m-3" action="{{ route('delete') }}" name="delete" method="POST">
-                        @csrf
-                        <input type="hidden" name="id" value="{{ $user->id }}">
-                        <p class="basis-5/6 block w-full font-medium rounded-md border-0 py-1.5 pl-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm">{{ $user->name }}</p>
+                <form class="flex flex-row m-3" action="{{ route('delete') }}" name="delete" method="POST">
+                    @csrf
+                    <input type="hidden" name="id" value="{{ $user->id }}">
+                        @if ($user->usertype == 'admin')
+                            <p class="basis-5/6 block w-full font-medium rounded-md border-0 py-1.5 pl-2 text-red-600 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm">{{ $user->name }} - admin</p>
+                        @else
+                            <p class="basis-5/6 block w-full font-medium rounded-md border-0 py-1.5 pl-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm">{{ $user->name }}</p>
+                        @endif
                         <button class="basis-1/6 ml-3 bg-red-400 font-medium rounded-md border-0 shadow-sm ring-1 ring-inset ring-red-400 hover:shadow-lg hover:bg-red-500 active:shadow-inner active:origin-bottom">Delete</button>
-                    </form>
-                @endif
+                </form>
             @endforeach
         </x-slot:right>
 
