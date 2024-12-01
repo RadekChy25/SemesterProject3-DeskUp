@@ -28,7 +28,7 @@ Route::post('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::get('/ui', function (){
-    return view('components/ui');
+    return view('/ui');
 })->middleware(User::class);
 
 //These are the routes for interacting with desks
@@ -37,12 +37,12 @@ Route::post('/changeDeskHeight', [DeskController::class, 'changeHeightTo'])->nam
 Route::post('/moveDeskBy', [DeskController::class, 'moveDeskBy'])->name('moveDesk');
 
 Route::get('/faq', function () {
-    return view('components/faq');
+    return view('/faq');
 })->name('faq');
 
 Route::get('/ui', function (){
-    return view('components/ui');
+    return view('/ui');
 })->name('ui');
 Route::get('/activity', function () {
-    return view('components/activity');
+    return view('/activity');
 })->name('activity');

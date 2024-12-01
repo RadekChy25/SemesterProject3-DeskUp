@@ -12,7 +12,6 @@
 </head>
 <body class="bg-blue-500 text-white font-sans">
     <div class="min-h-full">
-        <!-- Main content section injected here from child views -->
         @yield('content')
     </div>
 </body>
