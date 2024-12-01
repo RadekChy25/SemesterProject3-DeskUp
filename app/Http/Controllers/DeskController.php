@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
+
+const MODE_SEPARATOR = 1000;
 const URL='http://127.0.0.1:7500/api/';
 const VERSION='v2/';
 const API_KEY="E9Y2LxT4g1hQZ7aD8nR3mWx5P0qK6pV7";
@@ -48,6 +50,7 @@ class DeskController extends Controller
         {
             $height_to_set=$request->height;
         }
+
 
         $feedback=Http::put(URL.VERSION.API_KEY.'/desks'.'/'.$request->session()->get('desk_id', "cd:fb:1a:53:fb:e6").'/state', //This is for the final version
         ['position_mm'=>$height_to_set]);
