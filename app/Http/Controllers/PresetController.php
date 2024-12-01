@@ -8,20 +8,47 @@ use Illuminate\Support\Facades\Auth;
 
 class PresetController extends Controller
 {
-    public function createPreset(Request $request)
+    public function setPresets(Request $request)
     {
+
         $request->validate([
-            "height"=>"required",
-            "name"=>"required",
+            "standingHeight"=>"required",
+            "sittingHeight"=>"required",
         ]);
 
-        $preset=new Preset();
+        if(Preset::where('uID',Auth::id())->exists())
+        {
+            $standingPreset=Preset::where('uID',Auth::id())->where('name','standing')->first();
+            $sittingPreset=Preset::where('uID',Auth::id())->where('name','sitting')->first();
 
-        $preset->height=$request->height;
-        $preset->name=$request->name;
-        $preset->uID=Auth::id();
+            $standingPreset->height=$request->standingHeight;
+            $sittingPreset->height=$request->sittingHeight;
 
-        return redirect()->back();
+            $standingPreset->save();
+            $sittingPreset->save();
+
+            $feedback='New standing height:'.$standingPreset->height.' New sitting height:'.$sittingPreset->height;
+        }
+        else
+        {
+            $standingPreset=new Preset();
+            $sittingPreset=new Preset();
+
+            $standingPreset->height=$request->standingHeight;
+            $standingPreset->name='standing';
+            $standingPreset->uID=Auth::id();
+
+            $sittingPreset->height=$request->sittingHeight;
+            $sittingPreset->name='sitting';
+            $sittingPreset->uID=Auth::id();
+
+            $standingPreset->save();
+            $sittingPreset->save();
+            
+            $feedback='Standing height:'.$standingPreset->height.' Sitting height:'.$sittingPreset->height;
+        }
+
+        return redirect()->back()->with('feedback' ,$feedback);
     }
 
 
@@ -32,24 +59,6 @@ class PresetController extends Controller
         ]);
 
         Preset::destroy($request->id);
-
-        return redirect()->back();
-    }
-
-
-    public function updatePreset(Request $request)
-    {
-        $request->validate([
-            "id"=>"required",
-            "height"=>"required",
-            "name"=>"required",
-        ]);
-
-        $preset = Preset::find($request->id);
-        
-        $preset->height=$request->height;
-        $preset->name=$request->name;
-        $preset->save();
 
         return redirect()->back();
     }

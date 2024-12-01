@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\DeskController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PresetController;
 use App\Http\Middleware\Admin;
 use App\Http\Middleware\Users;
 
@@ -39,10 +40,15 @@ Route::get('/ui', function (){
     return view('components/ui');
 })->middleware(User::class);
 
+
+Route::post('/setpresets', [PresetController::class,'setPresets'])->name('setpresets');
+
 //These are the routes for interacting with desks
 Route::get('/getdesks', [DeskController::class, 'getDesks']);
 Route::post('/changeDeskHeight', [DeskController::class, 'changeHeightTo'])->name('changeHeight');
 Route::post('/moveDeskBy', [DeskController::class, 'moveDeskBy'])->name('moveDesk');
+Route::post('/sitDown', [DeskController::class, 'sitDown'])->name('sitDown');
+Route::post('/standUp', [DeskController::class, 'standUp'])->name('standUp');
 
 Route::get('/faq', function () {
     return view('components/faq');

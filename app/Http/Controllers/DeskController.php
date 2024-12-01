@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use App\Models\Preset;
+use Illuminate\Support\Facades\Auth;
 
 
 const MODE_SEPARATOR = 1000;
@@ -21,11 +23,6 @@ class DeskController extends Controller
         return $desk_list;
     }
 
-    public function assignDesk(Request $request)
-    {
-        $request->session()->put('desk_id', $request->desk_id);
-    }
-
     public function getDeskInfo(Request $request) //get data for a specific desk
     {
         $desk_info=Http::get(URL.VERSION.API_KEY.'/desks'.'/'.$request->session()->get('desk_id', "cd:fb:1a:53:fb:e6"));
@@ -37,10 +34,11 @@ class DeskController extends Controller
 
     public function changeHeightTo(Request $request) //changes the positon to provided height
     {
-
-        $request->validate([
+        echo('hello');
+        echo($request->height);
+        /*$request->validate([
             "height"=>"required"
-        ]);
+        ]);*/
 
         if($request->height<600)
         {
@@ -70,5 +68,33 @@ class DeskController extends Controller
 
 
         return redirect()->back()->with('feedback', $feedback);
+    }
+
+    public function sitDown(Request $request)
+    {
+        if(Preset::where('uID',Auth::id())->exists())
+        {
+            $preset=Preset::where('uID',Auth::id())->where('name', 'sitting')->first();
+
+            $request->height=$preset->height;
+            $this->changeHeightTo($request);
+            return redirect()->back();
+        }
+
+        return redirect()->back()->with('feedback', 'You have no presets');
+    }
+
+    public function standUp(Request $request)
+    {
+        if(Preset::where('uID',Auth::id())->exists())
+        {
+            $preset=Preset::where('uID',Auth::id())->where('name', 'standing')->first();
+            
+            $request->height=$preset->height;
+            $this->changeHeightTo($request);
+            return redirect()->back();
+        }
+
+        return redirect()->back()->with('feedback', 'You have no presets');
     }
 }
