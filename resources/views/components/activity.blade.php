@@ -11,10 +11,12 @@
 </head>
 <body class="bg-blue-500 text-white font-sans min-h-screen flex flex-col">
 
-    <!-- Navbar Section -->
+    <!-- Navbar -->
     <nav class="bg-blue-700 p-4">
         <div class="container mx-auto flex justify-between">
-            <img src="{{ asset('images/logo-deskUp.png') }}" alt="DeskUp Logo" class="h-8 w-35">
+            <a href="/ui">
+            <img src="{{ asset('images/logo-deskUp.png') }}" alt="DeskUp Logo" class="h-8 w-35" > 
+            <a>
             <div class="flex space-x-4 relative">
                 <!-- User Dropdown -->
                 <div class="relative">
@@ -24,14 +26,14 @@
                         <a href="#" class="block px-4 py-2 hover:bg-gray-200">Profile</a>
                         <form action="{{ route('logout') }}" method="POST">
                             @csrf
-                            <button type="submit" class="block px-4 py-2 hover:bg-blue-400 flex w-full">Logout</button>
+                            <button href="logout" class="block px-4 py-2 hover:bg-blue-400 flex w-full">Logout</button>
                         </form>                        
                     </div>
                 </div>
-                <form action="{{ route('faq') }}" method="GET">
-                    @csrf
-                    <button type="submit" class="text-white"><i class="fas fa-question-circle"></i></button>
-                </form>
+                    <form action="{{ route('faq') }}" method="GET">
+                            @csrf
+                            <button href="faq" class="text-white"><i class="fas fa-question-circle"></i></button>
+                        </form>
                 <a href="#" class="text-white"><i class="fas fa-cog"></i></a>
             </div>
         </div>

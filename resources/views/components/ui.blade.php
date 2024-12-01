@@ -174,7 +174,7 @@
                 ✖
             </button>
         </div>
-        <p class="text-gray-700 mb-4">Choose a preset option for your desk.</p>
+        <h1 class="text-gray-800 font-large  mb-5">Choose a preset option for your desk.</h1>
         
         <!-- Sitting Height -->
         <div class="mb-4">
