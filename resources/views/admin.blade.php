@@ -4,6 +4,7 @@
 
     <x-navbar>
     </x-navbar>
+    
     <x-user>
         <x-slot:left>
             <h2 class="text-center text-2xl font-semibold mt-3">Register new user</h2>

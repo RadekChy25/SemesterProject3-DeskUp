@@ -187,12 +187,6 @@
         document.getElementById('presetsBtn').addEventListener('click', function() {
             openModal('presetsModal');
         });
-        document.getElementById('modesBtn').addEventListener('click', function() {
-            openModal('modesModal');
-        });
-        document.getElementById('autoBtn').addEventListener('click', function() {
-            openModal('autoModal');
-        });
         document.getElementById('activityBtn').addEventListener('click', function() {
             openModal('activityModal');
         });
@@ -215,10 +209,4 @@
         closeModal('presetsModal');
     }
     </script>
-    
-    <style>
-    .mode-checkbox {
-        transform: scale(1.5); /* Adjust this scale value to your preference */
-    }
-    </style>
 @endsection
