@@ -13,22 +13,22 @@ class RegistrationController extends Controller
             //"uname" => "required",
             "name"=> "required",
             "password" => "required",
+            "code" => "required",
             //"usertype" => "required",
         ]);
 
-        if($request->code==123456789)
-        {
+        $user = new User();
+        $user->name = $request->name;
+        $user->password = Hash::make($request->password);  
 
-            $user=new User();
-        
-            //$user->uname = $request->uname;
-            $user->name =$request->name;
-            $user->password = Hash::make($request->password);
-            //$user->type =$request->usertype;
-            
-            $user->save();
+        if ($request->code == 123456789) {
+            $user->usertype = 'admin';  
+        } elseif ($request->code == 9876) {
+            $user->usertype = 'user'; 
+        } else {
+            return redirect('/');
         }
-
+        $user->save();
         return(redirect('/admin'));
     }
     public static function delete(Request $request)
