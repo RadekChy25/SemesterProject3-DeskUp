@@ -83,13 +83,13 @@
                 </form>
             </div>
 
-            <div class="mt-4 flex justify-center items-center space-x-2">
+            <div class="mt-4 flex justify-between items-center space-x-2">
                 <form action="{{route('changeHeight')}}" method='POST' class="flex flex-1">
                     @csrf
-                    <button type="submit" class="bg-blue-500 text-white px-10 py-4 text-lg rounded-md hover:bg-blue-700 flex-1" >
+                    <button type="submit" class="bg-blue-500 text-white px-9 py-4 mr-2 text-lg rounded-md hover:bg-blue-700 flex-1" >
                         CUSTOM
                     </button>
-                    <input name="height" type="number" class="w-20 px-4 py-4 border rounded-md text-black text-lg flex-1" placeholder="Set between 60-240 cm." min="60" max="240">
+                    <input name="height" type="number" class="w-20 px-3 py-4 ml-2 border rounded-md text-black text-lg flex-1" placeholder="Set between 60-240 cm." min="60" max="240">
                 </form>
             </div>
 
@@ -148,11 +148,11 @@
             </script>
 
             <!-- Buttons Section -->
-            <div class="flex space-x-4">
-                <div class="flex flex-col w-1/2 space-y-2">
+            <div class="flex justify-between space-x-4">
+                <div class="flex w-1/2 flex-col space-y-2">
                     <button id="presetsBtn" class="bg-blue-500 text-white px-8 py-4 text-lg rounded-md hover:bg-blue-700 flex-1">PRESETS</button>
                 </div>
-                <div class="flex flex-col w-1/2 space-y-4">
+                <div class="flex w-1/2 flex-col space-y-4">
                     <form action="{{route('activity')}}" method="GET" class="flex flex-1">
                         @csrf
                       <button id="activityBtn" class="bg-blue-500 text-white px-8 py-4 text-lg rounded-md hover:bg-blue-700 flex-1">ACTIVITY</button>
