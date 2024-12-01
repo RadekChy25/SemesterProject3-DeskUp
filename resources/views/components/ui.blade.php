@@ -45,6 +45,13 @@
         <!-- Left Side Section -->
         <div class="w-1/2 bg-white p-6 rounded-lg shadow-lg text-black">
             <h1 class="text-center text-2xl font-semibold mb-4">Control Panel</h1>
+            
+            @session('feedback')
+                <p class="bg-green-500 mt-5 text-white px-7 py-2 text-lg rounded-md hover:bg-green-300 flex-1 text-center">
+                    Desk height changed to {{$value->position_mm/10}} cms
+                </p>
+            @endsession
+
             <p class="text-center mb-6">Here you can adjust height of your desk.</p>
             
             <!-- Adjust Height Buttons -->
@@ -91,15 +98,9 @@
                     <button type="submit" class="bg-blue-500 text-white px-9 py-4 mr-2 text-lg rounded-md hover:bg-blue-700 flex-1" >
                         CUSTOM
                     </button>
-                    <input name="height" type="number" class="w-20 px-3 py-4 ml-2 border rounded-md text-black text-lg flex-1" placeholder="Set between 60-240 cm." min="60" max="240">
+                    <input  use step="0.1" name="height" type="number" class="w-20 px-3 py-4 ml-2 border rounded-md text-black text-lg flex-1" placeholder="Set between 60-240 cm." min="60" max="240">
                 </form>
             </div>
-
-            @session('feedback')
-                <p class="bg-green-500 mt-5 text-white px-7 py-2 text-lg rounded-md hover:bg-green-300 flex-1 text-center">
-                    Desk height changed to {{$value->position_mm/10}} cms
-                </p>
-            @endsession
         </div>
 
         <!-- Right Side Section -->

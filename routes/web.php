@@ -14,15 +14,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::post('/register', function () {
-    User::create(
-        [
-            'name'=> request('name'),
-            'password'=> request('password'),
-        ]
-    );
-    return redirect('admin');
-})->name('register');
+Route::post('/register', [RegistrationController::class,'register'])->name('register');
 
 Route::get('/admin', function(){
     return view('admin', [

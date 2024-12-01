@@ -13,7 +13,7 @@ class RegistrationController extends Controller
             //"uname" => "required",
             "name"=> "required",
             "password" => "required",
-            "code" => "required",
+            //"code" => "required",
             //"usertype" => "required",
         ]);
 
@@ -23,7 +23,7 @@ class RegistrationController extends Controller
 
         if ($request->code == 123456789) {
             $user->usertype = 'admin';  
-        } elseif ($request->code == 9876) {
+        } elseif ($request->code == null) {
             $user->usertype = 'user'; 
         } else {
             return redirect('/');
