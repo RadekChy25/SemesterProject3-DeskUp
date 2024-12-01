@@ -30,11 +30,7 @@ Route::get('/admin', function(){
     ]);
 })->middleware(Admin::class)->name('admin.index');
 
-
-Route::post('/delete', function ($user) {
-    RegistrationController::delete($user->id);
-    return redirect('admin');
-})->name('delete');
+Route::post('/delete', [RegistrationController::class, 'delete'])->name('delete');
 
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');

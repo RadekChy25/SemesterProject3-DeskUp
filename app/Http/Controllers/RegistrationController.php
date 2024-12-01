@@ -31,9 +31,13 @@ class RegistrationController extends Controller
         $user->save();
         return(redirect('/admin'));
     }
-    public static function delete(Request $request)
+    public function delete(Request $request)
     {
-        User::destroy($request->id);
-        return(redirect("/admin"));
+        $userId = $request->input('id');
+        $user = User::find($userId);
+        if ($user) {
+            $user->delete();
+        }
+        return redirect('admin');
     }
 }
