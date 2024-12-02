@@ -123,7 +123,7 @@ class DeskController extends Controller
         {
             $sitting=Preset::where('uID',Auth::id())->where('name', 'sitting')->first();
             $standing=Preset::where('uID',Auth::id())->where('name', 'standing')->first();
-            $separator=($sitting->height+$standing->height)/2;
+            $separator=10*($sitting->height+$standing->height)/2;
         }
         else
         {
@@ -143,10 +143,7 @@ class DeskController extends Controller
             {
                 $old_timedata=TimeData::where('uID', Auth::id())->latest()->first();
                 $old_timedata->end_time=Carbon::now();
-                if($old_timedata->save()) echo('still here  ');
-                echo($old_timedata->start_time);
-                echo($old_timedata->end_time);
-                $tat=tat;
+                $old_timedata->save();
             }
             
             $timedata=new Timedata;

@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
-use App\Models\TimeData;
 
 class TimeDataController extends Controller
 {
@@ -21,13 +20,19 @@ class TimeDataController extends Controller
         {
             $end=new Carbon($stand->end_time);
             $start=new Carbon($stand->start_time);
-            $time=$end->subtract($start);
-            echo nl2br($start."\n");
-            echo nl2br($end."\n");
-            echo nl2br($time."\n"."\n");
+            $time=$start->diffInMinutes($end);
+            $standingTotal+=$time;
         }
 
-        $that=tat;
+        foreach ($sitting as $sit) 
+        {
+            $end=new Carbon($sit->end_time);
+            $start=new Carbon($sit->start_time);
+            $time=$start->diffInMinutes($end);
+            $sittingTotal+=$time;
+        }
+
+        return view("components/ui", ["standtime"=>$standingTotal, "sittime"=>$sittingTotal]);
 
     }
 }

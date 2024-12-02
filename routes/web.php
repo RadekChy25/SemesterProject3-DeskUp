@@ -37,12 +37,8 @@ Route::post('/delete', [RegistrationController::class, 'delete'])->name('delete'
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::get('/ui', function (){
-    return view('components/ui');
-})->middleware(User::class);
+Route::get('/ui', [TimeDataController::class, 'getTimeData'])->middleware(User::class);
 
-
-Route::get('/time', [TimeDataController::class, 'getTimeData']);
 
 Route::post('/setpresets', [PresetController::class,'setPresets'])->name('setpresets');
 
@@ -57,9 +53,7 @@ Route::get('/faq', function () {
     return view('components/faq');
 })->name('faq');
 
-Route::get('/ui', function (){
-    return view('components/ui');
-})->name('ui');
+Route::get('/ui', [TimeDataController::class, 'getTimeData'])->name('ui');
 Route::get('/activity', function () {
     return view('components/activity');
 })->name('activity');

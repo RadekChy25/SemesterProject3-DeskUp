@@ -119,7 +119,9 @@
                         labels: ['Sitting', 'Standing'], 
                         datasets: [{
                             label: 'Time (in minutes)',
-                            data: [60, 120], 
+                            @if(@isset($sittime)&&@isset($standtime))
+                                data: [{{$sittime}}, {{$standtime}}],
+                            @endif 
                             backgroundColor: [
                                 'rgba(54, 162, 235, 0.2)',  
                                 'rgba(255, 99, 132, 0.2)'   
