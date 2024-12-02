@@ -40,6 +40,7 @@
                 </form>
             @endforeach
         </x-slot:right>
+        
 
         <!-- Add the buttons section as a bottom slot -->
         <x-slot:bottom>

@@ -21,12 +21,14 @@ class RegistrationController extends Controller
         $user->name = $request->name;
         $user->password = Hash::make($request->password);  
 
-        if ($request->code == 123456789) {
-            $user->usertype = 'admin';  
+        if ($request->code == 'admin') {
+            $user->usertype = 'admin';
+            return back()->with('success', 'Success! New admin registered.');  
         } elseif ($request->code == null) {
             $user->usertype = 'user'; 
+            return back()->with('success', 'Success! New user registered.');
         } else {
-            return redirect('/');
+            return back()->with('error', 'Wrong admin code! Try again.');
         }
         $user->save();
         return(redirect('/admin'));
