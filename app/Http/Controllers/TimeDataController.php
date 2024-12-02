@@ -32,7 +32,7 @@ class TimeDataController extends Controller
             $sittingTotal+=$time;
         }
 
-        return view("components/ui", ["standtime"=>$standingTotal, "sittime"=>$sittingTotal]);
+        return view("/ui", ["standtime"=>$standingTotal, "sittime"=>$sittingTotal]);
 
     }
 }
