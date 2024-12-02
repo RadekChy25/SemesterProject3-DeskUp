@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class User extends Authenticatable
 {
@@ -48,11 +49,11 @@ class User extends Authenticatable
 
     public function presets():HasMany
     {
-        return $this->hasMany(Preset::class);
+        return $this->hasMany(Preset::class,'uID','id');
     }
 
-    public function timadata():HasMany
+    public function timedata():HasMany
     {
-        return $this->hasMany(TimeData::class);
+        return $this->hasMany(TimeData::class,'uID','id');
     }
 }
