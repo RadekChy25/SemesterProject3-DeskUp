@@ -36,8 +36,6 @@ class DeskController extends Controller
 
     public function changeHeightTo(Request $request) //changes the positon to provided height
     {
-        echo('hello');
-        echo($request->height);
         /*$request->validate([
             "height"=>"required"
         ]);*/
@@ -143,15 +141,19 @@ class DeskController extends Controller
         {
             if(TimeData::where('uID',Auth::id())->exists())//search for the previous record and close it
             {
-                $old_timedata=Auth::user()->timedata()->latest()->get();
+                $old_timedata=TimeData::where('uID', Auth::id())->latest()->first();
                 $old_timedata->end_time=Carbon::now();
-                $old_timedata->save();
+                if($old_timedata->save()) echo('still here  ');
+                echo($old_timedata->start_time);
+                echo($old_timedata->end_time);
+                $tat=tat;
             }
             
             $timedata=new Timedata;
             $timedata->start_time=Carbon::now();
+            $timedata->end_time=Carbon::now();
             $timedata->uID=Auth::id();
-            $timedata->height($new_height);
+            $timedata->height=$new_height;
             if($new_height>=$separator)
             {
                 $timedata->mode='standing';
@@ -160,8 +162,8 @@ class DeskController extends Controller
             {
                 $timedata->mode='sitting';
             }
+
+            $timedata->save();
         }
-
-
     }
 }

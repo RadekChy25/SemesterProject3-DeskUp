@@ -19,13 +19,16 @@ class PresetController extends Controller
         if(Preset::where('uID',Auth::id())->exists())
         {
             $standingPreset=Preset::where('uID',Auth::id())->where('name','standing')->first();
-            $sittingPreset=Preset::where('uID',Auth::id())->where('name','sitting')->first();
-
             $standingPreset->height=$request->standingHeight;
-            $sittingPreset->height=$request->sittingHeight;
-
+            echo($standingPreset->height);
             $standingPreset->save();
-            $sittingPreset->save();
+
+            $sittingPreset=Preset::where('uID',Auth::id())->where('name','sitting')->first();
+            $sittingPreset->height=$request->sittingHeight;
+            echo($sittingPreset->height);
+            if($sittingPreset->save()) echo('it kills me');
+
+            //$that=taht;
 
             $feedback='New standing height:'.$standingPreset->height.' New sitting height:'.$sittingPreset->height;
         }

@@ -8,6 +8,7 @@ use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\DeskController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PresetController;
+use App\Http\Controllers\TimeDataController;
 use App\Http\Middleware\Admin;
 use App\Http\Middleware\Users;
 
@@ -40,6 +41,8 @@ Route::get('/ui', function (){
     return view('components/ui');
 })->middleware(User::class);
 
+
+Route::get('/time', [TimeDataController::class, 'getTimeData']);
 
 Route::post('/setpresets', [PresetController::class,'setPresets'])->name('setpresets');
 
