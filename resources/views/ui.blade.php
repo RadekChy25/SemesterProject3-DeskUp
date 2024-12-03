@@ -188,61 +188,75 @@
     </div>
 </div>
 
-    <script>
-
-        // Modal open/close functions
-        function openModal(modalId) {
-            document.getElementById(modalId).classList.remove('hidden');
-        }
-
-        function closeModal(modalId) {
-            document.getElementById(modalId).classList.add('hidden');
-        }
-
-        // Event listeners to open modals
-        document.getElementById('presetsBtn').addEventListener('click', function() {
-            openModal('presetsModal');
-        });
-        document.getElementById('activityBtn').addEventListener('click', function() {
-            openModal('activityModal');
-        });
-        // Handle Save Action
-        function submitHeights() {
-        const sittingHeight = document.getElementById('sittingHeight').value;
-        const standingHeight = document.getElementById('standingHeight').value;
-
-        if (!sittingHeight || !standingHeight) {
-            alert('Please fill in both heights.');
-            return;
-        }
-
-        if (sittingHeight < 60 || sittingHeight > 240 || standingHeight < 60 || standingHeight > 240) {
-            alert('Heights must be between 68 and 132 cm.');
-            return;
-        }
-
-        alert(`Sitting height: ${sittingHeight} cm, Standing height: ${standingHeight} cm`);
-        closeModal('presetsModal');
+<script>
+    // Modal open/close functions
+    function openModal(modalId) {
+        document.getElementById(modalId).classList.remove('hidden');
     }
-    </script>
 
-    <script>
-        function calculateHeights() {
-            $deskMin = 68;
-            $deskMax = 132;
-            const userHeight = parseFloat(document.getElementById('userHeight').value);
+    function closeModal(modalId) {
+        document.getElementById(modalId).classList.add('hidden');
+    }
 
-            if (!isNaN(userHeight)) {
-                let sittingHeight = (userHeight * 0.39).toFixed(1);
-                let standingHeight = (userHeight * 0.63).toFixed(1);
+    // Event listeners to open modals
+    document.getElementById('presetsBtn').addEventListener('click', function() {
+        openModal('presetsModal');
+    });
+    document.getElementById('activityBtn').addEventListener('click', function() {
+        openModal('activityModal');
+    });
 
-                document.getElementById('sittingHeight').value = sittingHeight;
-                document.getElementById('standingHeight').value = standingHeight;
-            }
+    // Calculate Heights
+    function calculateHeights() {
+        const deskMin = 68; // Minimum desk height
+        const deskMax = 132; // Maximum desk height
+        const userHeight = parseFloat(document.getElementById('userHeight').value);
+
+        if (!isNaN(userHeight) && userHeight > 0) {
+            // Calculate suggested sitting and standing desk heights
+            let sittingHeight = (userHeight * 0.39).toFixed(1);
+            let standingHeight = (userHeight * 0.63).toFixed(1);
+
+            // Apply constraints for sitting and standing heights
+            sittingHeight = Math.max(sittingHeight, deskMin).toFixed(1);
+            standingHeight = Math.min(Math.max(standingHeight, deskMin), deskMax).toFixed(1);
+
+            // Set the values in the form
+            document.getElementById('sittingHeight').value = sittingHeight;
+            document.getElementById('standingHeight').value = standingHeight;
+        } else {
+            alert("Please enter a valid positive numeric value for height.");
         }
+    }
 
-        function submitHeights() {
-            document.getElementById('presetsForm').submit();
-        }
-    </script>
+    function submitHeights() {
+    const sittingHeight = parseFloat(document.getElementById('sittingHeight').value);
+    const standingHeight = parseFloat(document.getElementById('standingHeight').value);
+
+    // Check if either value is empty
+    if (!sittingHeight || !standingHeight) {
+        alert('Please fill in both heights.');
+        return;
+    }
+
+    // Prevent saving if sittingHeight > standingHeight
+    if (sittingHeight > standingHeight) {
+        alert('Sitting Height cannot be greater than Standing Height.');
+        return;
+    }
+
+    // Ensure values are within range
+    if (sittingHeight < 68 || sittingHeight > 132 || standingHeight < 68 || standingHeight > 132) {
+        alert('Heights must be between 68 and 132 cm.');
+        return;
+    }
+
+    // If all validations pass, save the heights
+    alert(`Sitting height: ${sittingHeight} cm, Standing height: ${standingHeight} cm`);
+    closeModal('presetsModal');
+}
+</script>
+
+
+
 @endsection

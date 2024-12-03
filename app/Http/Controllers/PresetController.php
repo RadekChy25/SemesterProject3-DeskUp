@@ -26,7 +26,7 @@ class PresetController extends Controller
             $sittingPreset=Preset::where('uID',Auth::id())->where('name','sitting')->first();
             $sittingPreset->height=$request->sittingHeight;
             echo($sittingPreset->height);
-            if($sittingPreset->save()) echo('it kills me');
+            $sittingPreset->save();
 
             //$that=taht;
 
