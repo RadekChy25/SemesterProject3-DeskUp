@@ -27,6 +27,12 @@ class AuthController extends Controller
                 return redirect('/ui');
             }
         }
+        else {
+            // Authentication failed, send error message
+            return back()->withErrors([
+                'password' => 'Wrong password! Try again.',
+            ])->onlyInput('name'); // Retain only the name input for security
+        }
         return redirect('/');
     }
     
