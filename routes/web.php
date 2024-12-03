@@ -49,3 +49,7 @@ Route::get('/ui', [TimeDataController::class, 'getTimeData'])->name('ui');
 Route::get('/activity', function () {
     return view('/activity');
 })->name('activity');
+
+Route::get('/desks', function () {
+    return view('/desks', [DeskController::class, 'getdesks']);
+});
