@@ -10,28 +10,33 @@ class RegistrationController extends Controller
     public function register(Request $request)
     {
         $request->validate([
-            //"uname" => "required",
-            "name"=> "required",
-            "password" => "required",
-            //"code" => "required",
-            //"usertype" => "required",
+            "name" => "required",
+            "password" => [
+                "required",
+                "string",
+                "min:8",
+                "regex:/[A-Z]/",
+                "regex:/[!@#$%^&*]/",
+            ],
+        ], [
+            'password.min' => 'The password must be at least 8 characters.',
+            'password.regex' => 'The password must contain at least one uppercase letter and one special character (!@#$%^&*).',
         ]);
-
         $user = new User();
         $user->name = $request->name;
         $user->password = Hash::make($request->password);  
 
         if ($request->code == 'admin') {
             $user->usertype = 'admin';
+            $user->save();
             return back()->with('success', 'Success! New admin registered.');  
         } elseif ($request->code == null) {
-            $user->usertype = 'user'; 
+            $user->usertype = 'user';
+            $user->save();
             return back()->with('success', 'Success! New user registered.');
         } else {
             return back()->with('error', 'Wrong admin code! Try again.');
-        }
-        $user->save();
-        return(redirect('/admin'));
+        };
     }
     public function delete(Request $request)
     {

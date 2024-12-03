@@ -26,25 +26,4 @@
                 {{ $slot }}
             </button>
         </div>
-
-<!--Input validation alert for admin code-->
-        @if (session('error'))
-    <div id="alert-error" class="alert alert-danger">
-        {{ session('error') }}
-    </div>
-@endif
-@if (session('success'))
-    <div id="alert-success" class="alert alert-success">
-        {{ session('success') }}
-    </div>
-@endif
-
-<script>
-    setTimeout(() => {
-        const errorAlert = document.getElementById('alert-error');
-        const successAlert = document.getElementById('alert-success');
-        
-        if (errorAlert) errorAlert.style.display = 'none';
-        if (successAlert) successAlert.style.display = 'none';
-    }, 2000); 
-</script>
+        <x-validation></x-validation>
