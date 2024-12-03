@@ -63,7 +63,7 @@
                     <button type="submit" class="bg-blue-500 text-white px-9 py-4 mr-2 text-lg rounded-md hover:bg-blue-700 flex-1" >
                         CUSTOM
                     </button>
-                    <input  use step="0.1" name="height" type="number" class="w-20 px-3 py-4 ml-2 border rounded-md text-black text-lg flex-1" placeholder="Set between 60-240 cm." min="60" max="240">
+                    <input  use step="0.1" name="height" type="number" class="w-20 px-3 py-4 ml-2 border rounded-md text-black text-lg flex-1" placeholder="Set between 68-132 cm." min="68" max="132">
                 </form>
             </div>
         </x-slot:left>
