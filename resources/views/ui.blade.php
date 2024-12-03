@@ -144,25 +144,32 @@
                 ✖
             </button>
         </div>
-        <h1 class="text-gray-800 font-large  mb-5">Choose a preset option for your desk.</h1>
+        <h1 class="text-gray-800 font-large  mb-5">Set your height to calculate optimal desk heights and set your presets.</h1>
         
         <form action="{{route('setpresets')}}" method="POST" id="presetsForm">
             @csrf
+
+            <div class="mb-4">
+                <label for="userHeight" class="block text-sm font-medium text-gray-700">Your Height (cm):</label>
+                <input id="userHeight" name="userHeight" type="number"
+                    class="w-full px-4 py-2 mt-1 border border-gray-300 rounded-md text-gray-800 text-lg focus:ring-blue-500 focus:border-blue-500" 
+                    placeholder="Enter your height in cm" min="100" max="220" oninput="calculateHeights()">
+            </div>
             <!-- Sitting Height -->
             <div class="mb-4">
-                <label for="sittingHeight" class="block text-sm font-medium text-gray-700">Select the sitting height:</label>
+                <label for="sittingHeight" class="block text-sm font-medium text-gray-700">Optimal sitting height:</label>
                 <input id="sittingHeight" name="sittingHeight" type="number" 
                     class="w-full px-4 py-2 mt-1 border border-gray-300 rounded-md text-gray-800 text-lg focus:ring-blue-500 focus:border-blue-500" 
-                    placeholder="Set between 60-240 cm" min="60" max="240">
+                    placeholder="Set between 68-132 cm" min="68" max="132">
                 <input type="hidden" name="name" value="sitting">
             </div>
             
             <!-- Standing Height -->
             <div class="mb-4">
-                <label for="standingHeight" class="block text-sm font-medium text-gray-700">Select the standing height:</label>
+                <label for="standingHeight" class="block text-sm font-medium text-gray-700">Optimal standing height:</label>
                 <input id="standingHeight" name="standingHeight" type="number" 
                     class="w-full px-4 py-2 mt-1 border border-gray-300 rounded-md text-gray-800 text-lg focus:ring-blue-500 focus:border-blue-500" 
-                    placeholder="Set between 60-240 cm" min="60" max="240">
+                    placeholder="Set between 68-132 cm" min="68" max="132">
                 <input type="hidden" name="name" value="standing">
             </div>
         </form>
@@ -210,12 +217,32 @@
         }
 
         if (sittingHeight < 60 || sittingHeight > 240 || standingHeight < 60 || standingHeight > 240) {
-            alert('Heights must be between 60 and 240 cm.');
+            alert('Heights must be between 68 and 132 cm.');
             return;
         }
 
         alert(`Sitting height: ${sittingHeight} cm, Standing height: ${standingHeight} cm`);
         closeModal('presetsModal');
     }
+    </script>
+
+    <script>
+        function calculateHeights() {
+            $deskMin = 68;
+            $deskMax = 132;
+            const userHeight = parseFloat(document.getElementById('userHeight').value);
+
+            if (!isNaN(userHeight)) {
+                let sittingHeight = (userHeight * 0.39).toFixed(1);
+                let standingHeight = (userHeight * 0.63).toFixed(1);
+
+                document.getElementById('sittingHeight').value = sittingHeight;
+                document.getElementById('standingHeight').value = standingHeight;
+            }
+        }
+
+        function submitHeights() {
+            document.getElementById('presetsForm').submit();
+        }
     </script>
 @endsection
