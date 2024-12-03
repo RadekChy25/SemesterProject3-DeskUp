@@ -8,10 +8,10 @@
             <div class="relative">
                 <a href="#" id="user-icon" class="text-white"><i class="fas fa-user"></i></a>
                 <div id="user-dropdown" class="absolute right-0 mt-2 w-48 bg-white text-black rounded-md shadow-md hidden">
-                <a href="#" class="block px-4 py-2 font-bold hover:bg-gray-200">Welcome {{ Auth::user()->name }}!</a>
+                <a href="#" class="block px-4 py-2 font-bold">Welcome {{ Auth::user()->name }}!</a>
                     @if(Auth::check() && Auth::user()->usertype == 'admin')
-                        <a href="/admin" id="admin-view-link" class="block px-4 py-2 hover:bg-gray-200">Admin View</a>
-                        <a href="/ui" id="user-view-link" class="block px-4 py-2 hover:bg-gray-200">User View</a>
+                        <a href="/admin" id="admin-view-link" class="block px-4 py-2 hover:bg-blue-400">Admin View</a>
+                        <a href="/ui" id="user-view-link" class="block px-4 py-2 hover:bg-blue-400">User View</a>
                     @endif
                     <form action="{{ route('logout') }}" method="POST">
                         @csrf
