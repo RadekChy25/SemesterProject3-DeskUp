@@ -13,7 +13,6 @@ class RegistrationController extends Controller
             //"uname" => "required",
             "name"=> "required",
             "password" => "required",
-            //"code" => "required",
             //"usertype" => "required",
         ]);
 

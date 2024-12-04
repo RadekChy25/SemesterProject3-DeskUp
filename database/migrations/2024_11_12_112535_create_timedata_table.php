@@ -18,7 +18,7 @@ return new class extends Migration
             $table->unsignedSmallInteger('height');
             $table->enum('mode', ['sitting', 'standing']);
             $table->bigInteger('uID');
-            $table->foreign('uID')->references('id')->on('users');
+            $table->foreign('uID')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }
