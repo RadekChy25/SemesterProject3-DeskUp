@@ -1,6 +1,5 @@
 <?php
 
-
 use Illuminate\Support\Facades\Route;
 
 use App\Models\User;
@@ -10,7 +9,6 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PresetController;
 use App\Http\Controllers\TimeDataController;
 use App\Http\Middleware\Admin;
-use App\Http\Middleware\Users;
 
 Route::get('/', function () {
     return view('welcome');
@@ -51,5 +49,7 @@ Route::get('/activity', function () {
 })->name('activity');
 
 Route::get('/desks', function () {
-    return view('/desks', [DeskController::class, 'getdesks']);
+    $controller = new DeskController();
+    $desk_list = $controller->getDesks();
+    return view('/desks', ['desks'=> $desk_list]);
 });
