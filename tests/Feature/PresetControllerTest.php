@@ -85,7 +85,7 @@ class PresetControllerTest extends TestCase
             'name' => 'standing',
             'height' => 100
         ]);
-        $response = $this->post('/delete', [
+        $response = $this->post('/deletePreset', [
             'id' => $preset->id
         ]);
         $this->assertDatabaseMissing('presets', [
@@ -97,7 +97,7 @@ class PresetControllerTest extends TestCase
     {
         $user = User::where('name','user')->first();
         $this->actingAs($user);
-        $response = $this->post('/delete', []);
+        $response = $this->post('/deletePreset', []);
         $response->assertSessionHasErrors('id');
     }
     public function test_get_presets()
