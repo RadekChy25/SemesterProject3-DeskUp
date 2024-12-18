@@ -3,12 +3,18 @@
 @section('content')
     <x-navbar>
     </x-navbar>
-
-    <div class="container mx-auto p-4 flex space-x-8" id="desk_div">
+    <h1 class=" font-bold text-white text-6xl text-center my-8">Choose a desk !</h1>
+    <div class=" flex flex-row flex-wrap container m-auto p-4 space-x-8" id="desk_div">
         @foreach ($desks as $desk)
-            <div class="w-1/6 bg-white p-6 rounded-lg shadow-lg text-black">
-                <h2>Desk:{{ dd([DeskController::getDeskInfo($desk)]) }}</h2>
-            </div>
+        <form action="{{ route('getdeskname') }}" method="post">
+            @csrf
+            <input type="hidden" name="desk" value="{{ $desk }}">
+            <button>
+                <div class=" text-center flex-1 w-auto bg-white p-6 rounded-lg shadow-lg text-black mt-4">
+                    <h2>Desk:{{ $desk }}</h2>
+                </div>
+            </button>
+        </form>
         @endforeach
     </div>
 @endsection

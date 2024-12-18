@@ -27,8 +27,7 @@ Route::post('/delete', [RegistrationController::class, 'delete'])->name('delete'
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::get('/ui', [TimeDataController::class, 'getTimeData'])->middleware(User::class);
-
+Route::get('/ui', [TimeDataController::class, 'getTimeData'])->middleware(User::class)->name('ui');
 
 Route::post('/setpresets', [PresetController::class,'setPresets'])->name('setpresets');
 
@@ -43,7 +42,6 @@ Route::get('/faq', function () {
     return view('/faq');
 })->name('faq');
 
-Route::get('/ui', [TimeDataController::class, 'getTimeData'])->name('ui');
 Route::get('/activity', function () {
     return view('/activity');
 })->name('activity');
@@ -53,3 +51,5 @@ Route::get('/desks', function () {
     $desk_list = $controller->getDesks();
     return view('/desks', ['desks'=> $desk_list]);
 });
+
+Route::post('/desk', [DeskController::class, 'getDeskInfo'])->name('getdeskname');

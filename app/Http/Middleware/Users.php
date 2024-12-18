@@ -19,6 +19,6 @@ class Users
         if (Auth::check() && Auth::user()->usertype === 'user') {
             return $next($request);
         }
-        return redirect('/ui');
+        return redirect('/desks');
     }
 }

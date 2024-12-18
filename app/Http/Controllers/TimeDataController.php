@@ -10,6 +10,8 @@ class TimeDataController extends Controller
 {
     public function getTimeData(Request $request)
     {
+        $deskController = DeskController::class;
+        $deskInfo = $deskController::getDeskInfo();
         $standing =Auth::user()->timedata()->where('mode', 'standing')->get();
         $sitting = Auth::user()->timedata()->where('mode', 'sitting')->get();
 
@@ -32,7 +34,7 @@ class TimeDataController extends Controller
             $sittingTotal+=$time;
         }
 
-        return view("/ui", ["standtime"=>$standingTotal, "sittime"=>$sittingTotal]);
+        return view("/ui", ["standtime"=>$standingTotal, "sittime"=>$sittingTotal, "deskInfo"=>$deskInfo]);
 
     }
 }

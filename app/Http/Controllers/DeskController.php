@@ -30,7 +30,7 @@ class DeskController extends Controller
         $desk_info=Http::get(URL.VERSION.API_KEY.'/desks'.'/'.$request->session()->get('desk_id', "cd:fb:1a:53:fb:e6"));
         $desk_info=json_decode($desk_info);
 
-        return($desk_info); 
+        return redirect('/ui')->with('deskInfo', $desk_info);
         //accessing the data is tricky, $deskinfo->state->position_mm gets the position. For the structure refer to the readme.md of wifi2ble v2
     }
 

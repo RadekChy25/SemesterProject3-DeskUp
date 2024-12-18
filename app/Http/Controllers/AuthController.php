@@ -24,7 +24,7 @@ class AuthController extends Controller
             if (Auth::user()->usertype == 'admin') {
                 return redirect("/admin");
             } elseif (Auth::user()->usertype == 'user') {
-                return redirect('/ui');
+                return redirect('/desks');
             }
         }
         return redirect('/');

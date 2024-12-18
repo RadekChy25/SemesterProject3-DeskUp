@@ -17,9 +17,12 @@
                         {{$value}}
                     @endif
                 </p>
+                
+                <p class="text-center mb-6">Here you can adjust height of your desk.</p>
+                @isset($deskInfo)
+                <p class="text-center mb-6">Desk Id:{{ $deskInfo }}</p>
+                @endisset
             @endsession
-
-            <p class="text-center mb-6">Here you can adjust height of your desk.</p>
             
             <!-- Adjust Height Buttons -->
             <div class="flex justify-center space-x-4">
