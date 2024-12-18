@@ -49,5 +49,30 @@ class AuthControllerTest extends TestCase
         $this->assertAuthenticatedAs($user);
 
     }
-    public function
+    public function test_failed_login_due_to_incorrect_credentials()
+    {
+        $admin = User::where('name', 'admin')->first();
+        $response=$this->post('/login',[
+            'name'=>'admin',
+            'passwword'=>'wrongpassword'
+        ]);
+        $response->assertSessionHasErrors('password');
+        $this->assertGuest();
+    }
+    public function test_succesful_logout_as_user()
+    {
+        $user = User::where('name','user')->first();
+        $this->actingAs($user);
+        $response=$this->post('/logout');
+        $response->assertRedirect('/');
+        $this->assertGuest();
+    }
+    public function test_succesful_logout_as_admin()
+    {
+        $admin = User::where('name','admin')->first();
+        $this->actingAs($admin);
+        $response=$this->post('/logout');
+        $response->assertRedirect('/');
+        $this->assertGuest();
+    }
 }
