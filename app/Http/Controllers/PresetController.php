@@ -70,7 +70,7 @@ class PresetController extends Controller
     {
         $user=Auth::user();
 
-        $presets=$user->presets();
+        $presets=$user->presets;
         return redirect()->back()->with("presets", $presets);
     }
 }

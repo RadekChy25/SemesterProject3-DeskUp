@@ -25,7 +25,7 @@ Route::get('/admin', function(){
 })->middleware(Admin::class)->name('admin.index');
 
 Route::post('/delete', [RegistrationController::class, 'delete'])->name('delete');
-
+Route::post('/delete', [PresetController::class, 'deletePreset'])->name('deletePreset');
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
@@ -49,3 +49,5 @@ Route::get('/ui', [TimeDataController::class, 'getTimeData'])->name('ui');
 Route::get('/activity', function () {
     return view('/activity');
 })->name('activity');
+// routes/web.php
+Route::get('/getpresets', [PresetController::class, 'getPresets'])->name('getPresets');
