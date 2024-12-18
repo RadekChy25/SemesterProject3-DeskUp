@@ -10,6 +10,9 @@ class TimeDataController extends Controller
 {
     public function getTimeData(Request $request)
     {
+        if (!Auth::check()) {
+            return redirect('/');
+        }
         $standing =Auth::user()->timedata()->where('mode', 'standing')->get();
         $sitting = Auth::user()->timedata()->where('mode', 'sitting')->get();
 
