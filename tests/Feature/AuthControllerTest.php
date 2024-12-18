@@ -28,7 +28,7 @@ class AuthControllerTest extends TestCase
     {
         $admin = User::where('name', 'admin')->first();
 
-    $this->assertNotNull($admin);
+        $this->assertNotNull($admin);
         $response=$this->actingAs($admin)->post('/login',[
             'name'=>'admin',
             'password'=>'admin'
@@ -36,4 +36,18 @@ class AuthControllerTest extends TestCase
         $response->assertRedirect("/admin");
         $this->assertAuthenticatedAs($admin);
     }
+    public function test_succesful_login_for_user()
+    {
+        $user = User::where('name', 'user')->first();
+
+        $this->assertNotNull($user);
+        $response=$this->actingAs($user)->post('/login', [
+            'name'=>'user',
+            'password'=>'user'
+        ]);
+        $response->assertRedirect('/ui');
+        $this->assertAuthenticatedAs($user);
+
+    }
+    public function
 }
