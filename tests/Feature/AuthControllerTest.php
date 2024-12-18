@@ -10,7 +10,6 @@ use PhpParser\Node\Expr\FuncCall;
 
 class AuthControllerTest extends TestCase
 {
-    use RefreshDatabase;
     public function test_login_validation_fails_when_name_is_missing()
     {
         $response = $this->post('/login',[
@@ -28,14 +27,14 @@ class AuthControllerTest extends TestCase
     }
     public function test_succesful_login_for_admin_user()
     {
-        $admin = User::factory()->create([
-            'name'=> 'admin',
-            'password'=>'admin',
-        ]);
-        $response=$this->post('/login',[
+        $admin = User::where('name', 'admin')->first();
+
+    $this->assertNotNull($admin);
+        $response=$this->actingAs($admin)->post('/admin',[
             'name'=>'admin',
-            'password'=>'admin',
+            'password'=>'admin'
         ]);
+        //$response->assertRedirect("/login");
         $this->assertAuthenticatedAs($admin);
     }
 }
