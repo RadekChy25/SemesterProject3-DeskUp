@@ -82,11 +82,13 @@ class RegistrationControllerTest extends TestCase
     }
     public function test_admin_can_delete_user()
     {
-    
-        $user = User::factory()->create();
+        $user = User::where('name', 'Test User')->first();
+        $this->assertNotNull($user, 'User to delete not found in the database.');
 
-        
-        $response = $this->post('/delete', [
+        $admin = User::where('name', 'Admin User')->first();
+        $this->assertNotNull($admin, 'Admin user not found in the database.');
+
+        $response = $this->actingAs($admin)->post('/delete', [
             'id' => $user->id,
         ]);
 
