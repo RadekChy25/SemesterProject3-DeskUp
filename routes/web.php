@@ -51,4 +51,3 @@ Route::get('/activity', function () {
 })->name('activity');
 // routes/web.php
 Route::get('/getpresets', [PresetController::class, 'getPresets'])->name('getPresets');
-Route::get('/time-data', [TimeDataController::class, 'getTimeData'])->middleware('auth');
