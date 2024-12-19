@@ -64,7 +64,7 @@ class AuthControllerTest extends TestCase
         $user = User::where('name','user')->first();
         $this->actingAs($user);
         $response=$this->post('/logout');
-
+        $response->assertRedirect('/');
         $this->assertGuest();
     }
     public function test_succesful_logout_as_admin()
@@ -72,7 +72,7 @@ class AuthControllerTest extends TestCase
         $admin = User::where('name','admin')->first();
         $this->actingAs($admin);
         $response=$this->post('/logout');
-
+        $response->assertRedirect('/');
         $this->assertGuest();
     }
 }
