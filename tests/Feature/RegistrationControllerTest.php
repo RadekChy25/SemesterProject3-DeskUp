@@ -13,7 +13,6 @@ class RegistrationControllerTest extends TestCase
         $response=$this->post('/register',[
             'name'=>'Test User',
             'password'=>'Password123!',
-            're-password'=>'Password123!',
             'code'=>null,
         ]);
         $response->assertRedirect('/');
@@ -29,7 +28,6 @@ class RegistrationControllerTest extends TestCase
         $response = $this->post('/register', [
             'name' => 'Admin User',
             'password' => 'AdminPassword123!',
-            're-password'=>'AdminPassword123!',
             'code' => 'admin', 
         ]);
 
@@ -76,7 +74,6 @@ class RegistrationControllerTest extends TestCase
         $response = $this->post('/register', [
             'name' => 'Invalid Admin User',
             'password' => 'Password123!',
-            're-password' => 'Password123!',
             'code' => 'wrongcode',
         ]);
 
