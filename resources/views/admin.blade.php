@@ -17,7 +17,7 @@
                                 <label for="code" class="block text-sm font-medium text-black">Code</label>
                             </div>
                             <div class=" mt-2">
-                                <input type="text" id="code" name="code" placeholder="Code" class="block w-full font-medium rounded-md border-0 py-1.5 pl-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm">
+                                <input type="text" id="code" name="code" placeholder="Code" required minlength="5" maxlength="5" class="block w-full font-medium rounded-md border-0 py-1.5 pl-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm">
                             </div>
                         </x-slot:heading>
                         Register
