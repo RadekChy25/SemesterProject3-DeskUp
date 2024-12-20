@@ -27,7 +27,7 @@ def generate_desk_id():
 def generate_desk_name():
     return f"DESK {random.randint(1000, 9999)}"
 
-def run(server_class=HTTPServer, handler_class=SimpleRESTServer, port=8000, use_https=False, cert_file=None, key_file=None, desks=2, speed=60):
+def run(server_class=HTTPServer, handler_class=SimpleRESTServer, port=7500, use_https=False, cert_file=None, key_file=None, desks=2, speed=60):
     logger.info(f"Initializing DeskManager with simulation speed: {speed}")
     desk_manager = DeskManager(speed)
     
@@ -76,12 +76,12 @@ def run(server_class=HTTPServer, handler_class=SimpleRESTServer, port=8000, use_
         python main.py --port 8443 --https --certfile cert.pem --keyfile key.pem
 
     To execute the script as HTTP, use the following command:
-        python main.py --port 8000
+        python main.py --port 7500
 """
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Start a simple REST API server.")
-    parser.add_argument("--port", type=int, default=8000, help="Port to run the server on (default: 8000)")
+    parser.add_argument("--port", type=int, default=7500, help="Port to run the server on (default: 7500)")
     parser.add_argument("--https", action="store_true", help="Enable HTTPS")
     parser.add_argument("--certfile", type=str, help="Path to the SSL certificate file")
     parser.add_argument("--keyfile", type=str, help="Path to the SSL key file")

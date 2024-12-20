@@ -26,12 +26,12 @@ class AuthControllerTest extends TestCase
     }
     public function test_succesful_login_for_admin_user()
     {
-        $admin = User::where('name', 'admin')->first();
+        $admin = User::where('name', 'NewAdmin')->first();
 
         $this->assertNotNull($admin);
         $response=$this->actingAs($admin)->post('/login',[
-            'name'=>'admin',
-            'password'=>'admin'
+            'name'=>'NewAdmin',
+            'password'=>'Admin2024!'
         ]);
         $response->assertRedirect("/admin");
         $this->assertAuthenticatedAs($admin);
