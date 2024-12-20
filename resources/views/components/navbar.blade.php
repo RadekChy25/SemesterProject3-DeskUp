@@ -15,7 +15,7 @@
                     @endif
                     <form action="{{ route('logout') }}" method="POST">
                         @csrf
-                        <button type="submit" class="block px-4 py-2 hover:bg-blue-400 w-full text-left rounded-md">Logout</button>
+                        <button type="submit" class="block px-4 py-2 hover:bg-red-400 w-full text-left rounded-md">Logout</button>
                     </form>
                 </div>                    
             </div>
@@ -24,10 +24,12 @@
                 @csrf
                 <button href="faq" class="text-white"><i class="fas fa-question-circle"></i></button>
             </form>
-            <a href="#" class="text-white"><i class="fas fa-cog"></i></a>
+            <a href="#" id="modal-icon"class="text-white"><i class="fas fa-cog"></i></a>
         </div>
     </div>
 </nav>
+<x-sitDownModal></x-sitDownModal>
+
 <script>
     // Dropdown toggle
     const userIcon = document.getElementById('user-icon');
@@ -38,10 +40,11 @@
         userDropdown.classList.toggle('hidden');
     });
 
-    // Close dropdown when clicking outside
+    // Close modal when clicking outside
     document.addEventListener('click', function (event) {
         if (!userIcon.contains(event.target) && !userDropdown.contains(event.target)) {
             userDropdown.classList.add('hidden');
         }
     });
+    
 </script>
