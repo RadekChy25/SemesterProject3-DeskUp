@@ -39,6 +39,16 @@ class RegistrationController extends Controller
         return back()->with('success', 'Success! New user registered.');
     } else {
         return back()->with('error', 'Wrong admin code! Try again.');
+    };
+}
+public function delete(Request $request)
+{
+    $userId = $request->input('id');
+    $user = User::find($userId);
+    if ($user) {
+        $user->delete();
     }
+    return redirect('admin');
 }
 }
+
