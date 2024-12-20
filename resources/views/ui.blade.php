@@ -40,14 +40,6 @@
                 </form>
             </div>
             <div class="flex justify-center space-x-4 mt-4">
-                <form action="{{route('standUp')}}" method="POST" class="flex flex-1">
-                    @csrf
-                    <button class="bg-blue-500 text-white px-20 py-4 text-lg rounded-md hover:bg-blue-700 flex-1">
-                        STAND UP
-                    </button>
-                </form>
-            </div>
-            <div class="flex justify-center space-x-4 mt-4">
                 <form action="{{route('sitDown')}}" method="POST" class="flex flex-1">
                     @csrf
                     <button class="bg-blue-500 text-white px-20 py-4 text-lg rounded-md hover:bg-blue-700 flex-1">
@@ -55,7 +47,14 @@
                     </button>
                 </form>
             </div>
-
+            <div class="flex justify-center space-x-4 mt-4">
+                <form action="{{route('standUp')}}" method="POST" class="flex flex-1">
+                    @csrf
+                    <button class="bg-blue-500 text-white px-20 py-4 text-lg rounded-md hover:bg-blue-700 flex-1">
+                        STAND UP
+                    </button>
+                </form>
+            </div>
             <div class="mt-4 flex justify-between items-center space-x-2">
                 <form action="{{route('changeHeight')}}" method='POST' class="flex flex-1">
                     @csrf
