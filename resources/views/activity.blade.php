@@ -52,21 +52,22 @@
     const ctx1 = document.getElementById('sittingStandingChart').getContext('2d');
     const sittingStandingChart = new Chart(ctx1, {
         type: 'bar',
-        data: {
-            labels: ['Sitting', 'Standing'],
-            datasets: [{
-                label: 'Time (in minutes)',
-                data: [60, 120],
-                backgroundColor: [
-                    'rgba(54, 162, 235, 0.7)',
-                    'rgba(255, 99, 132, 0.7)'
-                ],
-                borderColor: [
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 99, 132, 1)'
-                ],
-                borderWidth: 1
-            }]
+        data:{
+        datasets: [{
+                            label: 'Time (in minutes)',
+                            @if(@isset($sittime)&&@isset($standtime))
+                                data: [{{$sittime}}, {{$standtime}}],
+                            @endif 
+                            backgroundColor: [
+                                'rgba(54, 162, 235, 0.2)',  
+                                'rgba(255, 99, 132, 0.2)'   
+                            ],
+                            borderColor: [
+                                'rgba(54, 162, 235, 1)',   
+                                'rgba(255, 99, 132, 1)'    
+                            ],
+                            borderWidth: 1
+                        }]
         },
         options: {
             responsive: true,
@@ -95,18 +96,20 @@
         data: {
             labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
             datasets: [{
-                label: 'Sitting (minutes)',
-                data: [60, 70, 90, 80, 75],
-                borderColor: 'rgba(54, 162, 235, 1)',
-                fill: false,
-                tension: 0.1
-            }, {
-                label: 'Standing (minutes)',
-                data: [120, 110, 90, 100, 95],
-                borderColor: 'rgba(255, 99, 132, 1)',
-                fill: false,
-                tension: 0.1
-            }]
+                            label: 'Time (in minutes)',
+                            @if(@isset($sittime)&&@isset($standtime))
+                                data: [{{$sittime}}, {{$standtime}}],
+                            @endif 
+                            backgroundColor: [
+                                'rgba(54, 162, 235, 0.2)',  
+                                'rgba(255, 99, 132, 0.2)'   
+                            ],
+                            borderColor: [
+                                'rgba(54, 162, 235, 1)',   
+                                'rgba(255, 99, 132, 1)'    
+                            ],
+                            borderWidth: 1
+                        }]
         },
         options: {
             responsive: true,
@@ -133,20 +136,22 @@
     const sittingStandingPieChart = new Chart(ctx3, {
         type: 'pie',
         data: {
-            labels: ['Sitting', 'Standing'],
-            datasets: [{
-                label: 'Percentage',
-                data: [60, 40],
-                backgroundColor: [
-                    'rgba(54, 162, 235, 0.7)',
-                    'rgba(255, 99, 132, 0.7)'
-                ],
-                borderColor: [
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 99, 132, 1)'
-                ],
-                borderWidth: 1
-            }]
+                        labels: ['Sitting', 'Standing'], 
+                        datasets: [{
+                            label: 'Time (in minutes)',
+                            @if(@isset($sittime)&&@isset($standtime))
+                                data: [{{$sittime}}, {{$standtime}}],
+                            @endif 
+                            backgroundColor: [
+                                'rgba(54, 162, 235, 0.2)',  
+                                'rgba(255, 99, 132, 0.2)'   
+                            ],
+                            borderColor: [
+                                'rgba(54, 162, 235, 1)',   
+                                'rgba(255, 99, 132, 1)'    
+                            ],
+                            borderWidth: 1
+                        }]
         },
         options: {
             responsive: true,
