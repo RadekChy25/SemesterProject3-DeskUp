@@ -20,7 +20,6 @@
             @endsession
 
             <p class="text-center mb-6">Here you can adjust height of your desk.</p>
-            
             <!-- Adjust Height Buttons -->
             <div class="flex justify-center space-x-4">
                 <form action="{{route('moveDesk')}}" method='POST' class="flex flex-1">
@@ -91,10 +90,8 @@
         <x-slot:bottom>
         </x-slot:bottom>
     </x-user>
-
+    <x-standUpModal></x-standUpModal>
+    <x-sitDownModal></x-sitDownModal>
     <x-presetsModal></x-presetsModal>
-
-
-
 
 @endsection

@@ -38,11 +38,11 @@
         <!-- Action Buttons -->
         <div class="flex justify-end">
             <button onclick="closeModal('presetsModal')" 
-                class="mr-2 bg-gray-200 text-gray-800 px-4 py-2 rounded-md hover:bg-gray-300">
+                class="mr-2 bg-red-500 px-4 py-2 rounded-md hover:bg-red-600">
                 Cancel
             </button>
             <button onclick="submitHeights()"  type="submit" form="presetsForm"
-                class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">
+                class="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600">
                 Save
             </button>
         </div>

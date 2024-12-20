@@ -10,7 +10,10 @@ class RegistrationController extends Controller
     public function register(Request $request)
 {
     $request->validate([
-        "name" => "required",
+        "name" => [
+            "required",
+            "unique:users,name",
+        ],
         "password" => [
             "required",
             "string",
@@ -20,6 +23,7 @@ class RegistrationController extends Controller
         ],
         "re-password" => "required|same:password",
     ], [
+        'name.unique' => 'The username is already taken. Please choose another.',
         'password.min' => 'The password must be at least 8 characters.',
         'password.regex' => 'The password must contain at least one uppercase letter and one special character (!@#$%^&*).',
         're-password.same' => 'The confirmation password must match the password.',

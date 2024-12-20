@@ -22,7 +22,7 @@
                                 <!-- Mode 2 with start hour, duration, and desk height -->
                                 <label class="flex items-center mb-2">
                                     <input type="checkbox" id="mode2Checkbox" class="mode-checkbox mr-2">
-                                    <span class="mode-btn bg-green-500 text-white px-4 py-2 rounded-md w-full">Some Fancy Mode</span>
+                                    <span class="mode-btn bg-yellow-500 text-white px-4 py-2 rounded-md w-full">Some Fancy Mode</span>
                                 </label>
                                 <div class="flex items-center mb-4 pl-8">
                                     <label for="mode2StartHour" class="mr-2">Start Hour:</label>
@@ -36,7 +36,7 @@
                                 <!-- Mode 3 with start hour, duration, and desk height -->
                                 <label class="flex items-center">
                                     <input type="checkbox" id="mode3Checkbox" class="mode-checkbox mr-2">
-                                    <span class="mode-btn bg-red-500 text-white px-4 py-2 rounded-md w-full">Disco Mode</span>
+                                    <span class="mode-btn bg-orange-500 text-white px-4 py-2 rounded-md w-full">Disco Mode</span>
                                 </label>
                                 <div class="flex items-center pl-8">
                                     <label for="mode3StartHour" class="mr-2">Start Hour:</label>
@@ -48,8 +48,8 @@
                                 </div>
                             </div>
                             <div class="flex justify-end space-x-4">
-                                <button onclick="saveSettings()" class="bg-blue-500 text-white px-6 py-2 rounded-md">Save</button>
-                                <button onclick="closeModal('modesModal')" class="bg-gray-500 text-white px-6 py-2 rounded-md">Cancel</button>
+                                <button onclick="closeModal('modesModal')" class="bg-red-500 text-white px-6 py-2 rounded-md hover:bg-red-600">Cancel</button>
+                                <button onclick="saveSettings()" class="bg-green-500 text-white px-6 py-2 rounded-md hover:bg-green-600" >Save</button>
                             </div>
                         </div>
                     </div>

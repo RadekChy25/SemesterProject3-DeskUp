@@ -34,8 +34,15 @@ class TimeDataController extends Controller
             $time=$start->diffInMinutes($end);
             $sittingTotal+=$time;
         }
+        //$showStandUpModal = $sitting > 1;
+        //$showSitDownModal = $standing > 1;
+        return view("/ui",
+        [   "standtime"=>$standingTotal, 
+            "sittime"=>$sittingTotal,
+            //"showStandUpModal" => $showStandUpModal,
+            //"showSitDownModal"=> $showSitDownModal
 
-        return view("/ui", ["standtime"=>$standingTotal, "sittime"=>$sittingTotal]);
+        ]);
 
     }
 }
