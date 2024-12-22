@@ -13,6 +13,7 @@ class RegistrationControllerTest extends TestCase
         $response=$this->post('/register',[
             'name'=>'Test User',
             'password'=>'Password123!',
+            're-password'=>'Password123!',
             'code'=>null,
         ]);
         $response->assertRedirect('/');
@@ -28,6 +29,7 @@ class RegistrationControllerTest extends TestCase
         $response = $this->post('/register', [
             'name' => 'Admin User',
             'password' => 'AdminPassword123!',
+            're-password' => 'AdminPassword123!',
             'code' => 'admin', 
         ]);
 
@@ -47,7 +49,7 @@ class RegistrationControllerTest extends TestCase
             'code' => null,
         ]);
 
-        $response->assertSessionHasErrors('password');
+        $response->assertSessionHasErrors(['password' => 'The password must be at least 8 characters.']);
     }
     public function test_registration_with_no_uppercase_in_password()
     {
@@ -64,16 +66,19 @@ class RegistrationControllerTest extends TestCase
         $response = $this->post('/register', [
             'name' => 'No Special Char User',
             'password' => 'Password123',
+            're-password' => 'Password123',
             'code' => null,
         ]);
 
-        $response->assertSessionHasErrors('password');
+        $response->assertSessionHasErrors(['password' => 'The password must contain at least one uppercase letter and one special character (!@#$%^&*).']);
+
     }
     public function test_registration_with_incorrect_admin_code()
     {
         $response = $this->post('/register', [
             'name' => 'Invalid Admin User',
             'password' => 'Password123!',
+            're-password' => 'Password123!',
             'code' => 'wrongcode',
         ]);
 
@@ -82,17 +87,13 @@ class RegistrationControllerTest extends TestCase
     }
     public function test_admin_can_delete_user()
     {
-        $user = User::where('name', 'Test User')->first();
-        $this->assertNotNull($user, 'User to delete not found in the database.');
-
-        $admin = User::where('name', 'Admin User')->first();
-        $this->assertNotNull($admin, 'Admin user not found in the database.');
+        $admin = User::factory()->create(['name' => 'Admin User', 'usertype' => 'admin']);
+        $user = User::factory()->create(['name' => 'Test User', 'usertype' => 'user']);
 
         $response = $this->actingAs($admin)->post('/delete', [
             'id' => $user->id,
         ]);
-
-        $response->assertRedirect('admin');
+        $response->assertRedirect('/admin');
         $this->assertNull(User::find($user->id)); 
     }
     public function test_delete_nonexistent_user()
@@ -104,6 +105,7 @@ class RegistrationControllerTest extends TestCase
 
         $response->assertRedirect('admin'); 
         $this->assertNull(User::find(99999)); 
+
     }
 
 }
