@@ -65,10 +65,6 @@ class TimeDataController extends Controller
         $startOfLastWeek = Carbon::now()->subDays(7)->startOfWeek();
         $endOfLastWeek = Carbon::now()->subDays(7)->endOfWeek()->subDays(2);
 
-        //these lines need to be deleted
-        $startOfLastWeek=Carbon::now()->startOfWeek();
-        $endOfLastWeek=Carbon::now()->endOfWeek()->subDays(2);
-
         $dayOfWeekDataStanding=[];
         $dayOfWeekDataSitting=[];
 

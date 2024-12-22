@@ -25,7 +25,7 @@ class DeskController extends Controller
         return $desk_list;
     }
 
-    public function getDeskInfo(Request $request) //get data for a specific desk
+    private function getDeskInfo(Request $request) //get data for a specific desk
     {
         $desk_info=Http::get(URL.VERSION.API_KEY.'/desks'.'/'.$request->session()->get('desk_id', "cd:fb:1a:53:fb:e6"));
         $desk_info=json_decode($desk_info);
@@ -34,12 +34,24 @@ class DeskController extends Controller
         //accessing the data is tricky, $deskinfo->state->position_mm gets the position. For the structure refer to the readme.md of wifi2ble v2
     }
 
+    private function getSitStandSeparator(Request $request)
+    {
+        if(Preset::where('uID',Auth::id())->exists()) //find the point of separation
+        {
+            $sitting=Preset::where('uID',Auth::id())->where('name', 'sitting')->first();
+            $standing=Preset::where('uID',Auth::id())->where('name', 'standing')->first();
+            $separator=($sitting->height+$standing->height)/2*10;
+        }
+        else
+        {
+            $separator=DEFAULT_MODE_SEPARATOR;
+        }
+
+        return $separator;
+    }
+
     public function changeHeightTo(Request $request) //changes the positon to provided height
     {
-        /*$request->validate([
-            "height"=>"required"
-        ]);*/
-
         if($request->height<600)
         {
             $height_to_set=$request->height*10;
@@ -58,22 +70,12 @@ class DeskController extends Controller
         return redirect()->back()->with('feedback', $feedback);
     }
 
-
     public function moveDeskBy(Request $request)
     {
         $desk_info=$this->getDeskInfo($request);
+        $separator=$this->getSitStandSeparator($request);
 
-        if(Preset::where('uID',Auth::id())->exists()) //find the point of separation
-        {
-            $sitting=Preset::where('uID',Auth::id())->where('name', 'sitting')->first();
-            $standing=Preset::where('uID',Auth::id())->where('name', 'standing')->first();
-            $separator=($sitting->height+$standing->height)/2;
-        }
-        else
-        {
-            $separator=DEFAULT_MODE_SEPARATOR;
-        }
-        if($request->heightChange+$desk_info->state->position_mm>$separator xor $desk_info->state->position_mm>$separator)//only start new record if the mode changed
+        if($request->heightChange+$desk_info->state->position_mm>=$separator xor $desk_info->state->position_mm>$separator)//only start new record if the mode changed
         {
             $this->recordIfChanged($request, $request->heightChange+$desk_info->state->position_mm);
         }
@@ -119,21 +121,11 @@ class DeskController extends Controller
 
         $new_height = max(680, min(1320, $new_height));//get value into the range of desk movement
 
-        if(Preset::where('uID',Auth::id())->exists()) //find the point fo separation
-        {
-            $sitting=Preset::where('uID',Auth::id())->where('name', 'sitting')->first();
-            $standing=Preset::where('uID',Auth::id())->where('name', 'standing')->first();
-            $separator=10*($sitting->height+$standing->height)/2;
-        }
-        else
-        {
-            $separator=DEFAULT_MODE_SEPARATOR;
-        }
+        $separator=$this->getSitStandSeparator($request);
+        echo($separator);
 
-        //get current desk position to see it will at all
-        $desk_info=Http::get(URL.VERSION.API_KEY.'/desks'.'/'.$request->session()->get('desk_id', "cd:fb:1a:53:fb:e6"));
-        $desk_info=json_decode($desk_info);
-
+        //get current desk position to see if it will move at all
+        $desk_info=$this->getDeskInfo($request);
         $position=$desk_info->state->position_mm;
 
 
@@ -142,8 +134,12 @@ class DeskController extends Controller
             if(TimeData::where('uID',Auth::id())->exists())//search for the previous record and close it
             {
                 $old_timedata=TimeData::where('uID', Auth::id())->latest()->first();
-                $old_timedata->end_time=Carbon::now();
-                $old_timedata->save();
+                $dayend=new Carbon($old_timedata->end_time);
+                if(!($dayend->endOfDay()->isBefore(Carbon::now()))) //it would change the times between logins
+                {
+                    $old_timedata->end_time=Carbon::now();
+                    $old_timedata->save();
+                }
             }
             
             $timedata=new Timedata;
