@@ -76,6 +76,26 @@
                 <x-slot:sittime>{{$sittime}}</x-slot:sittime>
                 <x-slot:standtime>{{$standtime}}</x-slot:standtime>
             </x-graph>
+            <div>
+    <h2>Total Times</h2>
+    <p>Standing: {{ $standtime }} minutes</p>
+    <p>Sitting: {{ $sittime }} minutes</p>
+
+    <h2>Active Session Times</h2>
+
+    @if($activeStandtime > 0)
+        <p>Current Standing Session: {{ $activeStandtime }} minutes</p>
+    @else
+        <p>No active standing session.</p>
+    @endif
+
+    @if($activeSittime > 0)
+        <p>Current Sitting Session: {{ $activeSittime }} minutes</p>
+    @else
+        <p>No active sitting session.</p>
+    @endif
+</div>
+
             <!-- Buttons Section -->
             <div class="flex justify-between space-x-4">
                 <div class="flex w-1/2 flex-col space-y-2">

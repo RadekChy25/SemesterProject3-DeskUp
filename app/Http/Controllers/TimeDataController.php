@@ -34,9 +34,33 @@ class TimeDataController extends Controller
             $time=$start->diffInMinutes($end);
             $sittingTotal+=$time;
         }
+        $activeStanding = Auth::user()->timedata()->where('mode', 'standing')->whereNull('end_time')->get();
+        $activeSitting = Auth::user()->timedata()->where('mode', 'sitting')->whereNull('end_time')->get();
+        
+        $activeStandingTotal = 0;
+        $activeSittingTotal = 0;
+        // Calculate the active time for standing sessions
+        foreach ($activeStanding as $stand) {
+            $start = new Carbon($stand->start_time);
+            $activeTime = $start->diffInMinutes(Carbon::now()); // Compare with current time
+            $activeStandingTotal += $activeTime;
+        }
 
-        return view("/ui", ["standtime"=>$standingTotal, "sittime"=>$sittingTotal]);
+        // Calculate the active time for sitting sessions
+        foreach ($activeSitting as $sit) {
+            $start = new Carbon($sit->start_time);
+            $activeTime = $start->diffInMinutes(Carbon::now()); // Compare with current time
+            $activeSittingTotal += $activeTime;
+        }
+
+        return view("/ui", [
+            "standtime" => $standingTotal,
+            "sittime" => $sittingTotal,
+            "activeStandtime" => $activeStandingTotal,
+            "activeSittime" => $activeSittingTotal
+        ]);
     }
+   
 
     public function getActivityData(Request $request)
     {
