@@ -28,8 +28,6 @@ class PresetController extends Controller
             echo($sittingPreset->height);
             $sittingPreset->save();
 
-            //$that=taht;
-
             $feedback='New standing height:'.$standingPreset->height.' New sitting height:'.$sittingPreset->height;
         }
         else

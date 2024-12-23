@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedSmallInteger('height');
             $table->string('name');
             $table->bigInteger('uID');
-            $table->foreign('uID')->references('id')->on('users');
+            $table->foreign('uID')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

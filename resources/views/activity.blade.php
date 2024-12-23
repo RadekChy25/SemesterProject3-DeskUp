@@ -56,7 +56,9 @@
             labels: ['Sitting', 'Standing'],
             datasets: [{
                 label: 'Time (in minutes)',
-                data: [60, 120],
+                @if(@isset($sittime)&&@isset($standtime))
+                    data: [{{$sittime}}, {{$standtime}}],
+                @endif 
                 backgroundColor: [
                     'rgba(54, 162, 235, 0.7)',
                     'rgba(255, 99, 132, 0.7)'
@@ -96,13 +98,17 @@
             labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
             datasets: [{
                 label: 'Sitting (minutes)',
-                data: [60, 70, 90, 80, 75],
+                @if(@isset($sittingovertime))
+                    data: [{{$sittingovertime[1]}}, {{$sittingovertime[2]}}, {{$sittingovertime[3]}}, {{$sittingovertime[4]}}, {{$sittingovertime[5]}},],
+                @endif 
                 borderColor: 'rgba(54, 162, 235, 1)',
                 fill: false,
                 tension: 0.1
             }, {
                 label: 'Standing (minutes)',
-                data: [120, 110, 90, 100, 95],
+                @if(@isset($standingovertime))
+                    data: [{{$standingovertime[1]}}, {{$standingovertime[2]}}, {{$standingovertime[3]}}, {{$standingovertime[4]}}, {{$standingovertime[5]}},],
+                @endif 
                 borderColor: 'rgba(255, 99, 132, 1)',
                 fill: false,
                 tension: 0.1
@@ -136,7 +142,9 @@
             labels: ['Sitting', 'Standing'],
             datasets: [{
                 label: 'Percentage',
-                data: [60, 40],
+                @if(@isset($sitpercentage)&&@isset($standpercentage))
+                    data: [{{$sitpercentage}}, {{$standpercentage}}],
+                @endif 
                 backgroundColor: [
                     'rgba(54, 162, 235, 0.7)',
                     'rgba(255, 99, 132, 0.7)'
