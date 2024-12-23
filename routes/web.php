@@ -30,7 +30,7 @@ Route::post('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::get('/ui', [TimeDataController::class, 'getTimeData'])->middleware(User::class);
-Route::get ('/aa', [TimeDataController::class,'getActivityData']);
+Route::get ('/activity', [TimeDataController::class,'getActivityData'])->name('activity');
 
 Route::post('/setpresets', [PresetController::class,'setPresets'])->name('setpresets');
 
@@ -46,8 +46,5 @@ Route::get('/faq', function () {
 })->name('faq');
 
 Route::get('/ui', [TimeDataController::class, 'getTimeData'])->name('ui');
-Route::get('/activity', function () {
-    return view('/activity');
-})->name('activity');
-// routes/web.php
+
 Route::get('/getpresets', [PresetController::class, 'getPresets'])->name('getPresets');

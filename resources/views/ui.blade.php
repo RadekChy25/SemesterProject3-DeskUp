@@ -72,7 +72,10 @@
 
         <!-- Right Side Section -->
         <x-slot:right>
-            <x-graph></x-graph>
+            <x-graph>
+                <x-slot:sittime>{{$sittime}}</x-slot:sittime>
+                <x-slot:standtime>{{$standtime}}</x-slot:standtime>
+            </x-graph>
             <!-- Buttons Section -->
             <div class="flex justify-between space-x-4">
                 <div class="flex w-1/2 flex-col space-y-2">
