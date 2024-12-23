@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class CleaningMode extends Model
+class Mode extends Model
 {
     //
 }
