@@ -14,9 +14,10 @@ return new class extends Migration
         Schema::create('modes', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->unsignedSmallInteger('heightbefore')->nullable();
             $table->unsignedSmallInteger('height');
-            $table->dateTime('start_time');
-            $table->dateTime('end_time');
+            $table->string('start_time');
+            $table->string('end_time');
             $table->timestamps();
         });
     }

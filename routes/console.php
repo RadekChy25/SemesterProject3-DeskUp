@@ -19,20 +19,26 @@ Schedule::call(function()
         $out = new \Symfony\Component\Console\Output\ConsoleOutput();
         $out->writeln($desk);
 
-        $modesets=Mode::where('name','discomode')->first();
-        $height=$modesets->height;
+        $modesets=Mode::where('name','cleaningmode')->first();
+        $height=$modesets->height*10;
 
         $feedback=Http::put(URL.VERSION.API_KEY.'/desks'.'/'.$desk.'/state', //This is for the final version
         ['position_mm'=>$height]);
         $out->writeln($feedback);
     }
 })
-    ->dailyAt(Mode::first())
-    ->when(function()
+    ->dailyAt((Mode::where('name', 'cleaningmode')->exists())?
+    ((Mode::firstWhere('name', 'cleaningmode'))->start_time):'');
+
+Schedule:: call(
+    function()
     {
-        if(Mode::where('name', 'cleaningmode')->exists()){return true;} 
-        else{return false;}
-    });
+        if(Mode::where('name','cleaningmode')->exists()){
+            $out = new \Symfony\Component\Console\Output\ConsoleOutput();
+            $out->writeln((Mode::firstWhere('name', 'cleaningmode'))->start_time);
+        }
+    }  
+)->everyFifteenSeconds();
 
 Schedule::call(function()
 {
@@ -40,23 +46,15 @@ Schedule::call(function()
     $desk_list=json_decode($desk_list);
 
     $modesets=Mode::where('name','fancymode')->first();
-    $height=$modesets->height;
+    $height=$modesets->height*10;
 
     foreach ($desk_list as $desk) {
-        $out = new \Symfony\Component\Console\Output\ConsoleOutput();
-        $out->writeln($desk);
-
         $feedback=Http::put(URL.VERSION.API_KEY.'/desks'.'/'.$desk.'/state', //This is for the final version
         ['position_mm'=>$height]);
-        $out->writeln($feedback);
     }
 })
-    ->dailyAt(Mode::first())
-    ->when(function()
-    {
-        if(Mode::where('name', 'fancymode')->exists()){return true;} 
-        else{return false;}
-    });
+    ->dailyAt((Mode::where('name', 'fancymode')->exists())?
+    (Mode::firstWhere('name','fancymode'))->start_time:'');
 
 Schedule::call(function()
 {
@@ -64,20 +62,12 @@ Schedule::call(function()
     $desk_list=json_decode($desk_list);
 
     $modesets=Mode::where('name','discomode')->first();
-    $height=$modesets->height;
+    $height=$modesets->height*10;
 
     foreach ($desk_list as $desk) {
-        $out = new \Symfony\Component\Console\Output\ConsoleOutput();
-        $out->writeln($desk);
-
         $feedback=Http::put(URL.VERSION.API_KEY.'/desks'.'/'.$desk.'/state', //This is for the final version
         ['position_mm'=>$height]);
-        $out->writeln($feedback);
     }
 })
-    ->dailyAt(Mode::first())
-    ->when(function()
-    {
-        if(Mode::where('name', 'discomode')->exists()){return true;} 
-        else{return false;}
-    });
+    ->dailyAt((Mode::where('name', 'discomode')->exists())?
+    ((Mode::firstWhere('name', 'discomode'))->start_time):'');
