@@ -76,21 +76,6 @@
                 <x-slot:sittime>{{$sittime}}</x-slot:sittime>
                 <x-slot:standtime>{{$standtime}}</x-slot:standtime>
             </x-graph>
-            <div>
-    <h2>Active Session Times</h2>
-
-    <p>
-        Current Standing Session: 
-        <span id="standing-timer">{{ $activeStandtime }}</span> seconds
-    </p>
-
-    <p>
-        Current Sitting Session: 
-        <span id="sitting-timer">{{ $activeSittime }}</span> seconds
-    </p>
-</div>
-
-
             <!-- Buttons Section -->
             <div class="flex justify-between space-x-4">
                 <div class="flex w-1/2 flex-col space-y-2">
