@@ -77,24 +77,19 @@
                 <x-slot:standtime>{{$standtime}}</x-slot:standtime>
             </x-graph>
             <div>
-    <h2>Total Times</h2>
-    <p>Standing: {{ $standtime }} minutes</p>
-    <p>Sitting: {{ $sittime }} minutes</p>
-
     <h2>Active Session Times</h2>
 
-    @if($activeStandtime > 0)
-        <p>Current Standing Session: {{ $activeStandtime }} minutes</p>
-    @else
-        <p>No active standing session.</p>
-    @endif
+    <p>
+        Current Standing Session: 
+        <span id="standing-timer">{{ $activeStandtime }}</span> seconds
+    </p>
 
-    @if($activeSittime > 0)
-        <p>Current Sitting Session: {{ $activeSittime }} minutes</p>
-    @else
-        <p>No active sitting session.</p>
-    @endif
+    <p>
+        Current Sitting Session: 
+        <span id="sitting-timer">{{ $activeSittime }}</span> seconds
+    </p>
 </div>
+
 
             <!-- Buttons Section -->
             <div class="flex justify-between space-x-4">
@@ -117,7 +112,22 @@
 
     <x-presetsModal></x-presetsModal>
 
+    <script>
+    let standingTime = {{ $activeStandtime }};
+    let sittingTime = {{ $activeSittime }};
 
+    // Update the timers every second
+    setInterval(() => {
+        if (standingTime > 0) {
+            standingTime++;
+            document.getElementById('standing-timer').innerText = standingTime;
+        }
+        if (sittingTime > 0) {
+            sittingTime++;
+            document.getElementById('sitting-timer').innerText = sittingTime;
+        }
+    }, 1000);
+</script>
 
 
 @endsection
