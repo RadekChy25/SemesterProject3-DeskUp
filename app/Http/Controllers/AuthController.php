@@ -65,13 +65,15 @@ class AuthController extends Controller
 
         $position=$desk_info->state->position_mm;
 
-        $sitting = Preset::where('uID', Auth::id())->where('name', 'sitting')->first();
-        $standing = Preset::where('uID', Auth::id())->where('name', 'standing')->first();
-        
-        if ($sitting && $standing) {
-            $separator = 10 * ($sitting->height + $standing->height) / 2;
-        } else {
-            $separator = DEFAULT_MODE_SEPARATOR;
+        if(Preset::where('uID',Auth::id())->exists()) //find the point of separation
+        {
+            $sitting=Preset::where('uID',Auth::id())->where('name', 'sitting')->first();
+            $standing=Preset::where('uID',Auth::id())->where('name', 'standing')->first();
+            $separator=10*($sitting->height+$standing->height)/2;
+        }
+        else
+        {
+            $separator=DEFAULT_MODE_SEPARATOR;
         }
 
         $timedata=new Timedata;
