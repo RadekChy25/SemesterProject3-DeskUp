@@ -65,7 +65,8 @@ class AuthController extends Controller
 
         $position=$desk_info->state->position_mm;
 
-        if(Preset::where('uID',Auth::id())->exists()) //find the point of separation
+        if(Preset::where('uID',Auth::id())->where('name','sitting')->exists() &&
+        Preset::where('uID',Auth::id())->where('name','standing')->exists()) //find the point of separation
         {
             $sitting=Preset::where('uID',Auth::id())->where('name', 'sitting')->first();
             $standing=Preset::where('uID',Auth::id())->where('name', 'standing')->first();
