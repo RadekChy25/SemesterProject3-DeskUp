@@ -21,7 +21,7 @@ class DeskController extends Controller
     {     
         $desk_list=Http::get(URL.VERSION.API_KEY.'/desks'); //access the desks using the defined constant
         $desk_list=json_decode($desk_list); //decode the json
-        
+
         return $desk_list;
     }
 
@@ -52,6 +52,7 @@ class DeskController extends Controller
 
     public function changeHeightTo(Request $request) //changes the positon to provided height
     {
+
         if($request->height<600)
         {
             $height_to_set=$request->height*10;

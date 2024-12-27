@@ -32,7 +32,7 @@
         
         <x-slot:right>
             @foreach ($users as $user)
-                <form class="flex flex-row m-3" action="{{ route('deletePreset') }}" name="delete" method="POST">
+                <form class="flex flex-row m-3" action="{{ route('delete') }}" name="delete" method="POST">
                     @csrf
                     <input type="hidden" name="id" value="{{ $user->id }}">
                         @if ($user->usertype == 'admin')

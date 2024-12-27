@@ -9,6 +9,7 @@ use App\Http\Controllers\DeskController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PresetController;
 use App\Http\Controllers\TimeDataController;
+use App\Http\Controllers\ModeController;
 use App\Http\Middleware\Admin;
 use App\Http\Middleware\Users;
 
@@ -33,6 +34,7 @@ Route::get('/ui', [TimeDataController::class, 'getTimeData'])->middleware(User::
 Route::get ('/activity', [TimeDataController::class,'getActivityData'])->name('activity');
 
 Route::post('/setpresets', [PresetController::class,'setPresets'])->name('setpresets');
+Route::post('/setmodes', [ModeController::class, 'setModes'])->name('setmodes');
 
 //These are the routes for interacting with desks
 Route::get('/getdesks', [DeskController::class, 'getDesks']);

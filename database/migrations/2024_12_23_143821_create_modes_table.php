@@ -11,10 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('cleaningmode', function (Blueprint $table) {
+        Schema::create('modes', function (Blueprint $table) {
             $table->id();
-            $table->dateTime('start_time');
-            $table->dateTime('end_time');
+            $table->string('name');
+            $table->unsignedSmallInteger('heightbefore')->nullable();
+            $table->unsignedSmallInteger('height');
+            $table->string('start_time');
+            $table->string('end_time');
             $table->timestamps();
         });
     }
@@ -24,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('cleaningmode');
+        Schema::dropIfExists('modes');
     }
 };
