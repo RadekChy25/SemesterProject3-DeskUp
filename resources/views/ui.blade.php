@@ -19,13 +19,22 @@
                 </p>
             @endsession
 
-            <p class="text-center mb-6">Here you can adjust height of your desk.</p>
+            @session('desk_id')
+                @if($value==='no_desk') 
+                    <p class="mb-6 text-red-600 text-center">
+                        You have no desk selected. Log out and select a desk to use these features.
+                    </p>
+                @else
+                    <p class="text-center mb-6">Here you can adjust height of your desk.</p>
+                @endif 
+            @endsession
             
             <!-- Adjust Height Buttons -->
             <div class="flex justify-center space-x-4">
                 <form action="{{route('moveDesk')}}" method='POST' class="flex flex-1">
                     @csrf
-                    <button class="bg-blue-500 text-white px-20 py-4 text-lg rounded-md hover:bg-blue-700 flex-1">
+                    <button class="bg-blue-500 text-white px-20 py-4 text-lg rounded-md hover:bg-blue-700 flex-1" 
+                    @session('desk_id')@if($value==='no_desk') disabled @endif @endsession>
                         <i class="fas fa-arrow-up"></i>
                     </button>
                     <input type="hidden" name="heightChange" value=5>
@@ -34,7 +43,8 @@
             <div class="flex justify-center space-x-4 mt-4">
                 <form action="{{route('moveDesk')}}" method='POST' class="flex flex-1">
                     @csrf
-                    <button class="bg-blue-500 text-white px-20 py-4 text-lg rounded-md hover:bg-blue-700 flex-1">
+                    <button class="bg-blue-500 text-white px-20 py-4 text-lg rounded-md hover:bg-blue-700 flex-1"
+                    @session('desk_id')@if($value==='no_desk') disabled @endif @endsession>
                         <i class="fas fa-arrow-down"></i>
                     </button>
                     <input type="hidden" name="heightChange" value=-5>
@@ -43,7 +53,8 @@
             <div class="flex justify-center space-x-4 mt-4">
                 <form action="{{route('standUp')}}" method="POST" class="flex flex-1">
                     @csrf
-                    <button class="bg-blue-500 text-white px-20 py-4 text-lg rounded-md hover:bg-blue-700 flex-1">
+                    <button class="bg-blue-500 text-white px-20 py-4 text-lg rounded-md hover:bg-blue-700 flex-1"
+                    @session('desk_id')@if($value==='no_desk') disabled @endif @endsession>
                         STAND UP
                     </button>
                 </form>
@@ -51,7 +62,8 @@
             <div class="flex justify-center space-x-4 mt-4">
                 <form action="{{route('sitDown')}}" method="POST" class="flex flex-1">
                     @csrf
-                    <button class="bg-blue-500 text-white px-20 py-4 text-lg rounded-md hover:bg-blue-700 flex-1">
+                    <button class="bg-blue-500 text-white px-20 py-4 text-lg rounded-md hover:bg-blue-700 flex-1"
+                    @session('desk_id')@if($value==='no_desk') disabled @endif @endsession>
                         SIT DOWN
                     </button>
                 </form>
@@ -60,12 +72,14 @@
             <div class="mt-4 flex justify-between items-center space-x-2">
                 <form action="{{route('changeHeight')}}" method='POST' class="flex flex-1">
                     @csrf
-                    <button type="submit" class="bg-blue-500 text-white px-9 py-4 mr-2 text-lg rounded-md hover:bg-blue-700 flex-1" >
+                    <button type="submit" class="bg-blue-500 text-white px-9 py-4 mr-2 text-lg rounded-md hover:bg-blue-700 flex-1" 
+                    @session('desk_id')@if($value==='no_desk') disabled @endif @endsession>
                         CUSTOM
                     </button>
                     <input  use step="0.1" name="height" type="number" 
                         class="w-20 px-3 py-4 ml-2 border rounded-md text-black text-lg flex-1" 
-                        placeholder="Set between 68-132 cm." min="68" max="132" required>
+                        placeholder="Set between 68-132 cm." min="68" max="132" required
+                        @session('desk_id')@if($value==='no_desk') disabled @endif @endsession>
                 </form>
             </div>
         </x-slot:left>

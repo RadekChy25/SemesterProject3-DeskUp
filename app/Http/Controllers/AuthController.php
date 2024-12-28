@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use Carbon\Carbon;
 use App\Models\TimeData;
+use App\Models\Desks_In_Use;
 use Illuminate\Support\Facades\Http;
 use App\Models\Preset;
 
@@ -29,7 +30,14 @@ class AuthController extends Controller
         $credentials["password"] =$request->password;
 
         if(Auth::attempt($credentials)){
-            $this->startNewTimedata($request);
+
+            session(['desk_id'=>$request->desks]);
+            $use_desk=new Desks_In_Use();
+            $use_desk->desk_id=$request->desks;
+            $use_desk->save();
+
+            if(session('desk_id'!='no_desk'))$this->startNewTimedata($request);
+            
             if (Auth::user()->usertype == 'admin') {
                 return redirect("/admin");
             } elseif (Auth::user()->usertype == 'user') {
@@ -54,6 +62,10 @@ class AuthController extends Controller
             $old_timedata->end_time=Carbon::now();
             $old_timedata->save();
         }
+
+        $desk=session('desk_id');
+        Desks_In_Use::where('desk_id', $desk)->delete();
+
         Auth::logout();
         return redirect('/');
     }

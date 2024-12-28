@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\TimeData;
+use App\Models\Desks_In_Use;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
@@ -17,17 +18,29 @@ const API_KEY="E9Y2LxT4g1hQZ7aD8nR3mWx5P0qK6pV7";
 
 class DeskController extends Controller
 {
-    public function getDesks() //get all desk keys
+    public function getAvaibleDesks() //get all desk keys
     {     
-        $desk_list=Http::get(URL.VERSION.API_KEY.'/desks'); //access the desks using the defined constant
-        $desk_list=json_decode($desk_list); //decode the json
+        $desk_id_list=Http::get(URL.VERSION.API_KEY.'/desks'); //access the desks using the defined constant
+        $desk_id_list=json_decode($desk_id_list); //decode the json
 
-        return $desk_list;
+        $desk_name_list=[];
+        
+        $desks_in_use=Desks_In_Use::all();
+        $desk_id_list=array_values(array_diff($desk_id_list, $desks_in_use->pluck('desk_id')->toArray()));
+
+        foreach ($desk_id_list as $desk) 
+        {
+            $desk_info=Http::get(URL.VERSION.API_KEY.'/desks'.'/'.$desk);
+            $desk_info=json_decode($desk_info);
+            $desk_name_list[]=$desk_info->config->name;
+        }
+
+        return (view('welcome' ,['desk_names'=>$desk_name_list, 'desk_ids'=>$desk_id_list] ));
     }
 
-    private function getDeskInfo(Request $request) //get data for a specific desk
+    private function getDeskInfo() //get data for a specific desk
     {
-        $desk_info=Http::get(URL.VERSION.API_KEY.'/desks'.'/'.$request->session()->get('desk_id', "cd:fb:1a:53:fb:e6"));
+        $desk_info=Http::get(URL.VERSION.API_KEY.'/desks'.'/'.session('desk_id'));
         $desk_info=json_decode($desk_info);
 
         return($desk_info); 
@@ -64,7 +77,7 @@ class DeskController extends Controller
 
         $this->recordIfChanged($request, $height_to_set);
 
-        $feedback=Http::put(URL.VERSION.API_KEY.'/desks'.'/'.$request->session()->get('desk_id', "cd:fb:1a:53:fb:e6").'/state', //This is for the final version
+        $feedback=Http::put(URL.VERSION.API_KEY.'/desks'.'/'.session('desk_id').'/state', //This is for the final version
         ['position_mm'=>$height_to_set]);
         $feedback=json_decode($feedback); //response is the new height. There are upper and lower limits, so use this for display
 
@@ -73,7 +86,7 @@ class DeskController extends Controller
 
     public function moveDeskBy(Request $request)
     {
-        $desk_info=$this->getDeskInfo($request);
+        $desk_info=$this->getDeskInfo();
         $separator=$this->getSitStandSeparator($request);
 
         if($request->heightChange+$desk_info->state->position_mm>=$separator xor $desk_info->state->position_mm>$separator)//only start new record if the mode changed
@@ -81,7 +94,7 @@ class DeskController extends Controller
             $this->recordIfChanged($request, $request->heightChange+$desk_info->state->position_mm);
         }
 
-        $feedback=Http::put(URL.VERSION.API_KEY.'/desks'.'/'.$request->session()->get('desk_id', "cd:fb:1a:53:fb:e6").'/state', //This is for the final version
+        $feedback=Http::put(URL.VERSION.API_KEY.'/desks'.'/'.session('desk_id').'/state', //This is for the final version
         ['position_mm'=>($request->heightChange+$desk_info->state->position_mm)]);
         $feedback=json_decode($feedback); //response is the new height. There are upper and lower limits, so use this for display
 
@@ -126,7 +139,7 @@ class DeskController extends Controller
         echo($separator);
 
         //get current desk position to see if it will move at all
-        $desk_info=$this->getDeskInfo($request);
+        $desk_info=$this->getDeskInfo();
         $position=$desk_info->state->position_mm;
 
 

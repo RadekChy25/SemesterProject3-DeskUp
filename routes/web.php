@@ -13,9 +13,7 @@ use App\Http\Controllers\ModeController;
 use App\Http\Middleware\Admin;
 use App\Http\Middleware\Users;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [DeskController::class,'getAvaibleDesks']);
 
 Route::post('/register', [RegistrationController::class,'register'])->name('register');
 
