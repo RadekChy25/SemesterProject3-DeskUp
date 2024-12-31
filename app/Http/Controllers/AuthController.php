@@ -72,7 +72,7 @@ class AuthController extends Controller
 
     private function startNewTimedata(Request $request)
     {
-        $desk_info=Http::get(URL.VERSION.API_KEY.'/desks'.'/'.$request->session()->get('desk_id', "cd:fb:1a:53:fb:e6"));
+        $desk_info=Http::get(URL.VERSION.API_KEY.'/desks'.'/'.$request->session()->get('desk_id'));
         $desk_info=json_decode($desk_info);
 
         $position=$desk_info->state->position_mm;
