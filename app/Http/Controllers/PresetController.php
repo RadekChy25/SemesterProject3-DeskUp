@@ -38,12 +38,11 @@ class PresetController extends Controller
             $standingPreset->height=$request->standingHeight;
             $standingPreset->name='standing';
             $standingPreset->uID=Auth::id();
+            $standingPreset->save();
 
             $sittingPreset->height=$request->sittingHeight;
             $sittingPreset->name='sitting';
             $sittingPreset->uID=Auth::id();
-
-            $standingPreset->save();
             $sittingPreset->save();
             
             $feedback='Standing height:'.$standingPreset->height.' Sitting height:'.$sittingPreset->height;

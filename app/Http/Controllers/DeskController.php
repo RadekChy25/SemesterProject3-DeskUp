@@ -145,8 +145,7 @@ class DeskController extends Controller
 
         if($position!=$new_height) //so we don't make unnecessary records if the desk doesn't move
         {
-            if(Preset::where('uID',Auth::id())->where('name','sitting')->exists() &&
-            Preset::where('uID',Auth::id())->where('name','standing')->exists())//search for the previous record and close it
+            if(TimeData::where('uID',Auth::id())->exists())//search for the previous record and close it
             {
                 $old_timedata=TimeData::where('uID', Auth::id())->latest()->first();
                 $dayend=new Carbon($old_timedata->end_time);
