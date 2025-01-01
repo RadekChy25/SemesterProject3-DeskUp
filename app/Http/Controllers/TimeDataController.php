@@ -101,10 +101,12 @@ class TimeDataController extends Controller
             $dayOfWeekDataSitting[$i->dayOfWeek]=$daySittingTotal;
         }
         
+        $sitpercentage=($sittingTotal+$standingTotal!=0)?$sittingTotal/($sittingTotal+$standingTotal):0;
+        $standpercentage=($sittingTotal+$standingTotal!=0)?$standingTotal/($sittingTotal+$standingTotal):0;
 
         return view("/activity", ["standtime"=>$standingTotal, "sittime"=>$sittingTotal, 
-        "sitpercentage"=>$sittingTotal/($sittingTotal+$standingTotal), 
-        "standpercentage"=>$standingTotal/($sittingTotal+$standingTotal),
+        "sitpercentage"=>$sitpercentage, 
+        "standpercentage"=>$standpercentage,
         "sittingovertime"=>$dayOfWeekDataSitting,
         "standingovertime"=>$dayOfWeekDataStanding,
         ]);
