@@ -31,7 +31,8 @@ class AuthControllerTest extends TestCase
         $this->assertNotNull($admin);
         $response=$this->actingAs($admin)->post('/login',[
             'name'=>'admin',
-            'password'=>'admin'
+            'password'=>'admin',
+            'desks'=>'6743'
         ]);
         $response->assertRedirect("/admin");
         $this->assertAuthenticatedAs($admin);
@@ -43,7 +44,8 @@ class AuthControllerTest extends TestCase
         $this->assertNotNull($user);
         $response=$this->actingAs($user)->post('/login', [
             'name'=>'user',
-            'password'=>'user'
+            'password'=>'user',
+            'desks'=>'6743'
         ]);
         $response->assertRedirect('/ui');
         $this->assertAuthenticatedAs($user);
