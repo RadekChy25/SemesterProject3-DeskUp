@@ -11,16 +11,15 @@ use App\Models\Preset;
 use Illuminate\Support\Facades\Auth;
 
 
-const DEFAULT_MODE_SEPARATOR = 1000;
-const URL='http://127.0.0.1:7500/api/';
-const VERSION='v2/';
-const API_KEY="E9Y2LxT4g1hQZ7aD8nR3mWx5P0qK6pV7";
-
 class DeskController extends Controller
 {
     public function getAvaibleDesks() //get all desk keys
     {     
-        $desk_id_list=Http::get(URL.VERSION.API_KEY.'/desks'); //access the desks using the defined constant
+        $url=config('constants.URL');
+        $version=config('constants.VERSION');
+        $api_key=config('constants.API_KEY');
+
+        $desk_id_list=Http::get($url.$version.$api_key.'/desks'); //access the desks using the defined constant
         $desk_id_list=json_decode($desk_id_list); //decode the json
 
         $desk_name_list=[];
@@ -30,7 +29,7 @@ class DeskController extends Controller
 
         foreach ($desk_id_list as $desk) 
         {
-            $desk_info=Http::get(URL.VERSION.API_KEY.'/desks'.'/'.$desk);
+            $desk_info=Http::get($url.$version.$api_key.'/desks'.'/'.$desk);
             $desk_info=json_decode($desk_info);
             $desk_name_list[]=$desk_info->config->name;
         }
@@ -40,7 +39,11 @@ class DeskController extends Controller
 
     private function getDeskInfo() //get data for a specific desk
     {
-        $desk_info=Http::get(URL.VERSION.API_KEY.'/desks'.'/'.session('desk_id'));
+        $url=config('constants.URL');
+        $version=config('constants.VERSION');
+        $api_key=config('constants.API_KEY');
+
+        $desk_info=Http::get($url.$version.$api_key.'/desks'.'/'.session('desk_id'));
         $desk_info=json_decode($desk_info);
 
         return($desk_info); 
@@ -57,7 +60,7 @@ class DeskController extends Controller
         }
         else
         {
-            $separator=DEFAULT_MODE_SEPARATOR;
+            $separator=config('constants.DEFAULT_MODE_SEPARATOR');
         }
 
         return $separator;
@@ -65,6 +68,9 @@ class DeskController extends Controller
 
     public function changeHeightTo(Request $request) //changes the positon to provided height
     {
+        $url=config('constants.URL');
+        $version=config('constants.VERSION');
+        $api_key=config('constants.API_KEY');
 
         if($request->height<600)
         {
@@ -77,7 +83,7 @@ class DeskController extends Controller
 
         $this->recordIfChanged($request, $height_to_set);
 
-        $feedback=Http::put(URL.VERSION.API_KEY.'/desks'.'/'.session('desk_id').'/state', //This is for the final version
+        $feedback=Http::put($url.$version.$api_key.'/desks'.'/'.session('desk_id').'/state', //This is for the final version
         ['position_mm'=>$height_to_set]);
         $feedback=json_decode($feedback); //response is the new height. There are upper and lower limits, so use this for display
 
@@ -86,6 +92,10 @@ class DeskController extends Controller
 
     public function moveDeskBy(Request $request)
     {
+        $url=config('constants.URL');
+        $version=config('constants.VERSION');
+        $api_key=config('constants.API_KEY');
+
         $desk_info=$this->getDeskInfo();
         $separator=$this->getSitStandSeparator($request);
 
@@ -94,7 +104,7 @@ class DeskController extends Controller
             $this->recordIfChanged($request, $request->heightChange+$desk_info->state->position_mm);
         }
 
-        $feedback=Http::put(URL.VERSION.API_KEY.'/desks'.'/'.session('desk_id').'/state', //This is for the final version
+        $feedback=Http::put($url.$version.$api_key.'/desks'.'/'.session('desk_id').'/state', //This is for the final version
         ['position_mm'=>($request->heightChange+$desk_info->state->position_mm)]);
         $feedback=json_decode($feedback); //response is the new height. There are upper and lower limits, so use this for display
 
