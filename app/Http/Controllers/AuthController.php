@@ -11,10 +11,7 @@ use App\Models\Desks_In_Use;
 use Illuminate\Support\Facades\Http;
 use App\Models\Preset;
 
-const DEFAULT_MODE_SEPARATOR = 1000;
-const URL='http://127.0.0.1:7500/api/';
-const VERSION='v2/';
-const API_KEY="E9Y2LxT4g1hQZ7aD8nR3mWx5P0qK6pV7";
+
 
 class AuthController extends Controller
 {
@@ -72,7 +69,11 @@ class AuthController extends Controller
 
     private function startNewTimedata(Request $request)
     {
-        $desk_info=Http::get(URL.VERSION.API_KEY.'/desks'.'/'.$request->session()->get('desk_id'));
+        $url=config('constants.URL');
+        $version=config('constants.VERSION');
+        $api_key=config('constants.API_KEY');
+
+        $desk_info=Http::get($url.$version.$api_key.'/desks'.'/'.$request->session()->get('desk_id'));
         $desk_info=json_decode($desk_info);
 
         $position=$desk_info->state->position_mm;
@@ -86,7 +87,7 @@ class AuthController extends Controller
         }
         else
         {
-            $separator=DEFAULT_MODE_SEPARATOR;
+            $separator=config('constants.DEFAULT_MODE_SEPARATOR');
         }
 
         $timedata=new Timedata;
