@@ -29,7 +29,7 @@
                                     <label class="flex items-center mb-2">
                                         <input type="checkbox" id="mode2Checkbox" class="mode-checkbox mr-2" name="fancyCheckbox" 
                                         @if(@isset($fancymode)&&$fancymode->is_active) checked @endif>
-                                        <span class="mode-btn bg-green-500 text-white px-4 py-2 rounded-md w-full">Some Fancy Mode</span>
+                                        <span class="mode-btn bg-green-500 text-white px-4 py-2 rounded-md w-full">Fancy Mode</span>
                                     </label>
                                     <div class="flex items-center mb-4 pl-8">
                                         <label for="mode2StartHour" class="mr-2">Start Hour:</label>
