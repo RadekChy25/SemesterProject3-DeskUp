@@ -174,13 +174,13 @@
                 {
                     sitTimeJS = @session('sitTime') {{$value}} @endsession;
                     timeSpent=Math.floor(Date.now() / 1000)-sitTimeJS;
-                    setTimeout(function(){sitMonitor()},20000-timeSpent*1000);
+                    setTimeout(function(){sitMonitor()},7200000-timeSpent*1000);
                 }
                 if(sit_stand_logout_state==2)
                 {
                     standTimeJS = @session('standTime') {{$value}} @endsession;
                     timeSpent=Math.floor(Date.now() / 1000)-standTimeJS;
-                    setTimeout(function(){standMonitor()},20000-timeSpent*1000)
+                    setTimeout(function(){standMonitor()},7200000-timeSpent*1000)
                 }      
             }
         );
