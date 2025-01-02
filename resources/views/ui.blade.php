@@ -176,12 +176,11 @@
 
         async function sitMonitor()
         {
-            sitTimeJS = @session('sitTime') {{session('sitTime')}} @endsession;
-            sit_stand_logout_state = @session('sit_stand_logout_state') {{session('sit_stand_logout_state')}} @endsession;
+            sitTimeJS = @session('sitTime') {{session('sitTime')}} @endsession
 
             while(1)
             {
-                if ((sit_stand_logout_state == 1) && (Date.now() - sitTimeJS > 10))
+                if (Date.now() - sitTimeJS > 10)
                 {
                     setBuzzer(3000);
 
@@ -196,11 +195,10 @@
         async function standMonitor()
         {
             standTimeJS = @session('standTime') {{session('standTime')}} @endsession
-            sit_stand_logout_state = @session('sit_stand_logout_state') {{session('sit_stand_logout_state')}} @endsession;
 
             while(1)
             {
-                if (sit_stand_logout_state == 2 && Date.now() - standTimeJS > 10)
+                if (Date.now() - standTimeJS > 10)
                 {
                     setBuzzer(3000);
 
