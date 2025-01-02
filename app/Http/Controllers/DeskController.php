@@ -83,7 +83,7 @@ class DeskController extends Controller
 
         $this->recordIfChanged($request, $height_to_set);
 
-        $feedback=Http::put($url.$version.$api_key.'/desks'.'/'.session('desk_id').'/state', //This is for the final version
+        $feedback=Http::put($url.$version.$api_key.'/desks'.'/'.session('desk_id').'/state', 
         ['position_mm'=>$height_to_set]);
         $feedback=json_decode($feedback); //response is the new height. There are upper and lower limits, so use this for display
 
@@ -107,7 +107,7 @@ class DeskController extends Controller
             $this->recordIfChanged($request, $new_position);
         }
 
-        $feedback=Http::put($url.$version.$api_key.'/desks'.'/'.session('desk_id').'/state', //This is for the final version
+        $feedback=Http::put($url.$version.$api_key.'/desks'.'/'.session('desk_id').'/state', 
         ['position_mm'=>($new_position)]);
         $feedback=json_decode($feedback); //response is the new height. There are upper and lower limits, so use this for display
 
