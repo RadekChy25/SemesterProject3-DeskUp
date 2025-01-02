@@ -116,7 +116,7 @@
     <div id="standUpModal" class="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50 z-50 hidden">
         <div class="bg-white p-8 rounded-lg shadow-lg w-1/3 relative">
             <!-- Close button placed at the top-left corner -->
-            <button onclick="closeModal('standUpModal')" aria-label="Close modal" class="absolute top-2 right-2 text-gray-500 font-bold hover:text-red-700 transition-colors duration-200">
+            <button onclick="document.getElementById('standUpModal').classList.add('hidden')" aria-label="Close modal" class="absolute top-2 right-2 text-gray-500 font-bold hover:text-red-700 transition-colors duration-200">
                 ✖
             </button>
             <br>
@@ -132,7 +132,7 @@
                 </button>
                 
                 <!-- Ignore Button -->
-                <button type="button" onclick="closeModal('standUpModal')" class="bg-red-500 text-white px-10 py-3 text-medium rounded-md ml-2 hover:bg-red-700 w-1/2">
+                <button type="button" onclick="document.getElementById('standUpModal').classList.add('hidden')" class="bg-red-500 text-white px-10 py-3 text-medium rounded-md ml-2 hover:bg-red-700 w-1/2">
                     Ignore
                 </button>
             </form>
@@ -142,7 +142,7 @@
     <div id="sitDownModal" class="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50 z-50 hidden">
         <div class="bg-white p-8 rounded-lg shadow-lg w-1/3 relative">
             <!-- Close button placed at the top-left corner -->
-            <button onclick="closeModal('sitDownModal')" aria-label="Close modal" class="absolute top-2 right-2 text-gray-500 font-bold hover:text-red-700 transition-colors duration-200">
+            <button onclick="document.getElementById('sitDownModal').classList.add('hidden')" aria-label="Close modal" class="absolute top-2 right-2 text-gray-500 font-bold hover:text-red-700 transition-colors duration-200">
                 ✖
             </button>
             <br>
@@ -158,7 +158,7 @@
                 </button>
                 
                 <!-- Ignore Button -->
-                <button type="button" onclick="closeModal('stiDownModal')" class="bg-red-500 text-white px-10 py-3 text-medium rounded-md ml-2 hover:bg-red-700 w-1/2">
+                <button type="button" onclick="document.getElementById('sitDownModal').classList.add('hidden')" class="bg-red-500 text-white px-10 py-3 text-medium rounded-md ml-2 hover:bg-red-700 w-1/2">
                     Ignore
                 </button>
             </form>
