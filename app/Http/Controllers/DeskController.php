@@ -121,6 +121,9 @@ class DeskController extends Controller
         {
             $preset=Preset::where('uID',Auth::id())->where('name', 'sitting')->first();
 
+            session(['sitTime'=>time()]);
+            session(['sit_stand_logout_state'=>1]);
+
             $request->height=$preset->height;
             $this->changeHeightTo($request);
             return redirect()->back();
@@ -134,6 +137,9 @@ class DeskController extends Controller
         if(Preset::where('uID',Auth::id())->exists())
         {
             $preset=Preset::where('uID',Auth::id())->where('name', 'standing')->first();
+            
+            session(['standTime'=>time()]);
+            session(['sit_stand_logout_state'=>2]);
             
             $request->height=$preset->height;
             $this->changeHeightTo($request);
@@ -176,10 +182,12 @@ class DeskController extends Controller
             $timedata->height=$new_height;
             if($new_height>=$separator)
             {
+                session(['standTime'=>time()]);
                 $timedata->mode='standing';
             }
             else
             {
+                session(['sitTime'=>time()]);
                 $timedata->mode='sitting';
             }
 

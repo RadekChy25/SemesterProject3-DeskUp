@@ -63,6 +63,7 @@
                 <form action="{{route('sitDown')}}" method="POST" class="flex flex-1">
                     @csrf
                     <button class="bg-blue-500 text-white px-20 py-4 text-lg rounded-md hover:bg-blue-700 flex-1"
+                    id="sitDownButton"
                     @session('desk_id')@if($value==='no_desk') disabled @endif @endsession>
                         SIT DOWN
                     </button>
@@ -112,6 +113,106 @@
     <x-presetsModal></x-presetsModal>
 
 
+    <div id="standUpModal" class="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50 z-50 hidden">
+        <div class="bg-white p-8 rounded-lg shadow-lg w-1/3 relative">
+            <!-- Close button placed at the top-left corner -->
+            <button onclick="document.getElementById('standUpModal').classList.add('hidden')" aria-label="Close modal" class="absolute top-2 right-2 text-gray-500 font-bold hover:text-red-700 transition-colors duration-200">
+                ✖
+            </button>
+            <br>
+            <h2 class="text-xl font-bold text-center text-black mb-4">Health Alert !</h2>
+            <p class="text-center text-black mb-4">You have been sitting for too long. Switch to standing position to keep good posture.</p>
+            
+            <br>
+            <form action="{{route('standUp')}}" method="POST" class="flex justify-between">
+                @csrf
+                <!-- Switch to Standing Position Button -->
+                <button class="bg-green-500 text-white px-10 py-3 text-medium rounded-md mr-2 hover:bg-green-700 w-1/2">
+                    Stand Up
+                </button>
+                
+                <!-- Ignore Button -->
+                <button type="button" onclick="document.getElementById('standUpModal').classList.add('hidden')" class="bg-red-500 text-white px-10 py-3 text-medium rounded-md ml-2 hover:bg-red-700 w-1/2">
+                    Ignore
+                </button>
+            </form>
+        </div>
+    </div>
 
+    <div id="sitDownModal" class="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50 z-50 hidden">
+        <div class="bg-white p-8 rounded-lg shadow-lg w-1/3 relative">
+            <!-- Close button placed at the top-left corner -->
+            <button onclick="document.getElementById('sitDownModal').classList.add('hidden')" aria-label="Close modal" class="absolute top-2 right-2 text-gray-500 font-bold hover:text-red-700 transition-colors duration-200">
+                ✖
+            </button>
+            <br>
+            <h2 class="text-xl font-bold text-center text-black mb-4">Health Alert !</h2>
+            <p class="text-center text-black mb-4">You have been standing for too long. Switch to sitting position to keep good posture.</p>
+            
+            <br>
+            <form action="{{route('sitDown')}}" method="POST" class="flex justify-between">
+                @csrf
+                <!-- Switch to Sitting Position Button -->
+                <button class="bg-green-500 text-white px-10 py-3 text-medium rounded-md mr-2 hover:bg-green-700 w-1/2">
+                    Sit Down
+                </button>
+                
+                <!-- Ignore Button -->
+                <button type="button" onclick="document.getElementById('sitDownModal').classList.add('hidden')" class="bg-red-500 text-white px-10 py-3 text-medium rounded-md ml-2 hover:bg-red-700 w-1/2">
+                    Ignore
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', 
+            function() 
+            {
+                sit_stand_logout_state = @session('sit_stand_logout_state') {{$value}} @endsession;
+                if(sit_stand_logout_state==1)
+                {
+                    sitTimeJS = @session('sitTime') {{$value}} @endsession;
+                    timeSpent=Math.floor(Date.now() / 1000)-sitTimeJS;
+                    setTimeout(function(){sitMonitor()},7200000-timeSpent*1000);
+                }
+                if(sit_stand_logout_state==2)
+                {
+                    standTimeJS = @session('standTime') {{$value}} @endsession;
+                    timeSpent=Math.floor(Date.now() / 1000)-standTimeJS;
+                    setTimeout(function(){standMonitor()},7200000-timeSpent*1000)
+                }      
+            }
+        );
+
+        async function sitMonitor()
+        {
+            setBuzzer(3000);
+
+            document.getElementById('standUpModal').classList.remove('hidden');
+            
+            fetch("http://192.168.1.107/buzzer/off");
+            return true;
+        }
+
+        async function standMonitor()
+        {
+            setBuzzer(3000);
+
+            document.getElementById('sitDownModal').classList.remove('hidden');
+            
+            fetch("http://192.168.1.107/buzzer/off");
+            return true;
+        }
+
+        async function setBuzzer(time)
+        {
+            
+            fetch("http://192.168.1.107/buzzer/off");
+            fetch("http://192.168.1.107/buzzer/on");
+            setTimeout(function(){fetch("http://192.168.1.107/buzzer/off");}, time);
+            return;
+        }
+    </script>
 
 @endsection
