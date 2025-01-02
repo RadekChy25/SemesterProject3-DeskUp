@@ -24,7 +24,6 @@
                 @csrf
                 <button href="faq" class="text-white"><i class="fas fa-question-circle"></i></button>
             </form>
-            <a href="#" id="modal-icon"class="text-white"><i class="fas fa-cog"></i></a>
         </div>
     </div>
 </nav>
