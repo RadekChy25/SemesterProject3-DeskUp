@@ -114,8 +114,6 @@
     
 
     // If all validations pass, save the heights
-    alert(`Sitting height: ${sittingHeight} cm, Standing height: ${standingHeight} cm`);
-    closeModal('presetsModal');
 }
 
 </script>
