@@ -32,7 +32,7 @@
                                         <label for="mode2Duration" class="mr-2">Duration (minutes):</label>
                                         <input type="number" id="mode2Duration" min="1" max="1440" class="w-16 mr-4" name="fancyDuration">
                                         <label for="mode2Height" class="mr-2">Desk Height (cm):</label>
-                                        <input type="number" id="mode2Height" min="66" max="132" class="w-16" name="fancyHeight">
+                                        <input type="number" id="mode2Height" min="68" max="132" class="w-16" name="fancyHeight">
                                     </div>
                         
                                     <!-- Mode 3 with start hour, duration, and desk height -->
