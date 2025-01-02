@@ -60,6 +60,8 @@ class AuthController extends Controller
             $old_timedata->save();
         }
 
+        session(['sit_stand_logout_state'=>0]);
+
         $desk=session('desk_id');
         Desks_In_Use::where('desk_id', $desk)->delete();
 
