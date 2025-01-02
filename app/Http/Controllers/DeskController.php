@@ -99,13 +99,16 @@ class DeskController extends Controller
         $desk_info=$this->getDeskInfo();
         $separator=$this->getSitStandSeparator($request);
 
-        if($request->heightChange+$desk_info->state->position_mm>=$separator xor $desk_info->state->position_mm>$separator)//only start new record if the mode changed
+        $previous_position=$desk_info->state->position_mm;
+        $new_position=$request->heightChange+$previous_position;
+
+        if(($new_position>$separator and $previous_position<=$separator) or ($new_position<$separator and $previous_position>=$separator))//only start new record if the mode changed
         {
-            $this->recordIfChanged($request, $request->heightChange+$desk_info->state->position_mm);
+            $this->recordIfChanged($request, $new_position);
         }
 
         $feedback=Http::put($url.$version.$api_key.'/desks'.'/'.session('desk_id').'/state', //This is for the final version
-        ['position_mm'=>($request->heightChange+$desk_info->state->position_mm)]);
+        ['position_mm'=>($new_position)]);
         $feedback=json_decode($feedback); //response is the new height. There are upper and lower limits, so use this for display
 
 
@@ -146,7 +149,6 @@ class DeskController extends Controller
         $new_height = max(680, min(1320, $new_height));//get value into the range of desk movement
 
         $separator=$this->getSitStandSeparator($request);
-        echo($separator);
 
         //get current desk position to see if it will move at all
         $desk_info=$this->getDeskInfo();
@@ -158,8 +160,9 @@ class DeskController extends Controller
             if(TimeData::where('uID',Auth::id())->exists())//search for the previous record and close it
             {
                 $old_timedata=TimeData::where('uID', Auth::id())->latest()->first();
-                $dayend=new Carbon($old_timedata->end_time);
-                if(!($dayend->endOfDay()->isBefore(Carbon::now()))) //it would change the times between logins
+                $sessionend=new Carbon($old_timedata->end_time);
+                $sessionstart=new Carbon($old_timedata->start_time);
+                if(($sessionend==$sessionstart)) //it would change the times between logins
                 {
                     $old_timedata->end_time=Carbon::now();
                     $old_timedata->save();

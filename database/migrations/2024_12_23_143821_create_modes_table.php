@@ -14,10 +14,11 @@ return new class extends Migration
         Schema::create('modes', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->unsignedSmallInteger('heightbefore')->nullable();
-            $table->unsignedSmallInteger('height');
+            $table->float('heightbefore')->nullable();
+            $table->float('height');
             $table->string('start_time');
             $table->string('end_time');
+            $table->boolean('is_active')->default(false);
             $table->timestamps();
         });
     }

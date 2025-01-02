@@ -54,7 +54,8 @@
                         <button id="modesBtn" class="bg-blue-500 text-white px-8 py-4 text-lg rounded-md hover:bg-blue-700 flex-1">MODES</button>
                     </div>
             </div>
-            <x-modes></x-modes>
+            <x-modes :cleaningmode="$cleaningmode" :fancymode="$fancymode" :discomode="$discomode">
+            </x-modes>
         </x-slot:bottom>
     </x-user>
 @endsection

@@ -30,7 +30,9 @@ Schedule::call(function()//set cleaningmode
     $modesets->save();
 })
     ->dailyAt((Mode::where('name', 'cleaningmode')->exists())?
-    ((Mode::firstWhere('name', 'cleaningmode'))->start_time):'');
+    ((Mode::firstWhere('name', 'cleaningmode'))->start_time):'')
+    ->when((Mode::where('name', 'cleaningmode')->exists())?
+    ((Mode::firstWhere('name', 'cleaningmode'))->is_active):false);
 
 
 Schedule::call(function()//set fancymode
@@ -55,12 +57,14 @@ Schedule::call(function()//set fancymode
         $feedback=Http::put($url.$version.$api_key.'/desks'.'/'.$desk.'/state', //This is for the final version
         ['position_mm'=>$height]);
     }
-    $set_to_after/=$desk_list->count();
+    $set_to_after/=count($desk_list);
     $modesets->heightbefore=$set_to_after;
     $modesets->save();
 })
     ->dailyAt((Mode::where('name', 'fancymode')->exists())?
-    (Mode::firstWhere('name','fancymode'))->start_time:'');
+    (Mode::firstWhere('name','fancymode'))->start_time:'')
+    ->when((Mode::where('name', 'fancymode')->exists())?
+    ((Mode::firstWhere('name', 'fancymode'))->is_active):false);
 
 Schedule::call(function()//set discomode
 {
@@ -84,12 +88,14 @@ Schedule::call(function()//set discomode
         $feedback=Http::put($url.$version.$api_key.'/desks'.'/'.$desk.'/state', //This is for the final version
         ['position_mm'=>$height]);
     }
-    $set_to_after/=$desk_list->count();
+    $set_to_after/=count($desk_list);
     $modesets->heightbefore=$set_to_after;
     $modesets->save();
 })
     ->dailyAt((Mode::where('name', 'discomode')->exists())?
-    ((Mode::firstWhere('name', 'discomode'))->start_time):'');
+    ((Mode::firstWhere('name', 'discomode'))->start_time):'')
+    ->when((Mode::where('name', 'discomode')->exists())?
+    ((Mode::firstWhere('name', 'discomode'))->is_active):false);
 
 
 
@@ -110,11 +116,13 @@ Schedule::call(function()//set after cleaningmode
 
     foreach ($desk_list as $desk) {
         $feedback=Http::put($url.$version.$api_key.'/desks'.'/'.$desk.'/state', //This is for the final version
-        ['position_mm'=>$height]);
+        ['position_mm'=>(float)$height]);
     }
 })
     ->dailyAt((Mode::where('name', 'cleaningmode')->exists())?
-    ((Mode::firstWhere('name', 'cleaningmode'))->end_time):'');
+    ((Mode::firstWhere('name', 'cleaningmode'))->end_time):'')
+    ->when((Mode::where('name', 'cleaningmode')->exists())?
+    ((Mode::firstWhere('name', 'cleaningmode'))->is_active):false);
 
 Schedule::call(function()//set after fancymode
 {
@@ -130,12 +138,14 @@ Schedule::call(function()//set after fancymode
 
     foreach ($desk_list as $desk) {
         $feedback=Http::put($url.$version.$api_key.'/desks'.'/'.$desk.'/state', //This is for the final version
-        ['position_mm'=>$height]);
+        ['position_mm'=>(float)$height]);
     }
 
 })
     ->dailyAt((Mode::where('name', 'fancymode')->exists())?
-    ((Mode::firstWhere('name', 'fancymode'))->end_time):'');
+    ((Mode::firstWhere('name', 'fancymode'))->end_time):'')
+    ->when((Mode::where('name', 'fancymode')->exists())?
+    ((Mode::firstWhere('name', 'fancymode'))->is_active):false);
 
 Schedule::call(function()//set after discomode
 {
@@ -146,14 +156,16 @@ Schedule::call(function()//set after discomode
     $desk_list=Http::get($url.$version.$api_key.'/desks'); //access the desks using the defined constant
     $desk_list=json_decode($desk_list);
 
-    $modesets=Mode::where('name','fancymode')->first();
+    $modesets=Mode::where('name','discomode')->first();
     $height=$modesets->heightbefore;
-
+    
     foreach ($desk_list as $desk) {
         $feedback=Http::put($url.$version.$api_key.'/desks'.'/'.$desk.'/state', //This is for the final version
-        ['position_mm'=>$height]);
+        ['position_mm'=>(float)$height]);
     }
 
 })
     ->dailyAt((Mode::where('name', 'discomode')->exists())?
-    ((Mode::firstWhere('name', 'discomode'))->end_time):'');
+    ((Mode::firstWhere('name', 'discomode'))->end_time):'')
+    ->when((Mode::where('name', 'discomode')->exists())?
+    ((Mode::firstWhere('name', 'discomode'))->is_active):false);

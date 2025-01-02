@@ -17,11 +17,8 @@ Route::get('/', [DeskController::class,'getAvaibleDesks']);
 
 Route::post('/register', [RegistrationController::class,'register'])->name('register');
 
-Route::get('/admin', function(){
-    return view('admin', [
-        'users' => User::all()
-    ]);
-})->middleware(Admin::class)->name('admin.index');
+Route::get('/admin', [ModeController::class, 'getModesForAdmin']
+)->middleware(Admin::class)->name('admin.index');
 
 Route::post('/delete', [RegistrationController::class, 'delete'])->name('delete');
 Route::post('/deletePreset', [PresetController::class, 'deletePreset'])->name('deletePreset');
@@ -35,7 +32,6 @@ Route::post('/setpresets', [PresetController::class,'setPresets'])->name('setpre
 Route::post('/setmodes', [ModeController::class, 'setModes'])->name('setmodes');
 
 //These are the routes for interacting with desks
-Route::get('/getdesks', [DeskController::class, 'getDesks']);
 Route::post('/changeDeskHeight', [DeskController::class, 'changeHeightTo'])->name('changeHeight');
 Route::post('/moveDeskBy', [DeskController::class, 'moveDeskBy'])->name('moveDesk');
 Route::post('/sitDown', [DeskController::class, 'sitDown'])->name('sitDown');
