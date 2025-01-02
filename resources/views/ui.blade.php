@@ -169,45 +169,40 @@
         document.addEventListener('DOMContentLoaded', 
             function() 
             {
-                sitMonitor();
-                standMonitor();
+                sit_stand_logout_state = @session('sit_stand_logout_state') {{$value}} @endsession;
+                if(sit_stand_logout_state==1)
+                {
+                    sitTimeJS = @session('sitTime') {{$value}} @endsession;
+                    timeSpent=Math.floor(Date.now() / 1000)-sitTimeJS;
+                    setTimeout(function(){sitMonitor()},20000-timeSpent*1000);
+                }
+                if(sit_stand_logout_state==2)
+                {
+                    standTimeJS = @session('standTime') {{$value}} @endsession;
+                    timeSpent=Math.floor(Date.now() / 1000)-standTimeJS;
+                    setTimeout(function(){standMonitor()},20000-timeSpent*1000)
+                }      
             }
         );
 
         async function sitMonitor()
         {
-            sitTimeJS = @session('sitTime') {{session('sitTime')}} @endsession
+            setBuzzer(3000);
 
-            while(1)
-            {
-                if (Date.now() - sitTimeJS > 10)
-                {
-                    setBuzzer(3000);
-
-                    document.getElementById('standUpModal').classList.remove('hidden');
-                    
-                    fetch("http://192.168.1.107/buzzer/off");
-                    return true;
-                }
-            }
+            document.getElementById('standUpModal').classList.remove('hidden');
+            
+            fetch("http://192.168.1.107/buzzer/off");
+            return true;
         }
 
         async function standMonitor()
         {
-            standTimeJS = @session('standTime') {{session('standTime')}} @endsession
+            setBuzzer(3000);
 
-            while(1)
-            {
-                if (Date.now() - standTimeJS > 10)
-                {
-                    setBuzzer(3000);
-
-                    document.getElementById('sitDownModal').classList.remove('hidden');
-                    
-                    fetch("http://192.168.1.107/buzzer/off");
-                    return true;
-                }
-            }
+            document.getElementById('sitDownModal').classList.remove('hidden');
+            
+            fetch("http://192.168.1.107/buzzer/off");
+            return true;
         }
 
         async function setBuzzer(time)

@@ -179,10 +179,12 @@ class DeskController extends Controller
             $timedata->height=$new_height;
             if($new_height>=$separator)
             {
+                session(['standTime'=>time()]);
                 $timedata->mode='standing';
             }
             else
             {
+                session(['sitTime'=>time()]);
                 $timedata->mode='sitting';
             }
 
