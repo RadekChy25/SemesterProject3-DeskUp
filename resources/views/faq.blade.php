@@ -27,7 +27,7 @@
                         <i class="fas fa-chevron-down"></i>
                     </button>
                     <div id="faq2" class="hidden mt-2 p-4 bg-gray-100 text-black rounded-md">
-                        You can adjust the desk height using the control panel on the DeskUp app or the physical buttons on the desk. The desk allows you to customize the height between 60 cm and 240 cm.
+                        You can adjust the desk height using the control panel on the DeskUp app or the physical buttons on the desk. The desk allows you to customize the height between 68 cm and 132 cm.
                     </div>
                 </div>
                 <!-- FAQ Item 3 -->
