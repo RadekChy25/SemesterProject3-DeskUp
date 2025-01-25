@@ -174,13 +174,13 @@
                 {
                     sitTimeJS = @session('sitTime') {{$value}} @endsession;
                     timeSpent=Math.floor(Date.now() / 1000)-sitTimeJS;
-                    setTimeout(function(){sitMonitor()},7200000-timeSpent*1000);
+                    setTimeout(function(){sitMonitor()},10000-timeSpent*1000);
                 }
                 if(sit_stand_logout_state==2)
                 {
                     standTimeJS = @session('standTime') {{$value}} @endsession;
                     timeSpent=Math.floor(Date.now() / 1000)-standTimeJS;
-                    setTimeout(function(){standMonitor()},7200000-timeSpent*1000)
+                    setTimeout(function(){standMonitor()},10000-timeSpent*1000)
                 }      
             }
         );
@@ -191,7 +191,7 @@
 
             document.getElementById('standUpModal').classList.remove('hidden');
             
-            fetch("http://192.168.1.107/buzzer/off");
+            fetch("http://192.168.99.105/buzzer/off");
             return true;
         }
 
@@ -201,16 +201,16 @@
 
             document.getElementById('sitDownModal').classList.remove('hidden');
             
-            fetch("http://192.168.1.107/buzzer/off");
+            fetch("http://192.168.99.105/buzzer/off");
             return true;
         }
 
         async function setBuzzer(time)
         {
             
-            fetch("http://192.168.1.107/buzzer/off");
-            fetch("http://192.168.1.107/buzzer/on");
-            setTimeout(function(){fetch("http://192.168.1.107/buzzer/off");}, time);
+            fetch("http://192.168.99.105/buzzer/off");
+            fetch("http://192.168.99.105/buzzer/on");
+            setTimeout(function(){fetch("http://192.168.99.105/buzzer/off");}, time);
             return;
         }
     </script>
