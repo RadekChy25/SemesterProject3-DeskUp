@@ -191,7 +191,7 @@
 
             document.getElementById('standUpModal').classList.remove('hidden');
             
-            fetch("http://192.168.99.105/buzzer/off");
+            fetch("http://192.168.99.125/buzzer/off");
             return true;
         }
 
@@ -201,16 +201,16 @@
 
             document.getElementById('sitDownModal').classList.remove('hidden');
             
-            fetch("http://192.168.99.105/buzzer/off");
+            fetch("http://192.168.99.125/buzzer/off");
             return true;
         }
 
         async function setBuzzer(time)
         {
             
-            fetch("http://192.168.99.105/buzzer/off");
-            fetch("http://192.168.99.105/buzzer/on");
-            setTimeout(function(){fetch("http://192.168.99.105/buzzer/off");}, time);
+            fetch("http://192.168.99.125/buzzer/off");
+            fetch("http://192.168.99.125/buzzer/on");
+            setTimeout(function(){fetch("http://192.168.99.125/buzzer/off");}, time);
             return;
         }
     </script>
