@@ -27,7 +27,6 @@
         </div>
     </div>
 </nav>
-<x-sitDownModal></x-sitDownModal>
 
 <script>
     // Dropdown toggle
